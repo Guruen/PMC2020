@@ -7,7 +7,13 @@ package pmc2020.GUI.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import pmc2020.GUI.Model.MovieModel;
 
 /**
  * FXML Controller class
@@ -16,7 +22,21 @@ import javafx.fxml.Initializable;
  */
 public class MovieGUIController implements Initializable
 {
-
+    private MovieModel model;
+    @FXML
+    private TextField searchBar;
+    @FXML
+    private Button addMovieButton;
+    @FXML
+    private Button addCategoryButton;
+    @FXML
+    private Button editMovieButton;
+    @FXML
+    private Button editCategoryButton;
+    @FXML
+    private Button playButton;
+    
+    
     /**
      * Initializes the controller class.
      */
@@ -25,5 +45,35 @@ public class MovieGUIController implements Initializable
     {
         // TODO
     }    
+
+    @FXML
+    private void handleSearch(KeyEvent event)
+    {
+    }
+
+    @FXML
+    private void handleAddMovie(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void handleAddCategory(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void handleEditMovie(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void handleEditCategory(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void handlePlay(ActionEvent event)
+    {
+    }
     
 }

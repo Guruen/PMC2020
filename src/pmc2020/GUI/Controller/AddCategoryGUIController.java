@@ -7,7 +7,12 @@ package pmc2020.GUI.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import pmc2020.GUI.Model.MovieModel;
 
 /**
  * FXML Controller class
@@ -16,7 +21,13 @@ import javafx.fxml.Initializable;
  */
 public class AddCategoryGUIController implements Initializable
 {
-
+    private MovieModel model;
+    @FXML
+    private Button addButton;
+    @FXML
+    private TextField categoryTextFieldText;
+    
+    
     /**
      * Initializes the controller class.
      */
@@ -25,5 +36,10 @@ public class AddCategoryGUIController implements Initializable
     {
         // TODO
     }    
+
+    @FXML
+    private void handleAddButton(ActionEvent event)
+    {
+    }
     
 }

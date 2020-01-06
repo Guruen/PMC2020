@@ -63,6 +63,7 @@ public class CategoryDAO
             throw new DalException();
         }
 
+
     }
 
     public Category createCategory(String category)
