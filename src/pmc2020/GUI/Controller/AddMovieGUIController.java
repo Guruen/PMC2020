@@ -7,7 +7,13 @@ package pmc2020.GUI.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import pmc2020.GUI.Model.MovieModel;
 
 /**
  * FXML Controller class
@@ -16,7 +22,21 @@ import javafx.fxml.Initializable;
  */
 public class AddMovieGUIController implements Initializable
 {
-
+    private MovieModel model;
+    @FXML
+    private TextField titleText;
+    @FXML
+    private TextField imdbRatingtext;
+    @FXML
+    private TextField imdbSiteLinkText;
+    @FXML
+    private Button chooseFilePathButton;
+    @FXML
+    private Button addMovieButton;
+    @FXML
+    private Label chosenFilePathtext;
+    
+    
     /**
      * Initializes the controller class.
      */
@@ -25,5 +45,15 @@ public class AddMovieGUIController implements Initializable
     {
         // TODO
     }    
+
+    @FXML
+    private void handleChooseFilePath(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void handleAddMovie(ActionEvent event)
+    {
+    }
     
 }

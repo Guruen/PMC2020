@@ -5,14 +5,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="229.0" prefWidth="241.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="pmc2020.GUI.Controller.AddMovieGUIController">
+<AnchorPane id="AnchorPane" prefHeight="229.0" prefWidth="241.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pmc2020.GUI.Controller.AddMovieGUIController">
    <children>
-      <TextField layoutX="25.0" layoutY="25.0" promptText="Title" />
-      <TextField layoutX="25.0" layoutY="63.0" promptText="IMDB Rating" />
-      <TextField layoutX="25.0" layoutY="103.0" promptText="IMDB Site Link" />
-      <Button layoutX="25.0" layoutY="143.0" mnemonicParsing="false" text="Choose file path" />
-      <Button accessibleRoleDescription="handleSearch" layoutX="25.0" layoutY="188.0" mnemonicParsing="false" text="Add Movie" />
-      <Label layoutX="137.0" layoutY="147.0" text="Chosen File Path" />
+      <TextField fx:id="titleText" layoutX="25.0" layoutY="25.0" promptText="Title" />
+      <TextField fx:id="imdbRatingtext" layoutX="25.0" layoutY="63.0" promptText="IMDB Rating" />
+      <TextField fx:id="imdbSiteLinkText" layoutX="25.0" layoutY="103.0" promptText="IMDB Site Link" />
+      <Button fx:id="chooseFilePathButton" layoutX="25.0" layoutY="143.0" mnemonicParsing="false" onAction="#handleChooseFilePath" text="Choose file path" />
+      <Button fx:id="addMovieButton" accessibleRoleDescription="handleSearch" layoutX="25.0" layoutY="188.0" mnemonicParsing="false" onAction="#handleAddMovie" text="Add Movie" />
+      <Label fx:id="chosenFilePathtext" layoutX="137.0" layoutY="147.0" text="Chosen File Path" />
    </children>
 </AnchorPane>
