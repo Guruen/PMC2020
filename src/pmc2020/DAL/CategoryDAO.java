@@ -5,6 +5,9 @@
  */
 package pmc2020.DAL;
 
+import java.util.List;
+import pmc2020.BE.Category;
+
 /**
  *
  * @author CSnit
