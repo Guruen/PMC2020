@@ -14,30 +14,27 @@ import pmc2020.BE.Category;
  */
 public class CategoryDAO
 {
-    
-    
-    
+
     public List<Category> getAllCategories()
     {
-        
+
         return null;
     }
-     
+
     public Category createCategory(String category)
     {
-        
+
         return null;
     }
-    
+
     public void deleteCategory(Category category)
     {
-        
-        
+
     }
-    
+
     public Category updateCategory(Category category)
     {
-        
+
         return null;
     }
 }

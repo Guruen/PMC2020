@@ -22,26 +22,23 @@ public class MovieDAO
     {
         dbCon = new DatabaseConnector();
     }
-  
+
     public List<Movie> getAllMovies()
     {
         return null;
     }
-    
+
     public Movie createMovie(String title, double p_rating, double imdb_rating, String filelocation, String imdb_link)
     {
 
         return null;
     }
 
-            
-    
     public void deleteMovie(Movie movie)
-        {   
+    {
 
     }
 
-    
     public Movie updateMovie(Movie movie)
 
     {
