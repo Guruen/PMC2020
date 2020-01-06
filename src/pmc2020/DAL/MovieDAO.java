@@ -16,24 +16,26 @@ public class MovieDAO
 {
 
   
-    public List<Movie> GetAllMovies()
+    public List<Movie> getAllMovies()
     {
         return null;
     }
     
-    public Movie CreateMovie()
+    public Movie createMovie(String title, double p_rating, double imdb_rating, String filelocation, String imdb_link)
     {
         
         return null;
     }
+ 
+            
     
-    public void DeleteMovie()
+    public void deleteMovie(Movie movie)
     {
         
         
     }
     
-    public Movie UpdateMovie()
+    public Movie updateMovie(Movie movie)
     {
         
         return null;

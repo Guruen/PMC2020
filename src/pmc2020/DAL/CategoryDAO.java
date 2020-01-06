@@ -5,6 +5,9 @@
  */
 package pmc2020.DAL;
 
+import java.util.List;
+import pmc2020.BE.Category;
+
 /**
  *
  * @author CSnit
@@ -13,25 +16,25 @@ public class CategoryDAO
 {
     
     
-    public List<Category> GetAllCategories()
+    public List<Category> getAllCategories()
     {
         
         return null;
     }
      
-    public Category CreateCategory()
+    public Category createCategory(String category)
     {
         
         return null;
     }
     
-    public void DeleteCategory()
+    public void deleteCategory(Category category)
     {
         
         
     }
     
-    public Category UpdateCategory()
+    public Category updateCategory(Category category)
     {
         
         return null;
