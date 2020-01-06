@@ -17,7 +17,6 @@ public class CategoryDAO
 
     public List<Category> getAllCategories()
     {
-
         return null;
     }
 
