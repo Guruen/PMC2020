@@ -5,11 +5,40 @@
  */
 package pmc2020.DAL;
 
+import java.util.List;
+import pmc2020.BE.Movie;
+
 /**
  *
  * @author CSnit
  */
 public class MovieDAO
 {
+
+  
+    public List<Movie> GetAllMovies()
+    {
+        return null;
+    }
+    
+    public Movie CreateMovie()
+    {
+        
+        return null;
+    }
+    
+    public void DeleteMovie()
+    {
+        
+        
+    }
+    
+    public Movie UpdateMovie()
+    {
+        
+        return null;
+    }
+    
     
 }
+

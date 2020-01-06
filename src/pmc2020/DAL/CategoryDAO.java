@@ -12,4 +12,28 @@ package pmc2020.DAL;
 public class CategoryDAO
 {
     
+    
+    public List<Category> GetAllCategories()
+    {
+        
+        return null;
+    }
+     
+    public Category CreateCategory()
+    {
+        
+        return null;
+    }
+    
+    public void DeleteCategory()
+    {
+        
+        
+    }
+    
+    public Category UpdateCategory()
+    {
+        
+        return null;
+    }
 }
