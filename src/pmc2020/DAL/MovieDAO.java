@@ -5,6 +5,7 @@
  */
 package pmc2020.DAL;
 
+import java.io.IOException;
 import java.util.List;
 import pmc2020.BE.Movie;
 
@@ -15,30 +16,34 @@ import pmc2020.BE.Movie;
 public class MovieDAO
 {
 
-  
-    public List<Movie> GetAllMovies()
-    {
-        return null;
-    }
-    
-    public Movie CreateMovie()
-    {
-        
-        return null;
-    }
-    
-    public void DeleteMovie()
-    {
-        
-        
-    }
-    
-    public Movie UpdateMovie()
-    {
-        
-        return null;
-    }
-    
-    
-}
+    private DatabaseConnector dbCon;
 
+    public MovieDAO() throws IOException
+    {
+        dbCon = new DatabaseConnector();
+    }
+
+    public List<Movie> getAllMovies()
+    {
+        return null;
+    }
+
+    public Movie createMovie(String title, double p_rating, double imdb_rating, String filelocation, String imdb_link)
+    {
+
+        return null;
+    }
+
+    public void deleteMovie(Movie movie)
+    {
+
+    }
+
+    public Movie updateMovie(Movie movie)
+
+    {
+
+        return null;
+    }
+
+}
