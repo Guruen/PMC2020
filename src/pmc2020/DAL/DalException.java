@@ -9,7 +9,7 @@ package pmc2020.DAL;
  *
  * @author CSnit
  */
-public class DalException
+public class DalException extends Exception
 {
     
 }
