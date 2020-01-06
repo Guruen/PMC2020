@@ -11,5 +11,32 @@ package pmc2020.BE;
  */
 public class Category
 {
-    
+    private int category_ID;
+    private String category;
+
+    public Category(int category_ID, String category)
+    {
+        this.category_ID = category_ID;
+        this.category = category;
+    }
+
+    public int getCategory_ID()
+    {
+        return category_ID;
+    }
+
+    public void setCategory_ID(int category_ID)
+    {
+        this.category_ID = category_ID;
+    }
+
+    public String getCategory()
+    {
+        return category;
+    }
+
+    public void setCategory(String category)
+    {
+        this.category = category;
+    }
 }
