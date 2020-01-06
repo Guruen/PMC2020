@@ -5,11 +5,21 @@
  */
 package pmc2020.DAL;
 
+import java.io.IOException;
+
 /**
  *
  * @author CSnit
  */
 public class MovieDAO
 {
+    
+    private DatabaseConnector dbCon;
+    
+    public MovieDAO() throws IOException
+    {
+        dbCon = new DatabaseConnector();
+    }
+    
     
 }
