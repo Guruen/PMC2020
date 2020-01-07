@@ -19,12 +19,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import pmc2020.BE.Movie;
 import pmc2020.DAL.DalException;
 import pmc2020.GUI.Model.MovieModel;
 
@@ -48,12 +52,29 @@ public class MovieGUIController implements Initializable
     private Button editCategoryButton;
     @FXML
     private Button playButton;
+    @FXML
+    private TableView<Movie> MovieView;
 
     private MovieModel model;
+    @FXML
+    private TableColumn<Movie, String> titleColumn;
+    @FXML
+    private TableColumn<Movie, Double> ratingColumn;
+    @FXML
+    private TableColumn<Movie, Double> imdbratingColumn;
+    @FXML
+    private TableColumn<Movie, String> categoryColumn;
 
-    public MovieGUIController()
+    public MovieGUIController() throws IOException, DalException
     {
-        model = new MovieModel();
+        try
+        {
+            model = new MovieModel();
+        } catch (IOException | DalException ex)
+        {
+            Logger.getLogger(MovieGUIController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -62,12 +83,17 @@ public class MovieGUIController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        MovieView.setItems(model.getAllMovies());
+        titleColumn.setCellValueFactory(new PropertyValueFactory<Movie, String>("Title"));
+        ratingColumn.setCellValueFactory(new PropertyValueFactory<Movie, Double>("Private_rating"));
+        imdbratingColumn.setCellValueFactory(new PropertyValueFactory<Movie, Double>("IMDB_Rating"));
     }
 
     @FXML
-    private void handleSearch(KeyEvent event)
+    private void handleSearch(KeyEvent event) throws DalException
     {
+        String query = searchBar.getText().trim();
+        model.search(query);
     }
 
     @FXML
@@ -111,7 +137,7 @@ public class MovieGUIController implements Initializable
     @FXML
     private void handlePlay(ActionEvent event) throws IOException
     {
-        Runtime.getRuntime().exec("vlc.exe");
+
     }
 
 }

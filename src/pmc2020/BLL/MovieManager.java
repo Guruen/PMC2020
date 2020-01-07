@@ -30,22 +30,22 @@ public class MovieManager
         categoryDAO = new CategoryDAO();
     }
 
-    public Movie addMovie(String title, double p_rating, double imdb_rating, String filelocation, String imdb_link)
+    public Movie addMovie(String title, double p_rating, double imdb_rating, String filelocation, String imdb_link) throws DalException
     {
         return movieDAO.createMovie(title, p_rating, imdb_rating, filelocation, imdb_link);
     }
 
-    public List<Movie> getAllMovies()
+    public List<Movie> getAllMovies() throws DalException
     {
         return movieDAO.getAllMovies();
     }
 
-    public void deleteMovie(Movie movie)
+    public void deleteMovie(Movie movie) throws DalException
     {
         movieDAO.deleteMovie(movie);
     }
 
-    public void updateMovie(Movie movie)
+    public void updateMovie(Movie movie) throws DalException
     {
         movieDAO.updateMovie(movie);
     }
@@ -60,20 +60,13 @@ public class MovieManager
         List<Movie> movieSearchBase = movieDAO.getAllMovies();
         List<Category> categorySearchBase = categoryDAO.getAllCategories();
         List<Movie> result = new ArrayList<>();
-
+        
         for (Movie movie : movieSearchBase)
         {
             if (movie.getTitle().toLowerCase().contains(query.toLowerCase()))
             {
                 result.add(movie);
             }
-            for (Category category : categorySearchBase) //TEST OM DET HER VIRKER
-            {
-                if (category.getCategory().toLowerCase().contains(query.toLowerCase()))
-                {
-                    result.add(movie);
-                }
-            } // Tilføj search funktion til imdb rating
         }
         return result;
     }
