@@ -5,6 +5,7 @@
  */
 package pmc2020.GUI.Controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -72,8 +73,9 @@ public class MovieGUIController implements Initializable
     }
 
     @FXML
-    private void handlePlay(ActionEvent event)
+    private void handlePlay(ActionEvent event) throws IOException
     {
+        Runtime.getRuntime().exec("wmplayer");
     }
     
 }
