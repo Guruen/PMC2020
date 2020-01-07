@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import pmc2020.BE.Category;
 import pmc2020.BE.Movie;
 
 /**
@@ -46,7 +45,7 @@ public class MovieDAO
 
         //movDAO.createMovie(title, imdb_rating, p_rating, filelocation, imdb_link);
         //movDAO.deleteMovie(mov);
-        movDAO.updateMovie(mov);
+        //movDAO.updateMovie(mov);
 
         List<Movie> allMovies = movDAO.getAllMovies();
         for (Movie allmovie : allMovies)
