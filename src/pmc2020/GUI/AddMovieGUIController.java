@@ -46,9 +46,6 @@ public class AddMovieGUIController implements Initializable
 
     public MovieModel model;
 
-    private String filename = "";
-    private String directory = "";
-
     /**
      * Initializes the controller class.
      */
