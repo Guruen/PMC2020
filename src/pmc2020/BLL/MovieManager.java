@@ -30,22 +30,22 @@ public class MovieManager
         categoryDAO = new CategoryDAO();
     }
 
-    public Movie addMovie(String title, double p_rating, double imdb_rating, String filelocation, String imdb_link)
+    public Movie addMovie(String title, double p_rating, double imdb_rating, String filelocation, String imdb_link) throws DalException
     {
         return movieDAO.createMovie(title, p_rating, imdb_rating, filelocation, imdb_link);
     }
 
-    public List<Movie> getAllMovies()
+    public List<Movie> getAllMovies() throws DalException
     {
         return movieDAO.getAllMovies();
     }
 
-    public void deleteMovie(Movie movie)
+    public void deleteMovie(Movie movie) throws DalException
     {
         movieDAO.deleteMovie(movie);
     }
 
-    public void updateMovie(Movie movie)
+    public void updateMovie(Movie movie) throws DalException
     {
         movieDAO.updateMovie(movie);
     }
@@ -73,7 +73,7 @@ public class MovieManager
                 {
                     result.add(movie);
                 }
-            } // Tilføj search funktion til personal rating
+            } // Tilføj search funktion til imdb rating
         }
         return result;
     }
