@@ -5,6 +5,7 @@
  */
 package pmc2020.GUI.Controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -33,6 +35,7 @@ import pmc2020.GUI.Model.MovieModel;
  */
 public class MovieGUIController implements Initializable
 {
+
     @FXML
     private TextField searchBar;
     @FXML
@@ -45,14 +48,14 @@ public class MovieGUIController implements Initializable
     private Button editCategoryButton;
     @FXML
     private Button playButton;
-    
+
     private MovieModel model;
-    
-    
+
     public MovieGUIController()
     {
         model = new MovieModel();
     }
+
     /**
      * Initializes the controller class.
      */
@@ -60,7 +63,7 @@ public class MovieGUIController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
-    }    
+    }
 
     @FXML
     private void handleSearch(KeyEvent event)
@@ -70,10 +73,10 @@ public class MovieGUIController implements Initializable
     @FXML
     private void handleAddMovie(ActionEvent event) throws IOException
     {
-                try
+        try
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pmc2020/GUI/View/AddMovieGUI.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("../View/AddMovieGUI.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../View/AddMovieGUI.fxml"));
             AddMovieGUIController c = fxmlLoader.getController();
             c.setModel(model);
             Stage stage = new Stage();
@@ -82,7 +85,7 @@ public class MovieGUIController implements Initializable
             stage.setAlwaysOnTop(true);
             stage.setTitle("Add new Playlist");
             stage.setResizable(false);
-            stage.setScene(new Scene(root1));
+            stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException ex)
         {
@@ -108,7 +111,7 @@ public class MovieGUIController implements Initializable
     @FXML
     private void handlePlay(ActionEvent event) throws IOException
     {
-        Runtime.getRuntime().exec("wmplayer");
+        Runtime.getRuntime().exec("vlc.exe");
     }
-    
+
 }
