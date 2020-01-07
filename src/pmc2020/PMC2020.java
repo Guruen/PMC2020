@@ -40,7 +40,7 @@ public class PMC2020 extends Application
         
         Scene scene = new Scene(root, 300, 250);
         
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("PMC 2020");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
