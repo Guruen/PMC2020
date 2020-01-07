@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 import pmc2020.BE.Movie;
 
 /**
@@ -27,31 +28,6 @@ public class MovieDAO
     public MovieDAO() throws IOException
     {
         dbCon = new DatabaseConnector();
-    }
-
-    public static void main(String[] args) throws DalException, IOException, SQLException
-    {
-        MovieDAO movDAO = new MovieDAO();
-
-        int id = 4;
-        String title = "Mock Movie 3";
-        double imdb_rating = 1.7;
-        double p_rating = 0.5;
-        String filelocation = "Boguslocation 3";
-        String lastview = null;
-        String imdb_link = null;
-
-        Movie mov = new Movie(id, title, imdb_rating, p_rating, filelocation, imdb_link, lastview);
-
-        //movDAO.createMovie(title, imdb_rating, p_rating, filelocation, imdb_link);
-        //movDAO.deleteMovie(mov);
-        //movDAO.updateMovie(mov);
-
-        List<Movie> allMovies = movDAO.getAllMovies();
-        for (Movie allmovie : allMovies)
-        {
-            System.out.println(allmovie + " ID:" + allmovie.getID());
-        }
     }
 
     public List<Movie> getAllMovies() throws DalException
