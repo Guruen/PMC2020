@@ -50,7 +50,7 @@ public class MovieGUIController implements Initializable
 
     private MovieModel model;
 
-    public MovieGUIController()
+    public MovieGUIController() throws IOException, DalException
     {
         model = new MovieModel();
     }
