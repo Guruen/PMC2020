@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="215.0" prefWidth="243.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pmc2020.GUI.AddMovieGUIController">
+<AnchorPane id="AnchorPane" prefHeight="246.0" prefWidth="241.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pmc2020.GUI.AddMovieGUIController">
    <children>
-      <TextField fx:id="titleText" layoutX="25.0" layoutY="25.0" promptText="Title" />
-      <TextField fx:id="imdbSiteLinkText" layoutX="25.0" layoutY="100.0" promptText="IMDB Site Link" />
-      <Button fx:id="chooseFilePathButton" layoutX="25.0" layoutY="135.0" mnemonicParsing="false" onAction="#handleChooseFilePath" text="Choose file path" />
-      <Button fx:id="addMovieButton" accessibleRoleDescription="handleSearch" layoutX="25.0" layoutY="171.0" mnemonicParsing="false" onAction="#handleAddMovie" text="Add Movie" />
-      <Label fx:id="chosenFilePathtext" layoutX="138.0" layoutY="139.0" text="Chosen File Path" />
-      <TextField fx:id="iMDBRating" layoutX="25.0" layoutY="63.0" promptText="IMDB Rating" />
+      <TextField fx:id="titleText" layoutX="25.0" layoutY="14.0" promptText="Title" />
+      <TextField fx:id="imdbRatingtext" layoutX="25.0" layoutY="46.0" promptText="IMDB Rating" />
+      <TextField fx:id="imdbSiteLinkText" layoutX="25.0" layoutY="113.0" promptText="IMDB Site Link" />
+      <Button fx:id="chooseFilePathButton" layoutX="15.0" layoutY="212.0" mnemonicParsing="false" onAction="#handleChooseFilePath" text="Choose file path" />
+      <Button fx:id="addMovieButton" accessibleRoleDescription="handleSearch" layoutX="138.0" layoutY="212.0" mnemonicParsing="false" onAction="#handleAddMovie" text="Add Movie" />
+      <Label fx:id="chosenFilePathtext" layoutX="15.0" layoutY="186.0" text="Chosen File Path" />
+      <ComboBox fx:id="CatChooser" layoutX="25.0" layoutY="152.0" prefWidth="150.0" promptText="Choose Categories" />
+      <TextField fx:id="UserRatingtext" layoutX="25.0" layoutY="78.0" promptText="User Rating" />
    </children>
 </AnchorPane>

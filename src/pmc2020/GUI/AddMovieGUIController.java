@@ -28,6 +28,8 @@ import pmc2020.GUI.Model.MovieModel;
  */
 public class AddMovieGUIController implements Initializable
 {
+    private String filename;
+    private String directory;
 
     @FXML
     private TextField titleText;
@@ -72,10 +74,10 @@ public class AddMovieGUIController implements Initializable
         directory = fd.getDirectory();
         if (filename == null)
         {
-            JOptionPane.showMessageDialog(dialog, "Adding the movie has been cancelled. Try again!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(dialog, "Adding a movie has been cancelled. Try again!", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else
         {
-            chosenFilePathtext.setText(filename);
+            chosenFilePathtext.setText(directory + "\\" + filename);
             System.out.println(filename);
         }
     }
