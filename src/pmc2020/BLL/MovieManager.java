@@ -11,6 +11,7 @@ import java.util.List;
 import pmc2020.BE.Category;
 import pmc2020.BE.Movie;
 import pmc2020.DAL.CategoryDAO;
+import pmc2020.DAL.DalException;
 import pmc2020.DAL.MovieDAO;
 
 /**
@@ -54,7 +55,7 @@ public class MovieManager
      * @param query
      * @return result of what you've searched for
      */
-    public List<Movie> search(String query)
+    public List<Movie> search(String query) throws DalException
     {
         List<Movie> movieSearchBase = movieDAO.getAllMovies();
         List<Category> categorySearchBase = categoryDAO.getAllCategories();
@@ -72,7 +73,7 @@ public class MovieManager
                 {
                     result.add(movie);
                 }
-            } // Tilføj search funktion til personal rating
+            } // Tilføj search funktion til imdb rating
         }
         return result;
     }
