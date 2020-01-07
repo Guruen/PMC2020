@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="229.0" prefWidth="241.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pmc2020.GUI.AddMovieGUIController">
+<AnchorPane id="AnchorPane" prefHeight="246.0" prefWidth="241.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pmc2020.GUI.AddMovieGUIController">
    <children>
       <TextField fx:id="titleText" layoutX="25.0" layoutY="14.0" promptText="Title" />
       <TextField fx:id="imdbRatingtext" layoutX="25.0" layoutY="46.0" promptText="IMDB Rating" />
