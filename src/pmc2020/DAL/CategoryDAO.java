@@ -7,7 +7,6 @@ package pmc2020.DAL;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,17 +28,6 @@ public class CategoryDAO
         dbCon = new DatabaseConnector();
     }
 
-    public static void main(String[] args) throws DalException, IOException, SQLException
-    {
-        CategoryDAO catDAO = new CategoryDAO();
-        
-        List<Category> allCats = catDAO.getAllCategories();
-        for (Category allCat : allCats)
-        {
-            System.out.println(allCat + " ID:" + allCat.getCategory_ID());
-        }
-    }
-
     public List<Category> getAllCategories() throws DalException
     {
         try ( Connection con = dbCon.getConnection())
@@ -51,7 +39,7 @@ public class CategoryDAO
             while (rs.next())
             {
                 int id = rs.getInt("id");
-                String catName = rs.getString("categoryname");
+                String catName = rs.getString("category");
 
                 Category cat = new Category(id, catName);
                 allCategories.add(cat);
@@ -63,23 +51,97 @@ public class CategoryDAO
             throw new DalException();
         }
 
-
     }
 
-    public Category createCategory(String category)
+    public Category createCategory(String category) throws DalException
     {
 
-        return null;
+        try ( Connection con = dbCon.getConnection())
+        {
+
+            String sql = "INSERT INTO Category (category) VALUES (?)";
+            PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+
+            ps.setString(1, category);
+
+            int affectedRows = ps.executeUpdate();
+
+            if (affectedRows == 1)
+            {
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next())
+                {
+                    int id = rs.getInt(1);
+
+                    Category cat = new Category(id, category);
+                    return cat;
+                }
+            }
+
+            throw new DalException();
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            throw new DalException();
+        }
     }
 
-    public void deleteCategory(Category category)
+    public void deleteCategory(Category category) throws DalException
     {
+        try ( Connection con = dbCon.getConnection())
+        {
+            int id = category.getCategory_ID();
 
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Category WHERE id=?");
+
+            ps.setInt(1, id);
+
+            int affectedRows = ps.executeUpdate();
+
+            if (affectedRows == 1)
+            {
+                System.out.println("It's Dead!");
+            }
+            if (affectedRows != 1)
+            {
+                throw new DalException();
+            }
+
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            throw new DalException();
+        }
     }
 
-    public Category updateCategory(Category category)
+    public void updateCategory(Category category) throws DalException
     {
 
-        return null;
+        try ( Connection con = dbCon.getConnection())
+        {
+            int id = category.getCategory_ID();
+            String catname = category.getCategory();
+
+            PreparedStatement ps = con.prepareStatement("UPDATE Category SET category=? WHERE id=?");
+
+            ps.setString(1, catname);
+            ps.setInt(2, id);
+
+            int affectedRows = ps.executeUpdate();
+
+            if (affectedRows == 1)
+            {
+                System.out.println("It's Updated!");
+            }
+            if (affectedRows != 1)
+            {
+                throw new DalException();
+            }
+
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            throw new DalException();
+        }
     }
 }
