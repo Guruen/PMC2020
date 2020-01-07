@@ -73,7 +73,7 @@ public class MovieManager
                 {
                     result.add(movie);
                 }
-            } // Tilføj search funktion til personal rating
+            } // Tilføj search funktion til imdb rating
         }
         return result;
     }
