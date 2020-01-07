@@ -29,6 +29,19 @@ public class MovieDAO
     {
         dbCon = new DatabaseConnector();
     }
+    
+    
+    public static void main(String[] args) throws DalException, IOException, SQLException
+    {
+        MovieDAO movDAO = new MovieDAO();
+        String categories = "1, 4";
+        
+        List<Movie> catMovies = movDAO.getMoviesPerCategory(categories);
+        for (Movie catmovie : catMovies)
+        {
+            System.out.println(catmovie);
+        }
+    }
 
     public List<Movie> getAllMovies() throws DalException
     {
@@ -166,4 +179,42 @@ public class MovieDAO
         }
     }
 
+    public List<Movie> getMoviesPerCategory(String categories) throws SQLException, DalException
+    {
+        try ( Connection con = dbCon.getConnection())
+        {
+            System.out.println(categories);
+            
+            String sql = "SELECT DISTINCT Movie.* FROM CatMovie as catmovie \n" +
+                         "JOIN Movie as movie ON catmovie.MovieId = movie.id \n" +
+                         "JOIN Category as category ON catmovie.CategoryId = category.id \n" +
+                         "WHERE category.id IN ("+categories+")";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+          
+            ResultSet rs = ps.executeQuery();
+            ArrayList<Movie> allMovies = new ArrayList<>();
+            while (rs.next())
+            {
+                int id = rs.getInt("id");
+                String title = rs.getString("name");
+                double imdb_rating = rs.getDouble("imdb_rating");
+                double p_rating = rs.getDouble("p_rating");
+                String filelocation = rs.getString("filelocation");
+                String lastview = rs.getString("lastview");
+                String imdb_link = rs.getString("imdb_link");
+
+                Movie mov = new Movie(id, title, imdb_rating, p_rating, filelocation, imdb_link, lastview);
+                allMovies.add(mov);
+            }
+            return allMovies;
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            throw new DalException();
+        }    
+            
+
+            
+    }
 }
