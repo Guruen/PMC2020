@@ -60,20 +60,13 @@ public class MovieManager
         List<Movie> movieSearchBase = movieDAO.getAllMovies();
         List<Category> categorySearchBase = categoryDAO.getAllCategories();
         List<Movie> result = new ArrayList<>();
-
+        
         for (Movie movie : movieSearchBase)
         {
             if (movie.getTitle().toLowerCase().contains(query.toLowerCase()))
             {
                 result.add(movie);
             }
-            for (Category category : categorySearchBase) //TEST OM DET HER VIRKER
-            {
-                if (category.getCategory().toLowerCase().contains(query.toLowerCase()))
-                {
-                    result.add(movie);
-                }
-            } // Tilføj search funktion til imdb rating
         }
         return result;
     }

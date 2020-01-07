@@ -5,6 +5,7 @@
  */
 package pmc2020.GUI;
 
+import java.awt.FileDialog;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -13,6 +14,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import pmc2020.GUI.Model.MovieModel;
 
 /**
@@ -22,6 +25,8 @@ import pmc2020.GUI.Model.MovieModel;
  */
 public class AddMovieGUIController implements Initializable
 {
+    private String filename;
+    private String directory;
 
     @FXML
     private TextField titleText;
@@ -50,6 +55,25 @@ public class AddMovieGUIController implements Initializable
     @FXML
     private void handleChooseFilePath(ActionEvent event)
     {
+        final JDialog dialog = new JDialog();
+        dialog.setAlwaysOnTop(true);
+        FileDialog fd = new java.awt.FileDialog((java.awt.Frame) null);
+        fd.setDirectory("C:\\");
+        fd.setFile("*.mp4;*.mpeg4");
+        fd.setTitle("Add a mp4 or mpeg4 file");
+        fd.setVisible(true);
+        fd.setFocusable(true);
+        fd.setAutoRequestFocus(true);
+        filename = fd.getFile();
+        directory = fd.getDirectory();
+        if (filename == null)
+        {
+            JOptionPane.showMessageDialog(dialog, "Adding a movie has been cancelled. Try again!", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else
+        {
+            chosenFilePathtext.setText(directory + "\\" + filename);
+            System.out.println(filename);
+        }
     }
 
     @FXML
