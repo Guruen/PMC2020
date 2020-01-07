@@ -15,16 +15,30 @@ public class Movie
     private String Title;
     private double IMDB_Rating;
     private double Private_rating;
-    private int Last_Viewed;
+    private String Last_Viewed;
     private String File_location;
+    private String imdb_Link;
 
-    public Movie(int ID, String Title, double IMDB_Rating, double Private_rating, String File_location)
+    /**
+     * 
+     * @param ID
+     * @param Title
+     * @param IMDB_Rating
+     * @param Private_rating
+     * @param File_location
+     * @param imdb_Link
+     * @param last_view - Format is YYYY-MM-DD
+     */
+    
+    public Movie(int ID, String Title, double IMDB_Rating, double Private_rating, String File_location, String imdb_Link, String last_view)
     {
         this.ID = ID;
         this.Title = Title;
         this.IMDB_Rating = IMDB_Rating;
         this.Private_rating = Private_rating;
         this.File_location = File_location;
+        this.imdb_Link = imdb_Link;
+        this.Last_Viewed = last_view;
     }
 
     public int getID()
@@ -47,14 +61,14 @@ public class Movie
         this.Title = Title;
     }
 
-    public double getIMBV_Rating()
+    public double getIMDB_Rating()
     {
         return IMDB_Rating;
     }
 
-    public void setIMBV_Rating(double IMBV_Rating)
+    public void setIMDB_Rating(double IMDB_Rating)
     {
-        this.IMDB_Rating = IMBV_Rating;
+        this.IMDB_Rating = IMDB_Rating;
     }
 
     public double getPrivate_rating()
@@ -67,12 +81,12 @@ public class Movie
         this.Private_rating = Private_rating;
     }
 
-    public int getLast_Viewed()
+    public String getLast_Viewed()
     {
         return Last_Viewed;
     }
 
-    public void setLast_Viewed(int Last_Viewed)
+    public void setLast_Viewed(String Last_Viewed)
     {
         this.Last_Viewed = Last_Viewed;
     }
@@ -86,5 +100,20 @@ public class Movie
     {
         this.File_location = File_location;
     }
+       
+    public String getIMDB_Link()
+    {
+        return imdb_Link;
+    }
+
+    public void setIMDB_Link(String imdb_Link)
+    {
+        this.imdb_Link = imdb_Link;
+    }
     
+    @Override
+    public String toString()
+    {
+        return Title;
+    }
 }
