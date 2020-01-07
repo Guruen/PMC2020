@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="229.0" prefWidth="241.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pmc2020.GUI.EditMovieGUIController">
+   <children>
+      <TextField fx:id="editTitleText" layoutX="25.0" layoutY="25.0" promptText="Title" />
+      <TextField fx:id="editIMDBRatingtext" layoutX="25.0" layoutY="63.0" promptText="IMDB Rating" />
+      <TextField fx:id="editIMDBSiteLinkText" layoutX="25.0" layoutY="103.0" promptText="IMDB Site Link" />
+      <Button fx:id="editChooseFilePathButton" layoutX="25.0" layoutY="143.0" mnemonicParsing="false" onAction="#handleEditChooseFilePath" text="Choose file path" />
+      <Button fx:id="editMovieButton" accessibleRoleDescription="handleSearch" layoutX="25.0" layoutY="188.0" mnemonicParsing="false" onAction="#handleEditMovie" text="Edit Movie" />
+      <Label fx:id="editChosenFilePathtext" layoutX="137.0" layoutY="147.0" text="Chosen File Path" />
+   </children>
+</AnchorPane>

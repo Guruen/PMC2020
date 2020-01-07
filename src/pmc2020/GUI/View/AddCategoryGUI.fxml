@@ -4,9 +4,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="102.0" prefWidth="195.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pmc2020.GUI.Controller.AddCategoryGUIController">
+<AnchorPane id="AnchorPane" prefHeight="102.0" prefWidth="195.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pmc2020.GUI.AddCategoryGUIController">
    <children>
-      <Button fx:id="addButton" layoutX="25.0" layoutY="58.0" mnemonicParsing="false" onAction="#handleAddButton" text="Add" />
+      <Button fx:id="addButton" layoutX="25.0" layoutY="58.0" mnemonicParsing="false" onAction="#handleAddButton" text="Add Category" />
       <TextField fx:id="categoryTextFieldText" layoutX="25.0" layoutY="25.0" promptText="Category to Add" />
    </children>
 </AnchorPane>
