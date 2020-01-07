@@ -21,11 +21,12 @@ import pmc2020.GUI.Model.MovieModel;
  */
 public class AddCategoryGUIController implements Initializable
 {
-    private MovieModel model;
     @FXML
     private Button addButton;
     @FXML
     private TextField categoryTextFieldText;
+    
+    private MovieModel model;
     
     
     /**

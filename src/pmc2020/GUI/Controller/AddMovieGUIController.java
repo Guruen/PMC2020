@@ -22,7 +22,6 @@ import pmc2020.GUI.Model.MovieModel;
  */
 public class AddMovieGUIController implements Initializable
 {
-    private MovieModel model;
     @FXML
     private TextField titleText;
     @FXML
@@ -35,6 +34,8 @@ public class AddMovieGUIController implements Initializable
     private Button addMovieButton;
     @FXML
     private Label chosenFilePathtext;
+    
+    private MovieModel model;
     
     
     /**
@@ -54,6 +55,11 @@ public class AddMovieGUIController implements Initializable
     @FXML
     private void handleAddMovie(ActionEvent event)
     {
+    }
+
+    void setModel(MovieModel model)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
