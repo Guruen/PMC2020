@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pmc2020.GUI.Controller;
+package pmc2020.GUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,6 +22,7 @@ import pmc2020.GUI.Model.MovieModel;
  */
 public class AddMovieGUIController implements Initializable
 {
+
     @FXML
     private TextField titleText;
     @FXML
@@ -34,10 +35,9 @@ public class AddMovieGUIController implements Initializable
     private Button addMovieButton;
     @FXML
     private Label chosenFilePathtext;
-    
-    private MovieModel model;
-    
-    
+
+    public MovieModel model;
+
     /**
      * Initializes the controller class.
      */
@@ -45,7 +45,7 @@ public class AddMovieGUIController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
-    }    
+    }
 
     @FXML
     private void handleChooseFilePath(ActionEvent event)
@@ -59,7 +59,7 @@ public class AddMovieGUIController implements Initializable
 
     void setModel(MovieModel model)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.model = model;
     }
-    
+
 }
