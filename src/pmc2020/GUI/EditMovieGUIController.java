@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import pmc2020.BE.Movie;
 import pmc2020.DAL.DalException;
 import pmc2020.GUI.Model.MovieModel;
@@ -64,6 +65,7 @@ public class EditMovieGUIController implements Initializable
     private void handleEditMovie(ActionEvent event) throws IOException, DalException
     {
         String title = EditTitleText.getText();
+        String imdbLink = EditImdbSiteLinkText.getText();
         boolean notBlank;
 
         if (title != null && !title.isEmpty())
@@ -71,12 +73,24 @@ public class EditMovieGUIController implements Initializable
             title = EditTitleText.getText();
             movie.setTitle(title);
             notBlank = true;
-            System.out.println("not blank");
+        } else
+        {
+            notBlank = false;
         }
-
+        if (imdbLink != null && !imdbLink.isEmpty())
+        {
+            imdbLink = EditImdbSiteLinkText.getText();
+            movie.setIMDB_Link(imdbLink);
+            notBlank = true;
+        } else
+        {
+            notBlank = false;
+        }
         if (notBlank = true)
         {
+            Stage stage = (Stage) EditMovieButton.getScene().getWindow();
             model.updateMovie(movie);
+            stage.close();
         }
     }
 
@@ -90,7 +104,9 @@ public class EditMovieGUIController implements Initializable
         this.movie = movie;
 
         EditTitleText.setText(movie.getTitle());
-        System.out.println(movie.getTitle());
+        EditImdbRatingtext.setText(movie.getIMDB_Rating() + "");
+        EditUserRatingtext.setText(movie.getPrivate_rating() + "");
+        EditImdbSiteLinkText.setText(movie.getIMDB_Link());
     }
 
 }
