@@ -10,6 +10,7 @@ import java.util.Comparator;
 import pmc2020.BLL.MovieManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import pmc2020.BE.Category;
 import pmc2020.BE.Movie;
 import pmc2020.DAL.DalException;
 
@@ -22,17 +23,25 @@ public class MovieModel
 
     private MovieManager movieManager;
     private ObservableList<Movie> allMovies;
+    private ObservableList<Category> allCategories;
 
     public MovieModel() throws IOException, DalException
     {
         movieManager = new MovieManager();
         allMovies = FXCollections.observableArrayList();
         allMovies.addAll(movieManager.getAllMovies());
+        allCategories = FXCollections.observableArrayList();
+        allCategories.addAll(movieManager.getAllCategories());
     }
     
     public ObservableList<Movie> getAllMovies()
     {
         return allMovies;
+    }
+    
+    public ObservableList<Category> getAllCategories()
+    {
+        return allCategories;
     }
     
     public void deleteSong(Movie movie) throws DalException
@@ -85,4 +94,10 @@ public class MovieModel
             allMovies.addAll(movieManager.search(query));
         }
     }
+
+    public void addMovie(String title, double iMDB_Rating, String iMDB_SiteLink, String movie_FilePath)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

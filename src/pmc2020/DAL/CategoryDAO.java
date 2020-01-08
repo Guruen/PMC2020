@@ -145,4 +145,36 @@ public class CategoryDAO
             throw new DalException();
         }
     }
+
+    public List<Category> getCategoryPerMovie(int movieid) throws SQLException, DalException
+    {
+        try ( Connection con = dbCon.getConnection())
+        {
+            String sql = "SELECT DISTINCT Category.* FROM CatMovie as catmovie \n"
+                    + "JOIN Movie as movie ON catmovie.MovieId = movie.id \n"
+                    + "JOIN Category as category ON catmovie.CategoryId = category.id \n"
+                    + "WHERE movie.id = " + movieid;
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            ArrayList<Category> allCats = new ArrayList<>();
+            while (rs.next())
+            {
+                int id = rs.getInt("id");
+                String category = rs.getString("category");
+
+                Category cat = new Category(id, category);
+                allCats.add(cat);
+            }
+            return allCats;
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            throw new DalException();
+        }
+
+    }
+
+
+
 }
