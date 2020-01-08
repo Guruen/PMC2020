@@ -51,18 +51,25 @@ public class MovieModel
     public void updateMovie(Movie movie) throws DalException
     {
         movieManager.updateMovie(movie);
-        if (allMovies.remove(movie))
-        {
-            allMovies.add(movie);
-            allMovies.sort(new Comparator<Movie>()
-            {
-                @Override
-                public int compare(Movie arg0, Movie arg1)
-                {
-                    return arg0.getID() - arg1.getID();
-                }
-            });
-        }
+        
+        
+        
+        
+        
+        
+//        if (allMovies.remove(movie))
+//        {
+//            allMovies.add(movie);
+//            allMovies.sort(new Comparator<Movie>()
+//            {
+//                @Override
+//                public int compare(Movie arg0, Movie arg1)
+//                {
+//                    return arg0.getID() - arg1.getID();
+//                }
+//            });
+//        }
+        
     }
     
     public void search(String query) throws DalException
