@@ -55,7 +55,6 @@ public class AddMovieGUIController implements Initializable
     private ListView<Category> categoryList;
 
     public MovieModel model;
-    
 
     public AddMovieGUIController() throws IOException, DalException
     {
@@ -104,19 +103,21 @@ public class AddMovieGUIController implements Initializable
     @FXML
     private void handleAddMovie(ActionEvent event) throws DalException
     {
+        final JDialog dialog = new JDialog();
+        dialog.setAlwaysOnTop(true);
+
         String title = titleText.getText();
-        double iMDB_Rating = Integer.parseInt(imdbRatingtext.getText());
+        double iMDB_Rating = Integer.parseInt(imdbRatingtext.getText() + 0);
         String iMDB_SiteLink = imdbSiteLinkText.getText();
         String movie_FilePath = chosenFilePathtext.getText();
         List<Category> categories = categoryList.getItems();
 
         model.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
-
     }
 
     void setModel(MovieModel model)
     {
         this.model = model;
     }
-    
+
 }

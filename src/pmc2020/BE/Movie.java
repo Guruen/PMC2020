@@ -43,7 +43,12 @@ public class Movie
 
     public Movie(int id, String title, double imdb_rating, String filelocation, String last_view, String imdb_link)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.ID = id;
+        this.Title = title;
+        this.IMDB_Rating = imdb_rating;
+        this.File_location = filelocation;
+        this.imdb_Link = imdb_link;
+        this.Last_Viewed = last_view;
     }
 
     public int getID()
