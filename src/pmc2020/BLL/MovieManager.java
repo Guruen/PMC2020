@@ -49,6 +49,11 @@ public class MovieManager
     {
         movieDAO.updateMovie(movie);
     }
+    
+        public List<Category> getAllCategories() throws DalException
+    {
+        return categoryDAO.getAllCategories();
+    }
 
     /**
      * Searches the list of movies
