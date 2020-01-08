@@ -45,6 +45,8 @@ public class AddMovieGUIController implements Initializable
 
     private String filename;
     private String directory;
+    private double userRating;
+    private double iMDBRating;
 
     @FXML
     private TextField titleText;
@@ -52,11 +54,7 @@ public class AddMovieGUIController implements Initializable
     private TextField imdbSiteLinkText;
     @FXML
     private Label chosenFilePathtext;
-    @FXML
-    private TextField imdbRatingtext;
-    @FXML
     private ListView<Category> categoryList;
-    @FXML
     public MovieModel model;
     @FXML
     private ComboBox<?> CatChooser;
@@ -68,6 +66,10 @@ public class AddMovieGUIController implements Initializable
     private Label UserRating;
     @FXML
     private Slider imdbSlider;
+    @FXML
+    private Button chooseFilePathButton;
+    @FXML
+    private Button addMovieButton;
 
     public AddMovieGUIController() throws IOException, DalException
     {
@@ -122,11 +124,7 @@ public class AddMovieGUIController implements Initializable
         String title = titleText.getText();
         String iMDB_SiteLink = imdbSiteLinkText.getText();
         String movie_FilePath = chosenFilePathtext.getText();
-        double iMDBRating = Double.parseDouble(IMDBRating.getText());
-        double userRating = Double.parseDouble(UserRating.getText());
         boolean movieNotEmpty;
-        final JDialog dialog = new JDialog();
-        dialog.setAlwaysOnTop(true);
         
         if (title != null && !title.isEmpty())
         {
@@ -179,7 +177,7 @@ public class AddMovieGUIController implements Initializable
         if (movieNotEmpty == true)
         {
             System.out.println(movieNotEmpty);
-            model.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
+            //model.addMovie(title, iMDBRating, iMDB_SiteLink, movie_FilePath, categories);
             //stage.close
         } else
         {
@@ -199,6 +197,7 @@ public class AddMovieGUIController implements Initializable
         double v = imdbSlider.getValue();
         String formatted = String.format("%.1f", v);
         IMDBRating.setText(formatted + "");
+        iMDBRating = Double.parseDouble(IMDBRating.getText());
     }
 
     @FXML
@@ -207,6 +206,7 @@ public class AddMovieGUIController implements Initializable
         double v = userSlider.getValue();
         String formatted = String.format("%.1f", v);
         UserRating.setText(formatted + "");
+        userRating = Double.parseDouble(UserRating.getText());
     }
 
 }
