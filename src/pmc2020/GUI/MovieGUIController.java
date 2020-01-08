@@ -88,9 +88,9 @@ public class MovieGUIController implements Initializable
     {
         
         MovieView.setItems(model.getAllMovies());
-        titleColumn.setCellValueFactory(new PropertyValueFactory<Movie, String>("Title"));
-        ratingColumn.setCellValueFactory(new PropertyValueFactory<Movie, Double>("Private_rating"));
-        imdbratingColumn.setCellValueFactory(new PropertyValueFactory<Movie, Double>("IMDB_Rating"));
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        ratingColumn.setCellValueFactory(new PropertyValueFactory<>("Private_rating"));
+        imdbratingColumn.setCellValueFactory(new PropertyValueFactory<>("IMDB_Rating"));
         // Add category column
     }
 
