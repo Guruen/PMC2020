@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import pmc2020.BE.Category;
 
 import pmc2020.BE.Movie;
 
@@ -28,19 +29,6 @@ public class MovieDAO
     public MovieDAO() throws IOException
     {
         dbCon = new DatabaseConnector();
-    }
-    
-    
-    public static void main(String[] args) throws DalException, IOException, SQLException
-    {
-        MovieDAO movDAO = new MovieDAO();
-        String categories = "1, 4";
-        
-        List<Movie> catMovies = movDAO.getMoviesPerCategory(categories);
-        for (Movie catmovie : catMovies)
-        {
-            System.out.println(catmovie);
-        }
     }
 
     public List<Movie> getAllMovies() throws DalException
@@ -72,7 +60,7 @@ public class MovieDAO
         }
     }
 
-    public Movie createMovie(String title, double imdb_rating, double p_rating, String filelocation, String imdb_link) throws DalException
+    public Movie createMovie(String title, double imdb_rating, double p_rating, String filelocation, String imdb_link, List<Category> categories) throws DalException
     {
 
         try ( Connection con = dbCon.getConnection())
@@ -98,6 +86,7 @@ public class MovieDAO
                     String last_view = null;
 
                     Movie mov = new Movie(id, title, imdb_rating, p_rating, filelocation, last_view, imdb_link);
+                    addCategorytoMovie(id, categories);
                     return mov;
                 }
             }
@@ -184,15 +173,14 @@ public class MovieDAO
         try ( Connection con = dbCon.getConnection())
         {
             System.out.println(categories);
-            
-            String sql = "SELECT DISTINCT Movie.* FROM CatMovie as catmovie \n" +
-                         "JOIN Movie as movie ON catmovie.MovieId = movie.id \n" +
-                         "JOIN Category as category ON catmovie.CategoryId = category.id \n" +
-                         "WHERE category.id IN ("+categories+")";
-            PreparedStatement ps = con.prepareStatement(sql);
-            
-          
-            ResultSet rs = ps.executeQuery();
+
+            String sql = "SELECT DISTINCT Movie.* FROM CatMovie as catmovie \n"
+                    + "JOIN Movie as movie ON catmovie.MovieId = movie.id \n"
+                    + "JOIN Category as category ON catmovie.CategoryId = category.id \n"
+                    + "WHERE category.id IN (" + categories + ")";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);;
+
             ArrayList<Movie> allMovies = new ArrayList<>();
             while (rs.next())
             {
@@ -212,9 +200,26 @@ public class MovieDAO
         {
             ex.printStackTrace();
             throw new DalException();
-        }    
-            
+        }
 
-            
+    }
+
+    public void addCategorytoMovie(int id, List<Category> category) throws SQLException
+    {
+        try ( Connection con = dbCon.getConnection())
+        {
+            String sql = "INSERT INTO CatMovie (movieId, categoryId) VALUES (?,?)";
+            PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+
+            for (int i = 0; i < category.size(); i++)
+            {
+
+                ps.setInt(1, id);
+                ps.setInt(2, category.get(i).getCategory_ID());
+
+                ps.executeUpdate();
+
+            }
+        }
     }
 }
