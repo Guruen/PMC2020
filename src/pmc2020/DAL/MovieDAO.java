@@ -60,20 +60,19 @@ public class MovieDAO
         }
     }
 
-    public Movie createMovie(String title, double imdb_rating, double p_rating, String filelocation, String imdb_link, List<Category> categories) throws DalException
+    public Movie createMovie(String title, double imdb_rating, String filelocation, String imdb_link, List<Category> categories) throws DalException
     {
 
         try ( Connection con = dbCon.getConnection())
         {
 
-            String sql = "INSERT INTO Movie (name, imdb_rating, p_rating, filelocation, imdb_link) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO Movie (name, imdb_rating, filelocation, imdb_link) VALUES (?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, title);
             ps.setDouble(2, imdb_rating);
-            ps.setDouble(3, p_rating);
-            ps.setString(4, filelocation);
-            ps.setString(5, imdb_link);
+            ps.setString(3, filelocation);
+            ps.setString(4, imdb_link);
 
             int affectedRows = ps.executeUpdate();
 
@@ -85,7 +84,7 @@ public class MovieDAO
                     int id = rs.getInt(1);
                     String last_view = null;
 
-                    Movie mov = new Movie(id, title, imdb_rating, p_rating, filelocation, last_view, imdb_link);
+                    Movie mov = new Movie(id, title, imdb_rating, filelocation, last_view, imdb_link);
                     addCategorytoMovie(id, categories);
                     return mov;
                 }

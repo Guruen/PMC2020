@@ -41,6 +41,11 @@ public class Movie
         this.Last_Viewed = last_view;
     }
 
+    public Movie(int id, String title, double imdb_rating, String filelocation, String last_view, String imdb_link)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getID()
     {
         return ID;
