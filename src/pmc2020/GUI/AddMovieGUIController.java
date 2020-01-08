@@ -118,5 +118,5 @@ public class AddMovieGUIController implements Initializable
     {
         this.model = model;
     }
-
+    
 }

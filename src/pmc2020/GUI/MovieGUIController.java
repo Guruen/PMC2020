@@ -146,10 +146,12 @@ public class MovieGUIController implements Initializable
     {
         try
         {
+            Movie movieToEdit = MovieView.getSelectionModel().getSelectedItem();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("View/EditMovieGUI.fxml"));
             Parent root = (Parent) fxmlLoader.load();
             EditMovieGUIController c = fxmlLoader.getController();
             c.setModel(model);
+            c.setMovie(movieToEdit);
             Stage stage = new Stage();
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initStyle(StageStyle.DECORATED);
