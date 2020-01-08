@@ -52,9 +52,9 @@ public class MovieModel
     }
     
     
-    public void addMovie(int ID, String Title, double IMDB_Rating, double Private_rating, String File_location, String imdb_Link, String last_view, List<Category> categories) throws DalException
+    public void addMovie(int ID, String Title, double IMDB_Rating, String File_location, String imdb_Link, String last_view, List<Category> categories) throws DalException
     {
-        Movie movie = movieManager.addMovie(Title, Private_rating, IMDB_Rating, File_location, imdb_Link, categories);
+        Movie movie = movieManager.addMovie(Title, IMDB_Rating, File_location, imdb_Link, categories);
         allMovies.add(movie);
     }
     
@@ -96,10 +96,12 @@ public class MovieModel
         }
     }
 
-
     public void addMovie(String title, double iMDB_Rating, String iMDB_SiteLink, String movie_FilePath, List<Category> categories) throws DalException
     {
-        movieManager.addMovie(title, iMDB_Rating, iMDB_Rating, title, iMDB_SiteLink, categories);
+        movieManager.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
     }
+
+
+
 
 }
