@@ -21,14 +21,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import pmc2020.BE.Movie;
 import pmc2020.DAL.DalException;
-import pmc2020.GUI.AddMovieGUIController;
 import pmc2020.GUI.Model.MovieModel;
 
 /**
