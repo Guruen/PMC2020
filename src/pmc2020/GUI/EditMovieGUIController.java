@@ -97,6 +97,7 @@ public class EditMovieGUIController implements Initializable
         editIMDBRating.setText(formatted + "");
         iMDBRating = Double.parseDouble(editIMDBRating.getText());
     }
+    @FXML 
     private void handleEditMovie(ActionEvent event) throws IOException, DalException
     {        
         final JDialog dialog = new JDialog();
