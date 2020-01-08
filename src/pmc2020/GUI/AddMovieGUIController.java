@@ -6,6 +6,7 @@
 package pmc2020.GUI;
 
 import java.awt.FileDialog;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -13,7 +14,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import pmc2020.GUI.Model.MovieModel;
@@ -31,8 +34,6 @@ public class AddMovieGUIController implements Initializable
     @FXML
     private TextField titleText;
     @FXML
-    private TextField imdbRatingtext;
-    @FXML
     private TextField imdbSiteLinkText;
     @FXML
     private Button chooseFilePathButton;
@@ -40,6 +41,8 @@ public class AddMovieGUIController implements Initializable
     private Button addMovieButton;
     @FXML
     private Label chosenFilePathtext;
+    @FXML
+    private TextField iMDBRating;
 
     public MovieModel model;
 
@@ -59,8 +62,8 @@ public class AddMovieGUIController implements Initializable
         dialog.setAlwaysOnTop(true);
         FileDialog fd = new java.awt.FileDialog((java.awt.Frame) null);
         fd.setDirectory("C:\\");
-        fd.setFile("*.mp4;*.mpeg4");
-        fd.setTitle("Add a mp4 or mpeg4 file");
+        fd.setFile("*.mpeg4;*.mp4");
+        fd.setTitle("Add a mpeg4 or mp4 file");
         fd.setVisible(true);
         fd.setFocusable(true);
         fd.setAutoRequestFocus(true);
@@ -79,6 +82,13 @@ public class AddMovieGUIController implements Initializable
     @FXML
     private void handleAddMovie(ActionEvent event)
     {
+        String title = titleText.getText();
+        double iMDB_Rating = Integer.parseInt(iMDBRating.getText());
+        String iMDB_SiteLink = imdbSiteLinkText.getText();
+        String movie_FilePath = chosenFilePathtext.getText();
+        
+        
+
     }
 
     void setModel(MovieModel model)
