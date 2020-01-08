@@ -9,6 +9,7 @@ import java.awt.FileDialog;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -101,15 +102,15 @@ public class AddMovieGUIController implements Initializable
     }
 
     @FXML
-    private void handleAddMovie(ActionEvent event)
+    private void handleAddMovie(ActionEvent event) throws DalException
     {
         String title = titleText.getText();
         double iMDB_Rating = Integer.parseInt(imdbRatingtext.getText());
         String iMDB_SiteLink = imdbSiteLinkText.getText();
         String movie_FilePath = chosenFilePathtext.getText();
-        
+        List<Category> categories = categoryList.getItems();
 
-        model.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath);
+        model.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
 
     }
 

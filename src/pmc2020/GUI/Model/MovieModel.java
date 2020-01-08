@@ -7,6 +7,7 @@ package pmc2020.GUI.Model;
 
 import java.io.IOException;
 import java.util.Comparator;
+import java.util.List;
 import pmc2020.BLL.MovieManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -51,9 +52,9 @@ public class MovieModel
     }
     
     
-    public void addMovie(int ID, String Title, double IMDB_Rating, double Private_rating, String File_location, String imdb_Link, String last_view) throws DalException
+    public void addMovie(int ID, String Title, double IMDB_Rating, double Private_rating, String File_location, String imdb_Link, String last_view, List<Category> categories) throws DalException
     {
-        Movie movie = movieManager.addMovie(Title, Private_rating, IMDB_Rating, File_location, imdb_Link);
+        Movie movie = movieManager.addMovie(Title, Private_rating, IMDB_Rating, File_location, imdb_Link, categories);
         allMovies.add(movie);
     }
     
@@ -88,9 +89,10 @@ public class MovieModel
         }
     }
 
-    public void addMovie(String title, double iMDB_Rating, String iMDB_SiteLink, String movie_FilePath)
+
+    public void addMovie(String title, double iMDB_Rating, String iMDB_SiteLink, String movie_FilePath, List<Category> categories) throws DalException
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        movieManager.addMovie(title, iMDB_Rating, iMDB_Rating, title, iMDB_SiteLink, categories);
     }
 
 }
