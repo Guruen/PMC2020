@@ -63,7 +63,7 @@ public class MovieManager
     public List<Movie> search(String query) throws DalException
     {
         List<Movie> movieSearchBase = movieDAO.getAllMovies();
-        List<Category> categorySearchBase = categoryDAO.getAllCategories();
+        List<Category> categorySearchBase = categoryDAO.getAllCategories(); //Delete
         List<Movie> result = new ArrayList<>();
         
         for (Movie movie : movieSearchBase)

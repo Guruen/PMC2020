@@ -45,7 +45,7 @@ public class MovieModel
         return allCategories;
     }
     
-    public void deleteSong(Movie movie) throws DalException
+    public void deleteMovie(Movie movie) throws DalException
     {
         movieManager.deleteMovie(movie);
         allMovies.remove(movie);
@@ -61,24 +61,19 @@ public class MovieModel
     public void updateMovie(Movie movie) throws DalException
     {
         movieManager.updateMovie(movie);
-        
-        
-        
-        
-        
-        
-//        if (allMovies.remove(movie))
-//        {
-//            allMovies.add(movie);
-//            allMovies.sort(new Comparator<Movie>()
-//            {
-//                @Override
-//                public int compare(Movie arg0, Movie arg1)
-//                {
-//                    return arg0.getID() - arg1.getID();
-//                }
-//            });
-//        }
+   
+        if (allMovies.remove(movie))
+        {
+            allMovies.add(movie);
+            allMovies.sort(new Comparator<Movie>()
+            {
+                @Override
+                public int compare(Movie arg0, Movie arg1)
+                {
+                    return arg0.getID() - arg1.getID();
+                }
+            });
+        }
         
     }
     
@@ -99,6 +94,13 @@ public class MovieModel
     public void addMovie(String title, double iMDB_Rating, String iMDB_SiteLink, String movie_FilePath, List<Category> categories) throws DalException
     {
         movieManager.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
+    }
+    
+    public ObservableList<Movie> refreshMovies() throws DalException
+    {
+        allMovies.clear();
+        allMovies.addAll(movieManager.getAllMovies());
+        return allMovies;
     }
 
 

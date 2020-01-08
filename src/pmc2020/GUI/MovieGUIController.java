@@ -17,19 +17,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import pmc2020.BE.Movie;
 import pmc2020.DAL.DalException;
-import pmc2020.GUI.AddMovieGUIController;
 import pmc2020.GUI.Model.MovieModel;
+import java.text.SimpleDateFormat;  
+import java.util.Date;  
 
 /**
  * FXML Controller class
@@ -38,7 +39,9 @@ import pmc2020.GUI.Model.MovieModel;
  */
 public class MovieGUIController implements Initializable
 {
+    private Movie movieToDelete;
 
+    private String TimeAndDate;
     @FXML
     private TextField searchBar;
     @FXML
@@ -63,6 +66,8 @@ public class MovieGUIController implements Initializable
     private TableColumn<Movie, Double> imdbratingColumn;
     @FXML
     private TableColumn<Movie, String> categoryColumn;
+    @FXML
+    private ComboBox<?> CategoryCombobox;
 
     public MovieGUIController() throws IOException, DalException
     {
@@ -81,6 +86,7 @@ public class MovieGUIController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        
         MovieView.setItems(model.getAllMovies());
         titleColumn.setCellValueFactory(new PropertyValueFactory<Movie, String>("Title"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<Movie, Double>("Private_rating"));
@@ -192,6 +198,25 @@ public class MovieGUIController implements Initializable
     @FXML
     private void handlePlay(ActionEvent event)
     {
+        //get selected element
+        //get file path of element
+        //play element with default media player
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 
+        Date date = new Date();  
+        System.out.println(formatter.format(date));
+        TimeAndDate = formatter.format(date);
+        //write date to DB
+        //find expiry date of last watched (two years after last play)
+        //check date on startup, to control expiry
+        //prompt user to delete entries
+    }
+
+    @FXML
+    private void deleteMovieButton(ActionEvent event) throws DalException
+    {
+        movieToDelete = MovieView.getSelectionModel().getSelectedItem();
+        System.out.println(movieToDelete);
+        model.deleteMovie(movieToDelete);
     }
 
 }
