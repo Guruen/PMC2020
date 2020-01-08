@@ -9,10 +9,12 @@ import java.awt.FileDialog;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,6 +23,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -110,9 +113,11 @@ public class AddMovieGUIController implements Initializable
         double iMDB_Rating = Integer.parseInt(imdbRatingtext.getText() + 0);
         String iMDB_SiteLink = imdbSiteLinkText.getText();
         String movie_FilePath = chosenFilePathtext.getText();
-        List<Category> categories = categoryList.getItems();
-
-        model.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
+        List<Category> categories = categoryList.getSelectionModel().getSelectedItems();
+        
+        System.out.println(categories);
+        
+        //model.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
     }
 
     void setModel(MovieModel model)
