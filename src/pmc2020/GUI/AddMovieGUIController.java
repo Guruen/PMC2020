@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,6 +23,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -124,6 +126,11 @@ public class AddMovieGUIController implements Initializable
         String title = titleText.getText();
         String iMDB_SiteLink = imdbSiteLinkText.getText();
         String movie_FilePath = chosenFilePathtext.getText();
+        List<Category> categories = categoryList.getSelectionModel().getSelectedItems();
+        
+        System.out.println(categories);
+        
+        //model.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
         boolean movieNotEmpty;
         
         if (title != null && !title.isEmpty())
