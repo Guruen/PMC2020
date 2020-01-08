@@ -61,7 +61,7 @@ public class AddCategoryGUIController implements Initializable
         }
         
         if(catHasName = true){
-             //closes window
+            //closes window
             //adds category to list  
         }
         else
