@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -38,6 +39,7 @@ import pmc2020.GUI.Model.MovieModel;
  */
 public class MovieGUIController implements Initializable
 {
+    private Movie movieToDelete;
 
     @FXML
     private TextField searchBar;
@@ -63,6 +65,8 @@ public class MovieGUIController implements Initializable
     private TableColumn<Movie, Double> imdbratingColumn;
     @FXML
     private TableColumn<Movie, String> categoryColumn;
+    @FXML
+    private ComboBox<?> CategoryCombobox;
 
     public MovieGUIController() throws IOException, DalException
     {
@@ -192,6 +196,14 @@ public class MovieGUIController implements Initializable
     @FXML
     private void handlePlay(ActionEvent event)
     {
+    }
+
+    @FXML
+    private void deleteMovieButton(ActionEvent event) throws DalException
+    {
+        movieToDelete = MovieView.getSelectionModel().getSelectedItem();
+        System.out.println(movieToDelete);
+        model.deleteMovie(movieToDelete);
     }
 
 }
