@@ -7,15 +7,21 @@ package pmc2020.GUI;
 
 import java.awt.FileDialog;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -24,6 +30,9 @@ import javafx.stage.Stage;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.xml.stream.events.Characters;
+import pmc2020.BE.Category;
+import pmc2020.BE.Movie;
+import pmc2020.DAL.DalException;
 import pmc2020.GUI.Model.MovieModel;
 
 /**
@@ -33,6 +42,7 @@ import pmc2020.GUI.Model.MovieModel;
  */
 public class AddMovieGUIController implements Initializable
 {
+
     private String filename;
     private String directory;
 
@@ -41,13 +51,12 @@ public class AddMovieGUIController implements Initializable
     @FXML
     private TextField imdbSiteLinkText;
     @FXML
-    private Button chooseFilePathButton;
-    @FXML
-    private Button addMovieButton;
-    @FXML
     private Label chosenFilePathtext;
-    private TextField iMDBRating;
-
+    @FXML
+    private TextField imdbRatingtext;
+    @FXML
+    private ListView<Category> categoryList;
+    @FXML
     public MovieModel model;
     @FXML
     private ComboBox<?> CatChooser;
@@ -60,13 +69,24 @@ public class AddMovieGUIController implements Initializable
     @FXML
     private Slider imdbSlider;
 
+    public AddMovieGUIController() throws IOException, DalException
+    {
+        try
+        {
+            model = new MovieModel();
+        } catch (IOException | DalException ex)
+        {
+            Logger.getLogger(MovieGUIController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        categoryList.setItems(model.getAllCategories());
     }
 
     @FXML
@@ -94,8 +114,11 @@ public class AddMovieGUIController implements Initializable
     }
 
     @FXML
-    private void handleAddMovie(ActionEvent event)
+    private void handleAddMovie(ActionEvent event) throws DalException
     {
+        final JDialog dialog = new JDialog();
+        dialog.setAlwaysOnTop(true);
+
         String title = titleText.getText();
         String iMDB_SiteLink = imdbSiteLinkText.getText();
         String movie_FilePath = chosenFilePathtext.getText();
@@ -156,6 +179,8 @@ public class AddMovieGUIController implements Initializable
         if (movieNotEmpty == true)
         {
             System.out.println(movieNotEmpty);
+            model.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
+            //stage.close
         } else
         {
             System.out.println(movieNotEmpty);

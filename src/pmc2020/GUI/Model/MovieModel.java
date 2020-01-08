@@ -7,9 +7,11 @@ package pmc2020.GUI.Model;
 
 import java.io.IOException;
 import java.util.Comparator;
+import java.util.List;
 import pmc2020.BLL.MovieManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import pmc2020.BE.Category;
 import pmc2020.BE.Movie;
 import pmc2020.DAL.DalException;
 
@@ -22,17 +24,25 @@ public class MovieModel
 
     private MovieManager movieManager;
     private ObservableList<Movie> allMovies;
+    private ObservableList<Category> allCategories;
 
     public MovieModel() throws IOException, DalException
     {
         movieManager = new MovieManager();
         allMovies = FXCollections.observableArrayList();
         allMovies.addAll(movieManager.getAllMovies());
+        allCategories = FXCollections.observableArrayList();
+        allCategories.addAll(movieManager.getAllCategories());
     }
     
     public ObservableList<Movie> getAllMovies()
     {
         return allMovies;
+    }
+    
+    public ObservableList<Category> getAllCategories()
+    {
+        return allCategories;
     }
     
     public void deleteSong(Movie movie) throws DalException
@@ -42,27 +52,34 @@ public class MovieModel
     }
     
     
-    public void addMovie(int ID, String Title, double IMDB_Rating, double Private_rating, String File_location, String imdb_Link, String last_view) throws DalException
+    public void addMovie(int ID, String Title, double IMDB_Rating, String File_location, String imdb_Link, String last_view, List<Category> categories) throws DalException
     {
-        Movie movie = movieManager.addMovie(Title, Private_rating, IMDB_Rating, File_location, imdb_Link);
+        Movie movie = movieManager.addMovie(Title, IMDB_Rating, File_location, imdb_Link, categories);
         allMovies.add(movie);
     }
     
     public void updateMovie(Movie movie) throws DalException
     {
         movieManager.updateMovie(movie);
-        if (allMovies.remove(movie))
-        {
-            allMovies.add(movie);
-            allMovies.sort(new Comparator<Movie>()
-            {
-                @Override
-                public int compare(Movie arg0, Movie arg1)
-                {
-                    return arg0.getID() - arg1.getID();
-                }
-            });
-        }
+        
+        
+        
+        
+        
+        
+//        if (allMovies.remove(movie))
+//        {
+//            allMovies.add(movie);
+//            allMovies.sort(new Comparator<Movie>()
+//            {
+//                @Override
+//                public int compare(Movie arg0, Movie arg1)
+//                {
+//                    return arg0.getID() - arg1.getID();
+//                }
+//            });
+//        }
+        
     }
     
     public void search(String query) throws DalException
@@ -78,4 +95,13 @@ public class MovieModel
             allMovies.addAll(movieManager.search(query));
         }
     }
+
+    public void addMovie(String title, double iMDB_Rating, String iMDB_SiteLink, String movie_FilePath, List<Category> categories) throws DalException
+    {
+        movieManager.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
+    }
+
+
+
+
 }

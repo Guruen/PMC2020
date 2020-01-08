@@ -5,6 +5,7 @@
  */
 package pmc2020.GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -16,6 +17,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import pmc2020.BE.Movie;
+import pmc2020.DAL.DalException;
 import pmc2020.GUI.Model.MovieModel;
 
 /**
@@ -27,9 +31,14 @@ public class EditMovieGUIController implements Initializable
 {
 
     private MovieModel model;
-    
+    private Movie movie;
+
     @FXML
-    private TextField editTitleText;
+    private TextField EditTitleText;
+    @FXML
+    private TextField EditImdbRatingtext;
+    @FXML
+    private TextField EditImdbSiteLinkText;
     @FXML
     private Button editChooseFilePathButton;
     @FXML
@@ -55,8 +64,7 @@ public class EditMovieGUIController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
-    }    
+    }
 
 
     void setModel(MovieModel model)
@@ -73,6 +81,38 @@ public class EditMovieGUIController implements Initializable
     @FXML
     private void SendValueIMDB(MouseEvent event)
     {
+        
+    }
+    private void handleEditMovie(ActionEvent event) throws IOException, DalException
+    {
+        String title = EditTitleText.getText();
+        String imdbLink = EditImdbSiteLinkText.getText();
+        boolean notBlank;
+
+        if (title != null && !title.isEmpty())
+        {
+            title = EditTitleText.getText();
+            movie.setTitle(title);
+            notBlank = true;
+        } else
+        {
+            notBlank = false;
+        }
+        if (imdbLink != null && !imdbLink.isEmpty())
+        {
+            imdbLink = EditImdbSiteLinkText.getText();
+            movie.setIMDB_Link(imdbLink);
+            notBlank = true;
+        } else
+        {
+            notBlank = false;
+        }
+        if (notBlank = true)
+        {
+            Stage stage = (Stage) EditMovieButton.getScene().getWindow();
+            model.updateMovie(movie);
+            stage.close();
+        }
     }
 
     @FXML
@@ -84,5 +124,15 @@ public class EditMovieGUIController implements Initializable
     private void handleEditMovie(ActionEvent event)
     {
     }
-    
+
+    void setMovie(Movie movie)
+    {
+        this.movie = movie;
+
+        EditTitleText.setText(movie.getTitle());
+        EditImdbRatingtext.setText(movie.getIMDB_Rating() + "");
+        EditUserRatingtext.setText(movie.getPrivate_rating() + "");
+        EditImdbSiteLinkText.setText(movie.getIMDB_Link());
+    }
+
 }

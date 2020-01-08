@@ -41,6 +41,16 @@ public class Movie
         this.Last_Viewed = last_view;
     }
 
+    public Movie(int id, String title, double imdb_rating, String filelocation, String last_view, String imdb_link)
+    {
+        this.ID = id;
+        this.Title = title;
+        this.IMDB_Rating = imdb_rating;
+        this.File_location = filelocation;
+        this.imdb_Link = imdb_link;
+        this.Last_Viewed = last_view;
+    }
+
     public int getID()
     {
         return ID;

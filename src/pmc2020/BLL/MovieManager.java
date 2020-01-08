@@ -30,9 +30,9 @@ public class MovieManager
         categoryDAO = new CategoryDAO();
     }
 
-    public Movie addMovie(String title, double p_rating, double imdb_rating, String filelocation, String imdb_link) throws DalException
+    public Movie addMovie(String title, double imdb_rating, String filelocation, String imdb_link, List<Category> categories) throws DalException
     {
-        return movieDAO.createMovie(title, p_rating, imdb_rating, filelocation, imdb_link);
+        return movieDAO.createMovie(title, imdb_rating, filelocation, imdb_link, categories);
     }
 
     public List<Movie> getAllMovies() throws DalException
@@ -48,6 +48,11 @@ public class MovieManager
     public void updateMovie(Movie movie) throws DalException
     {
         movieDAO.updateMovie(movie);
+    }
+    
+        public List<Category> getAllCategories() throws DalException
+    {
+        return categoryDAO.getAllCategories();
     }
 
     /**
