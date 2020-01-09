@@ -41,12 +41,6 @@ public class EditMovieGUIController implements Initializable
     private double iMDBRating;
 
     @FXML
-    private TextField EditTitleText;
-    @FXML
-    private TextField EditImdbRatingtext;
-    @FXML
-    private TextField EditImdbSiteLinkText;
-    @FXML
     private Button editChooseFilePathButton;
     @FXML
     private Label editChosenFilePathtext;
@@ -64,6 +58,8 @@ public class EditMovieGUIController implements Initializable
     private Label editUserRating;
     @FXML
     private Slider editImdbSlider;
+    @FXML
+    private TextField editTitleText;
 
     /**
      * Initializes the controller class.
@@ -73,12 +69,10 @@ public class EditMovieGUIController implements Initializable
     {
     }
 
-
     void setModel(MovieModel model)
     {
         this.model = model;
     }
-
 
     @FXML
     private void SendValueUser(MouseEvent event)
@@ -91,24 +85,25 @@ public class EditMovieGUIController implements Initializable
 
     @FXML
     private void SendValueIMDB(MouseEvent event)
-    {
+    { 
         double v = editImdbSlider.getValue();
         String formatted = String.format("%.1f", v);
         editIMDBRating.setText(formatted + "");
         iMDBRating = Double.parseDouble(editIMDBRating.getText());
     }
-    @FXML 
+
+    @FXML
     private void handleEditMovie(ActionEvent event) throws IOException, DalException
-    {        
+    {
         final JDialog dialog = new JDialog();
         dialog.setAlwaysOnTop(true);
-        String title = EditTitleText.getText();
-        String imdbLink = EditImdbSiteLinkText.getText();
+        String title = editTitleText.getText();
+        String imdbLink = editImdbSiteLinkText.getText();
         boolean notBlank;
 
         if (title != null && !title.isEmpty())
         {
-            title = EditTitleText.getText();
+            title = editTitleText.getText();
             movie.setTitle(title);
             notBlank = true;
         } else
@@ -118,7 +113,7 @@ public class EditMovieGUIController implements Initializable
         }
         if (imdbLink != null && !imdbLink.isEmpty())
         {
-            imdbLink = EditImdbSiteLinkText.getText();
+            imdbLink = editImdbSiteLinkText.getText();
             movie.setIMDB_Link(imdbLink);
             notBlank = true;
         } else
@@ -136,7 +131,7 @@ public class EditMovieGUIController implements Initializable
 
     @FXML
     private void handleEditFilePath(ActionEvent event)
-    {   
+    {
         final JDialog dialog = new JDialog();
         dialog.setAlwaysOnTop(true);
         FileDialog fd = new java.awt.FileDialog((java.awt.Frame) null);
@@ -158,13 +153,12 @@ public class EditMovieGUIController implements Initializable
         }
     }
 
-
     void setMovie(Movie movie)
     {
         this.movie = movie;
 
-        EditTitleText.setText(movie.getTitle());
-        EditImdbSiteLinkText.setText(movie.getIMDB_Link());
+        editTitleText.setText(movie.getTitle());
+        editImdbSiteLinkText.setText(movie.getIMDB_Link());
     }
 
 }
