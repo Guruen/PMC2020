@@ -41,17 +41,15 @@ public class EditMovieGUIController implements Initializable
     private double iMDBRating;
 
     @FXML
-    private TextField EditTitleText;
+    private TextField editTitleText;
     @FXML
-    private TextField EditImdbRatingtext;
+    private TextField editImdbRatingtext;
     @FXML
-    private TextField EditImdbSiteLinkText;
+    private TextField editImdbSiteLinkText;
     @FXML
     private Button editChooseFilePathButton;
     @FXML
     private Label editChosenFilePathtext;
-    @FXML
-    private TextField editImdbSiteLinkText;
     @FXML
     private Button editAddMovieButton;
     @FXML
@@ -102,13 +100,13 @@ public class EditMovieGUIController implements Initializable
     {        
         final JDialog dialog = new JDialog();
         dialog.setAlwaysOnTop(true);
-        String title = EditTitleText.getText();
-        String imdbLink = EditImdbSiteLinkText.getText();
+        String title = editTitleText.getText();
+        String imdbLink = editImdbSiteLinkText.getText();
         boolean notBlank;
 
         if (title != null && !title.isEmpty())
         {
-            title = EditTitleText.getText();
+            title = editTitleText.getText();
             movie.setTitle(title);
             notBlank = true;
         } else
@@ -118,7 +116,7 @@ public class EditMovieGUIController implements Initializable
         }
         if (imdbLink != null && !imdbLink.isEmpty())
         {
-            imdbLink = EditImdbSiteLinkText.getText();
+            imdbLink = editImdbSiteLinkText.getText();
             movie.setIMDB_Link(imdbLink);
             notBlank = true;
         } else
@@ -163,8 +161,9 @@ public class EditMovieGUIController implements Initializable
     {
         this.movie = movie;
 
-        EditTitleText.setText(movie.getTitle());
-        EditImdbSiteLinkText.setText(movie.getIMDB_Link());
+
+        editTitleText.setText(movie.getTitle());
+        editImdbSiteLinkText.setText(movie.getIMDB_Link());
     }
 
 }
