@@ -63,11 +63,7 @@ public class AddMovieGUIController implements Initializable
     @FXML
     private Label chosenFilePathtext;
     @FXML
-    private Slider userSlider;
-    @FXML
     private Label IMDBRating;
-    @FXML
-    private Label UserRating;
     @FXML
     private Slider imdbSlider;
     @FXML
@@ -93,6 +89,7 @@ public class AddMovieGUIController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         categoryList.setItems(model.getAllCategories());
+        categoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     @FXML
@@ -129,9 +126,13 @@ public class AddMovieGUIController implements Initializable
         double iMDB_Rating = imdbSlider.getValue();
         String iMDB_SiteLink = imdbSiteLinkText.getText();
         String movie_FilePath = chosenFilePathtext.getText();
+        
         List<Category> categories = categoryList.getSelectionModel().getSelectedItems();
         
+        
+        
         model.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
+        
         
         boolean movieNotEmpty;
         
@@ -206,16 +207,7 @@ public class AddMovieGUIController implements Initializable
         double v = imdbSlider.getValue();
         String formatted = String.format("%.1f", v);
         IMDBRating.setText(formatted + "");
-        iMDBRating = Double.parseDouble(IMDBRating.getText());
-    }
-
-    @FXML
-    private void SendValueUser(MouseEvent event)
-    {
-        double v = userSlider.getValue();
-        String formatted = String.format("%.1f", v);
-        UserRating.setText(formatted + "");
-        userRating = Double.parseDouble(UserRating.getText());
+        iMDBRating = v;
     }
 
 }
