@@ -29,8 +29,9 @@ import javafx.stage.StageStyle;
 import pmc2020.BE.Movie;
 import pmc2020.DAL.DalException;
 import pmc2020.GUI.Model.MovieModel;
-import java.text.SimpleDateFormat;  
-import java.util.Date;  
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javafx.collections.ListChangeListener;
 
 /**
  * FXML Controller class
@@ -39,6 +40,7 @@ import java.util.Date;
  */
 public class MovieGUIController implements Initializable
 {
+
     private Movie movieToDelete;
 
     private String TimeAndDate;
@@ -86,12 +88,39 @@ public class MovieGUIController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        
+
         MovieView.setItems(model.getAllMovies());
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("Title"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("Private_Rating"));
         imdbratingColumn.setCellValueFactory(new PropertyValueFactory<>("IMDB_Rating"));
+        
         // Add category column
+        
+        movieList();
+    }
+
+    public void movieList()
+    {
+        model.getAllMovies().addListener((ListChangeListener<Movie>) c ->
+        {
+            while (c.next())
+            {
+                if (c.wasRemoved())
+                {
+                    System.out.println("removed!");
+                    MovieView.refresh();
+                }
+
+                if (c.wasAdded())
+                {
+                    System.out.println("added!");
+                    MovieView.refresh();
+                }
+
+            }
+
+        });
+
     }
 
     @FXML
@@ -153,7 +182,7 @@ public class MovieGUIController implements Initializable
         Movie movieToEdit = MovieView.getSelectionModel().getSelectedItem();
         try
         {
-            
+
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("View/EditMovieGUI.fxml"));
             Parent root = (Parent) fxmlLoader.load();
             EditMovieGUIController c = fxmlLoader.getController();
@@ -202,8 +231,8 @@ public class MovieGUIController implements Initializable
         //get selected element
         //get file path of element
         //play element with default media player
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 
-        Date date = new Date();  
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
         System.out.println(formatter.format(date));
         TimeAndDate = formatter.format(date);
         //write date to DB
