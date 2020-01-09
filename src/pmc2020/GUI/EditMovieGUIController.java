@@ -43,8 +43,6 @@ public class EditMovieGUIController implements Initializable
     @FXML
     private TextField editTitleText;
     @FXML
-    private TextField editImdbRatingtext;
-    @FXML
     private TextField editImdbSiteLinkText;
     @FXML
     private Button editChooseFilePathButton;
@@ -82,16 +80,16 @@ public class EditMovieGUIController implements Initializable
         double v = editUserSlider.getValue();
         String formatted = String.format("%.1f", v);
         editUserRating.setText(formatted + "");
-        userRating = Double.parseDouble(editUserRating.getText());
+        userRating = v;
     }
 
     @FXML
     private void SendValueIMDB(MouseEvent event)
-    { 
+    {
         double v = editImdbSlider.getValue();
         String formatted = String.format("%.1f", v);
         editIMDBRating.setText(formatted + "");
-        iMDBRating = Double.parseDouble(editIMDBRating.getText());
+        iMDBRating = v;
     }
 
     @FXML
@@ -99,8 +97,16 @@ public class EditMovieGUIController implements Initializable
     {
         final JDialog dialog = new JDialog();
         dialog.setAlwaysOnTop(true);
+
+        double imdbRating = editImdbSlider.getValue();
+        double userRating = editUserSlider.getValue();
         String title = editTitleText.getText();
         String imdbLink = editImdbSiteLinkText.getText();
+
+        movie.setIMDB_Rating(imdbRating);
+        movie.setPrivate_Rating(userRating);
+        movie.setTitle(title);
+        movie.setIMDB_Link(imdbLink);
         boolean notBlank;
 
         if (title != null && !title.isEmpty())
@@ -125,8 +131,10 @@ public class EditMovieGUIController implements Initializable
         }
         if (notBlank = true)
         {
+            movie.setFile_location(editChosenFilePathtext.getText());
             Stage stage = (Stage) editAddMovieButton.getScene().getWindow();
             model.updateMovie(movie);
+            //model.refreshMovies(); For at refresh efter man har trykket Edit
             stage.close();
         }
     }
@@ -150,7 +158,7 @@ public class EditMovieGUIController implements Initializable
             JOptionPane.showMessageDialog(dialog, "Adding a movie has been cancelled. Try again!", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else
         {
-            editChosenFilePathtext.setText(directory + "\\" + filename);
+            editChosenFilePathtext.setText(filename);
             System.out.println(filename);
         }
     }
@@ -161,6 +169,6 @@ public class EditMovieGUIController implements Initializable
 
         editTitleText.setText(movie.getTitle());
         editImdbSiteLinkText.setText(movie.getIMDB_Link());
+        editChosenFilePathtext.setText(movie.getFile_location());
     }
-
 }

@@ -5,6 +5,8 @@
  */
 package pmc2020.GUI;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -69,7 +71,7 @@ public class MovieGUIController implements Initializable
     @FXML
     private TableColumn<Movie, String> categoryColumn;
     @FXML
-    private ComboBox<?> CategoryCombobox;
+    private ComboBox<Category> CategoryCombobox;
 
     public MovieGUIController() throws IOException, DalException
     {
@@ -88,7 +90,7 @@ public class MovieGUIController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-
+        CategoryCombobox.setItems(model.getAllCategories());
         MovieView.setItems(model.getAllMovies());
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("Title"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("Private_Rating"));
@@ -226,13 +228,17 @@ public class MovieGUIController implements Initializable
     }
 
     @FXML
-    private void handlePlay(ActionEvent event)
+    private void handlePlay(ActionEvent event) throws IOException
     {
+        Movie movieToEdit = MovieView.getSelectionModel().getSelectedItem();
+        Desktop desktop = Desktop.getDesktop();
         //get selected element
         //get file path of element
-        //play element with default media player
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date = new Date();
+        File f = new File(movieToEdit.getFile_location());
+        desktop.open(f);
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 
+        Date date = new Date();  
         System.out.println(formatter.format(date));
         TimeAndDate = formatter.format(date);
         //write date to DB
@@ -247,6 +253,16 @@ public class MovieGUIController implements Initializable
         movieToDelete = MovieView.getSelectionModel().getSelectedItem();
         System.out.println(movieToDelete);
         model.deleteMovie(movieToDelete);
+    }
+
+    @FXML
+    private void handleCategorySearch(ActionEvent event)
+    {
+        //CategoryCombobox.getSelectionModel().getSelectedItem());
+        
+        Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
+        String categoryToSearch = category.getCategory();
+       // model.searchCategory(categoryToSearch);
     }
 
 }

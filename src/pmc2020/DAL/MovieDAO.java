@@ -110,7 +110,7 @@ public class MovieDAO
             PreparedStatement ps = con.prepareStatement("DELETE FROM Movie WHERE id=?");
 
             ps.setInt(1, id);
-
+            
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows == 1)

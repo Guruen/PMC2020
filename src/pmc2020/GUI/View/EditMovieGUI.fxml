@@ -14,7 +14,7 @@
       <TextField fx:id="editImdbSiteLinkText" layoutX="35.0" layoutY="133.0" promptText="IMDB Site Link" />
       <Button fx:id="editChooseFilePathButton" layoutX="25.0" layoutY="222.0" mnemonicParsing="false" onAction="#handleEditFilePath" text="Choose file path" />
       <Button fx:id="editAddMovieButton" accessibleRoleDescription="handleSearch" layoutX="148.0" layoutY="222.0" mnemonicParsing="false" onAction="#handleEditMovie" text="Edit Movie" />
-      <Label fx:id="editChosenFilePathtext" layoutX="25.0" layoutY="196.0" text="Chosen File Path" />
+      <Label fx:id="editChosenFilePathtext" contentDisplay="RIGHT" layoutX="25.0" layoutY="196.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="17.0" prefWidth="196.0" text="Chosen File Path" textAlignment="RIGHT" wrapText="true" />
       <ComboBox fx:id="editCatChooser" layoutX="35.0" layoutY="162.0" prefWidth="150.0" promptText="Choose Categories" />
       <Slider fx:id="editUserSlider" blockIncrement="0.1" layoutX="35.0" layoutY="91.0" majorTickUnit="1.0" max="10.0" minorTickCount="9" onDragDetected="#SendValueUser" onMouseClicked="#SendValueUser" onMouseDragged="#SendValueUser" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
       <Label fx:id="editIMDBRating" layoutX="201.0" layoutY="71.0" text="0.0" />

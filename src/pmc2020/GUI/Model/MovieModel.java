@@ -93,6 +93,26 @@ public class MovieModel
         allMovies.addAll(movieManager.getAllMovies());
         return allMovies;
     }
+    
+    public void createCategory(String category) throws DalException
+    {
+        Category cat = movieManager.createCategory(category);
+        allCategories.add(cat);
+    }
+
+    public void searchCategory(String categoryToSearch) throws DalException
+    {
+                if (categoryToSearch.isEmpty())
+        {
+            allMovies.clear();
+            allMovies.addAll(movieManager.getAllMovies());
+        }
+        else
+        {
+            allMovies.clear();
+            allMovies.addAll(movieManager.search(categoryToSearch));
+        }
+    }
 
 
 
