@@ -25,7 +25,7 @@ public class MovieModel
 
     private MovieManager movieManager;
     private ObservableList<Movie> allMovies;
-    private ObservableList<Category> allCategories;
+    private ObservableList<Category> allCategories, movieCategories;
 
     public MovieModel() throws IOException, DalException
     {
@@ -34,6 +34,7 @@ public class MovieModel
         allMovies.addAll(movieManager.getAllMovies());
         allCategories = FXCollections.observableArrayList();
         allCategories.addAll(movieManager.getAllCategories());
+         
     }
 
     public ObservableList<Movie> getAllMovies()
@@ -61,20 +62,11 @@ public class MovieModel
     public void updateMovie(Movie movie) throws DalException
     {
         movieManager.updateMovie(movie);
+        allMovies.remove(movie);
+        allMovies.add(movie);
+       
 
-        if (allMovies.remove(movie))
-        {
-            allMovies.add(movie);
-            allMovies.sort(new Comparator<Movie>()
-            {
-                @Override
-                public int compare(Movie arg0, Movie arg1)
-                {
-                    return arg0.getID() - arg1.getID();
-                }
-            });
-        }
-
+        
     }
 
     public void search(String query) throws DalException
@@ -121,5 +113,20 @@ public class MovieModel
         Category cat = movieManager.createCategory(category);
         allCategories.add(cat);
     }
+
+    public void searchCategory(String categoryToSearch) throws DalException
+    {
+                if (categoryToSearch.isEmpty())
+        {
+            allMovies.clear();
+            allMovies.addAll(movieManager.getAllMovies());
+        }
+        else
+        {
+            allMovies.clear();
+            allMovies.addAll(movieManager.search(categoryToSearch));
+        }
+    }
+
 
 }

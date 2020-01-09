@@ -35,6 +35,7 @@ import pmc2020.GUI.Model.MovieModel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javafx.collections.ObservableList;
+import javafx.collections.ListChangeListener;
 import pmc2020.BE.Category;
 
 /**
@@ -97,7 +98,36 @@ public class MovieGUIController implements Initializable
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("Title"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("Private_Rating"));
         imdbratingColumn.setCellValueFactory(new PropertyValueFactory<>("IMDB_Rating"));
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        
+
         // Add category column
+        
+        movieList();
+    }
+
+    public void movieList()
+    {
+        model.getAllMovies().addListener((ListChangeListener<Movie>) c ->
+        {
+            while (c.next())
+            {
+                if (c.wasRemoved())
+                {
+                    System.out.println("removed!");
+                    MovieView.refresh();
+                }
+
+                if (c.wasAdded())
+                {
+                    System.out.println("added!");
+                    MovieView.refresh();
+                }
+
+            }
+
+        });
+
     }
 
     @FXML

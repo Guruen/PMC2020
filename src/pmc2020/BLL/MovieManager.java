@@ -91,5 +91,11 @@ public class MovieManager
     {
         return categoryDAO.createCategory(category);
     }
+    
+    public List<Category> getCategoryPerMovie(int movieid) throws SQLException, DalException
+    {
+        
+        return categoryDAO.getCategoryPerMovie(movieid);
+    }
 
 }

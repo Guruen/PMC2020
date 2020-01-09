@@ -5,9 +5,14 @@
  */
 package pmc2020.BE;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import pmc2020.DAL.CategoryDAO;
+import pmc2020.DAL.DalException;
 
 /**
  *
@@ -139,7 +144,13 @@ public class Movie
   {
       return IMDB_Link;
   }
-  
+
+ 
+      @Override
+    public String toString()
+    {
+        return Title.get();
+    }
     
     /**
      * 
@@ -243,9 +254,5 @@ public class Movie
 //        this.imdb_Link = imdb_Link;
 //    }
 //    
-//    @Override
-//    public String toString()
-//    {
-//        return Title;
-//    }
+
 }
