@@ -85,7 +85,7 @@ public class EditMovieGUIController implements Initializable
 
     @FXML
     private void SendValueIMDB(MouseEvent event)
-    { 
+    {
         double v = editImdbSlider.getValue();
         String formatted = String.format("%.1f", v);
         editIMDBRating.setText(formatted + "");
@@ -97,8 +97,16 @@ public class EditMovieGUIController implements Initializable
     {
         final JDialog dialog = new JDialog();
         dialog.setAlwaysOnTop(true);
+
+        double imdbRating = editImdbSlider.getValue();
+        double userRating = editUserSlider.getValue();
         String title = editTitleText.getText();
         String imdbLink = editImdbSiteLinkText.getText();
+
+        movie.setIMDB_Rating(imdbRating);
+        movie.setPrivate_Rating(userRating);
+        movie.setTitle(title);
+        movie.setIMDB_Link(imdbLink);
         boolean notBlank;
 
         if (title != null && !title.isEmpty())
@@ -150,7 +158,7 @@ public class EditMovieGUIController implements Initializable
             JOptionPane.showMessageDialog(dialog, "Adding a movie has been cancelled. Try again!", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else
         {
-            editChosenFilePathtext.setText(directory + "\\" + filename);
+            editChosenFilePathtext.setText(filename);
             System.out.println(filename);
         }
     }
