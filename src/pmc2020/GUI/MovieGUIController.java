@@ -89,7 +89,7 @@ public class MovieGUIController implements Initializable
         
         MovieView.setItems(model.getAllMovies());
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("Title"));
-        ratingColumn.setCellValueFactory(new PropertyValueFactory<>("Private_rating"));
+        ratingColumn.setCellValueFactory(new PropertyValueFactory<>("Private_Rating"));
         imdbratingColumn.setCellValueFactory(new PropertyValueFactory<>("IMDB_Rating"));
         // Add category column
     }
@@ -150,9 +150,10 @@ public class MovieGUIController implements Initializable
     @FXML
     private void handleEditMovie(ActionEvent event) throws IOException
     {
+        Movie movieToEdit = MovieView.getSelectionModel().getSelectedItem();
         try
         {
-            Movie movieToEdit = MovieView.getSelectionModel().getSelectedItem();
+            
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("View/EditMovieGUI.fxml"));
             Parent root = (Parent) fxmlLoader.load();
             EditMovieGUIController c = fxmlLoader.getController();
