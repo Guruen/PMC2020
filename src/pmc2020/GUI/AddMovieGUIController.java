@@ -49,17 +49,19 @@ public class AddMovieGUIController implements Initializable
     private String directory;
     private double userRating;
     private double iMDBRating;
-
+    
+    public MovieModel model;
+    
     @FXML
     private TextField titleText;
     @FXML
     private TextField imdbSiteLinkText;
     @FXML
-    private Label chosenFilePathtext;
-    private ListView<Category> categoryList;
-    public MovieModel model;
+    private Button chooseFilePathButton;
     @FXML
-    private ComboBox<?> CatChooser;
+    private Button addMovieButton;
+    @FXML
+    private Label chosenFilePathtext;
     @FXML
     private Slider userSlider;
     @FXML
@@ -69,9 +71,9 @@ public class AddMovieGUIController implements Initializable
     @FXML
     private Slider imdbSlider;
     @FXML
-    private Button chooseFilePathButton;
-    @FXML
-    private Button addMovieButton;
+    private ListView<Category> categoryList;
+
+
 
     public AddMovieGUIController() throws IOException, DalException
     {
@@ -124,13 +126,13 @@ public class AddMovieGUIController implements Initializable
         dialog.setAlwaysOnTop(true);
 
         String title = titleText.getText();
+        double iMDB_Rating = imdbSlider.getValue();
         String iMDB_SiteLink = imdbSiteLinkText.getText();
         String movie_FilePath = chosenFilePathtext.getText();
         List<Category> categories = categoryList.getSelectionModel().getSelectedItems();
         
-        System.out.println(categories);
+        model.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
         
-        //model.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
         boolean movieNotEmpty;
         
         if (title != null && !title.isEmpty())
