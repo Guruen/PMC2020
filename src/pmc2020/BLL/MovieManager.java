@@ -75,5 +75,10 @@ public class MovieManager
         }
         return result;
     }
+    
+    public Category createCategory(String category) throws DalException
+    {
+        return categoryDAO.createCategory(category);
+    }
 
 }

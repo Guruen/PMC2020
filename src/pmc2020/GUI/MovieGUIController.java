@@ -5,6 +5,8 @@
  */
 package pmc2020.GUI;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -197,11 +199,15 @@ public class MovieGUIController implements Initializable
     }
 
     @FXML
-    private void handlePlay(ActionEvent event)
+    private void handlePlay(ActionEvent event) throws IOException
     {
+        Movie movieToEdit = MovieView.getSelectionModel().getSelectedItem();
+        Desktop desktop = Desktop.getDesktop();
         //get selected element
         //get file path of element
-        //play element with default media player
+        File f = new File(movieToEdit.getFile_location());
+        desktop.open(f);
+        
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 
         Date date = new Date();  
         System.out.println(formatter.format(date));

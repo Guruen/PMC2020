@@ -102,6 +102,12 @@ public class MovieModel
         allMovies.addAll(movieManager.getAllMovies());
         return allMovies;
     }
+    
+    public void createCategory(String category) throws DalException
+    {
+        Category cat = movieManager.createCategory(category);
+        allCategories.add(cat);
+    }
 
 
 

@@ -43,8 +43,6 @@ public class EditMovieGUIController implements Initializable
     @FXML
     private TextField editTitleText;
     @FXML
-    private TextField editImdbRatingtext;
-    @FXML
     private TextField editImdbSiteLinkText;
     @FXML
     private Button editChooseFilePathButton;
@@ -62,8 +60,6 @@ public class EditMovieGUIController implements Initializable
     private Label editUserRating;
     @FXML
     private Slider editImdbSlider;
-    @FXML
-    private TextField editTitleText;
 
     /**
      * Initializes the controller class.
@@ -127,8 +123,10 @@ public class EditMovieGUIController implements Initializable
         }
         if (notBlank = true)
         {
+            movie.setFile_location(editChosenFilePathtext.getText());
             Stage stage = (Stage) editAddMovieButton.getScene().getWindow();
             model.updateMovie(movie);
+            //model.refreshMovies(); For at refresh efter man har trykket Edit
             stage.close();
         }
     }
@@ -163,6 +161,6 @@ public class EditMovieGUIController implements Initializable
 
         editTitleText.setText(movie.getTitle());
         editImdbSiteLinkText.setText(movie.getIMDB_Link());
+        editChosenFilePathtext.setText(movie.getFile_location());
     }
-
 }

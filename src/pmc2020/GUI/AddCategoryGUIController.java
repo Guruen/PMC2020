@@ -12,8 +12,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import pmc2020.DAL.DalException;
 import pmc2020.GUI.Model.MovieModel;
 
 /**
@@ -41,7 +43,7 @@ public class AddCategoryGUIController implements Initializable
     }
 
     @FXML
-    private void handleAddButton(ActionEvent event)
+    private void handleAddButton(ActionEvent event) throws DalException
     {
         String catName = categoryTextFieldText.getText();
         boolean catHasName;
@@ -60,9 +62,10 @@ public class AddCategoryGUIController implements Initializable
             System.out.println(catHasName);
         }
         
-        if(catHasName = true){
-            //closes window
-            //adds category to list  
+        if(catHasName == true){
+            Stage stage = (Stage) addButton.getScene().getWindow();
+            model.createCategory(catName);
+            stage.close();
         }
         else
         {
