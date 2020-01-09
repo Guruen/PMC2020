@@ -49,7 +49,7 @@ public class MovieDAO
                 String lastview = rs.getString("lastview");
                 String imdb_link = rs.getString("imdb_link");
 
-                Movie mov = new Movie(id, title, imdb_rating, p_rating, filelocation, imdb_link, lastview);
+                Movie mov = new Movie(id, title, imdb_rating, p_rating, filelocation, lastview, imdb_link);
                 allMovies.add(mov);
             }
             return allMovies;
@@ -81,11 +81,14 @@ public class MovieDAO
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next())
                 {
-                    int id = rs.getInt(1);
+                    int ID = rs.getInt(1);
                     String last_view = null;
+                    double p_rating = 0;
+                    
+                    Movie mov = new Movie(ID, title, imdb_rating, p_rating, filelocation, last_view, imdb_link);
 
-                    Movie mov = new Movie(id, title, imdb_rating, filelocation, last_view, imdb_link);
-                    addCategorytoMovie(id, categories);
+
+                    addCategorytoMovie(ID, categories);
                     return mov;
                 }
             }
@@ -134,7 +137,7 @@ public class MovieDAO
             int id = movie.getID();
             String title = movie.getTitle();
             double imdb_rating = movie.getIMDB_Rating();
-            double p_rating = movie.getPrivate_rating();
+            double p_rating = movie.getPrivate_Rating();
             String filelocation = movie.getFile_location();
             String lastview = movie.getLast_Viewed();
             String imdb_link = movie.getIMDB_Link();
@@ -191,7 +194,7 @@ public class MovieDAO
                 String lastview = rs.getString("lastview");
                 String imdb_link = rs.getString("imdb_link");
 
-                Movie mov = new Movie(id, title, imdb_rating, p_rating, filelocation, imdb_link, lastview);
+                Movie mov = new Movie(id, title, imdb_rating, p_rating, filelocation, lastview, imdb_link);
                 allMovies.add(mov);
             }
             return allMovies;

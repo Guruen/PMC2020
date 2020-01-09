@@ -41,11 +41,15 @@ public class EditMovieGUIController implements Initializable
     private double iMDBRating;
 
     @FXML
+    private TextField editTitleText;
+    @FXML
+    private TextField editImdbRatingtext;
+    @FXML
+    private TextField editImdbSiteLinkText;
+    @FXML
     private Button editChooseFilePathButton;
     @FXML
     private Label editChosenFilePathtext;
-    @FXML
-    private TextField editImdbSiteLinkText;
     @FXML
     private Button editAddMovieButton;
     @FXML
