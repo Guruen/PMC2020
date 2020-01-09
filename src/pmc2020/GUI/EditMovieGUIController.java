@@ -80,7 +80,7 @@ public class EditMovieGUIController implements Initializable
         double v = editUserSlider.getValue();
         String formatted = String.format("%.1f", v);
         editUserRating.setText(formatted + "");
-        userRating = Double.parseDouble(editUserRating.getText());
+        userRating = v;
     }
 
     @FXML
@@ -89,7 +89,7 @@ public class EditMovieGUIController implements Initializable
         double v = editImdbSlider.getValue();
         String formatted = String.format("%.1f", v);
         editIMDBRating.setText(formatted + "");
-        iMDBRating = Double.parseDouble(editIMDBRating.getText());
+        iMDBRating = v;
     }
 
     @FXML
