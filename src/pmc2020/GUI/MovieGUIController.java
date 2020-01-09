@@ -9,6 +9,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,8 +32,8 @@ import javafx.stage.StageStyle;
 import pmc2020.BE.Movie;
 import pmc2020.DAL.DalException;
 import pmc2020.GUI.Model.MovieModel;
-import java.text.SimpleDateFormat;  
-import java.util.Date;  
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javafx.collections.ObservableList;
 import pmc2020.BE.Category;
 
@@ -43,6 +44,7 @@ import pmc2020.BE.Category;
  */
 public class MovieGUIController implements Initializable
 {
+
     private Movie movieToDelete;
 
     private String TimeAndDate;
@@ -106,6 +108,14 @@ public class MovieGUIController implements Initializable
     }
 
     @FXML
+    private void handleCategorySearch(ActionEvent event) throws DalException, SQLException
+    {   
+        Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
+        int categoryToSearch = category.getCategory_ID();
+        model.searchByCategory(categoryToSearch);
+    }
+
+    @FXML
     private void handleAddMovie(ActionEvent event) throws IOException
     {
         try
@@ -157,7 +167,7 @@ public class MovieGUIController implements Initializable
         Movie movieToEdit = MovieView.getSelectionModel().getSelectedItem();
         try
         {
-            
+
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("View/EditMovieGUI.fxml"));
             Parent root = (Parent) fxmlLoader.load();
             EditMovieGUIController c = fxmlLoader.getController();
@@ -209,9 +219,9 @@ public class MovieGUIController implements Initializable
         //get file path of element
         File f = new File(movieToEdit.getFile_location());
         desktop.open(f);
-        
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 
-        Date date = new Date();  
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
         System.out.println(formatter.format(date));
         TimeAndDate = formatter.format(date);
         //write date to DB
@@ -226,16 +236,6 @@ public class MovieGUIController implements Initializable
         movieToDelete = MovieView.getSelectionModel().getSelectedItem();
         System.out.println(movieToDelete);
         model.deleteMovie(movieToDelete);
-    }
-
-    @FXML
-    private void handleCategorySearch(ActionEvent event)
-    {
-        //CategoryCombobox.getSelectionModel().getSelectedItem());
-        
-        Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
-        String categoryToSearch = category.getCategory();
-       // model.searchCategory(categoryToSearch);
     }
 
 }
