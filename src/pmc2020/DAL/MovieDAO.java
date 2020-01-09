@@ -170,11 +170,11 @@ public class MovieDAO
         }
     }
 
-    public List<Movie> getMoviesPerCategory(String categories) throws SQLException, DalException
+    public List<Movie> getMoviesPerCategory(int categories) throws SQLException, DalException
     {
         try ( Connection con = dbCon.getConnection())
         {
-            System.out.println(categories);
+            //System.out.println(categories);
 
             String sql = "SELECT DISTINCT Movie.* FROM CatMovie as catmovie \n"
                     + "JOIN Movie as movie ON catmovie.MovieId = movie.id \n"

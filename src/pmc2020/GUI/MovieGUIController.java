@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,6 +35,7 @@ import pmc2020.DAL.DalException;
 import pmc2020.GUI.Model.MovieModel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javafx.collections.ObservableList;
 import javafx.collections.ListChangeListener;
 import pmc2020.BE.Category;
 
@@ -97,6 +99,8 @@ public class MovieGUIController implements Initializable
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("Title"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("Private_Rating"));
         imdbratingColumn.setCellValueFactory(new PropertyValueFactory<>("IMDB_Rating"));
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        
 
         // Add category column
         movieList();
@@ -131,6 +135,14 @@ public class MovieGUIController implements Initializable
     {
         String query = searchBar.getText().trim();
         model.search(query);
+    }
+
+    @FXML
+    private void handleCategorySearch(ActionEvent event) throws DalException, SQLException
+    {   
+        Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
+        int categoryToSearch = category.getCategory_ID();
+        model.searchByCategory(categoryToSearch);
     }
 
     @FXML

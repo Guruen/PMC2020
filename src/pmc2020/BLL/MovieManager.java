@@ -6,6 +6,7 @@
 package pmc2020.BLL;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import pmc2020.BE.Category;
@@ -64,7 +65,6 @@ public class MovieManager
     public List<Movie> search(String query) throws DalException
     {
         List<Movie> movieSearchBase = movieDAO.getAllMovies();
-        List<Category> categorySearchBase = categoryDAO.getAllCategories(); //Delete
         List<Movie> result = new ArrayList<>();
 
         for (Movie movie : movieSearchBase)
@@ -77,8 +77,25 @@ public class MovieManager
         return result;
     }
 
+    public List<Movie> searchByCategory(int categoryToSearch) throws SQLException, DalException
+    {
+        List<Movie> movieSearchBase = movieDAO.getMoviesPerCategory(categoryToSearch);
+        List<Movie> result = new ArrayList<>();
+        
+        result.addAll(movieDAO.getMoviesPerCategory(categoryToSearch));
+        
+        return result;
+    }
+
     public Category createCategory(String category) throws DalException
     {
         return categoryDAO.createCategory(category);
     }
+    
+    public List<Category> getCategoryPerMovie(int movieid) throws SQLException, DalException
+    {
+        
+        return categoryDAO.getCategoryPerMovie(movieid);
+    }
+
 }

@@ -6,6 +6,7 @@
 package pmc2020.GUI.Model;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.List;
 import pmc2020.BLL.MovieManager;
@@ -24,7 +25,7 @@ public class MovieModel
 
     private MovieManager movieManager;
     private ObservableList<Movie> allMovies;
-    private ObservableList<Category> allCategories;
+    private ObservableList<Category> allCategories, movieCategories;
 
     public MovieModel() throws IOException, DalException
     {
@@ -33,48 +34,61 @@ public class MovieModel
         allMovies.addAll(movieManager.getAllMovies());
         allCategories = FXCollections.observableArrayList();
         allCategories.addAll(movieManager.getAllCategories());
+         
     }
-    
+
     public ObservableList<Movie> getAllMovies()
     {
         return allMovies;
     }
-    
+
     public ObservableList<Category> getAllCategories()
     {
         return allCategories;
     }
-    
+
     public void deleteMovie(Movie movie) throws DalException
     {
         movieManager.deleteMovie(movie);
         allMovies.remove(movie);
     }
-    
     public void addMovie(int ID, String Title, double IMDB_Rating, String File_location, String imdb_Link, String last_view, List<Category> categories) throws DalException
     {
         Movie movie = movieManager.addMovie(Title, IMDB_Rating, File_location, imdb_Link, categories);
         allMovies.add(movie);
     }
-    
+
     public void updateMovie(Movie movie) throws DalException
     {
         movieManager.updateMovie(movie);
         allMovies.remove(movie);
         allMovies.add(movie);
     }
-    
+
     public void search(String query) throws DalException
     {
         if (query.isEmpty())
         {
             allMovies.clear();
             allMovies.addAll(movieManager.getAllMovies());
-        }
-        else
+        } else
         {
             allMovies.clear();
             allMovies.addAll(movieManager.search(query));
+        }
+    }
+
+    public void searchByCategory(int categoryToSearch) throws SQLException, DalException
+    {
+        if (categoryToSearch == 0)
+        {
+            allMovies.clear();
+            allMovies.addAll(movieManager.getAllMovies());
+        } else
+        {
+            allMovies.clear();
+            allMovies.addAll(movieManager.searchByCategory(categoryToSearch));
+            movieManager.searchByCategory(categoryToSearch);
         }
     }
 
@@ -82,14 +96,14 @@ public class MovieModel
     {
         movieManager.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
     }
-    
+
     public ObservableList<Movie> refreshMovies() throws DalException
     {
         allMovies.clear();
         allMovies.addAll(movieManager.getAllMovies());
         return allMovies;
     }
-    
+
     public void createCategory(String category) throws DalException
     {
         Category cat = movieManager.createCategory(category);
@@ -109,4 +123,6 @@ public class MovieModel
             allMovies.addAll(movieManager.search(categoryToSearch));
         }
     }
+
+
 }
