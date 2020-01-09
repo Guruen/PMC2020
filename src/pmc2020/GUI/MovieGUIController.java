@@ -9,6 +9,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,6 +35,7 @@ import pmc2020.GUI.Model.MovieModel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javafx.collections.ListChangeListener;
+import pmc2020.BE.Category;
 
 /**
  * FXML Controller class
@@ -95,7 +97,9 @@ public class MovieGUIController implements Initializable
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("Title"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("Private_Rating"));
         imdbratingColumn.setCellValueFactory(new PropertyValueFactory<>("IMDB_Rating"));
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         
+
         // Add category column
         
         movieList();

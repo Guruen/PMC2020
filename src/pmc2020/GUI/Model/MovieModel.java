@@ -6,6 +6,7 @@
 package pmc2020.GUI.Model;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.List;
 import pmc2020.BLL.MovieManager;
@@ -24,7 +25,7 @@ public class MovieModel
 
     private MovieManager movieManager;
     private ObservableList<Movie> allMovies;
-    private ObservableList<Category> allCategories;
+    private ObservableList<Category> allCategories, movieCategories;
 
     public MovieModel() throws IOException, DalException
     {
@@ -33,6 +34,7 @@ public class MovieModel
         allMovies.addAll(movieManager.getAllMovies());
         allCategories = FXCollections.observableArrayList();
         allCategories.addAll(movieManager.getAllCategories());
+         
     }
     
     public ObservableList<Movie> getAllMovies()
@@ -113,8 +115,6 @@ public class MovieModel
             allMovies.addAll(movieManager.search(categoryToSearch));
         }
     }
-
-
 
 
 }

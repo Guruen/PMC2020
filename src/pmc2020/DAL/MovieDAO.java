@@ -170,7 +170,7 @@ public class MovieDAO
         }
     }
 
-    public List<Movie> getMoviesPerCategory(String categories) throws SQLException, DalException
+    public List<Movie> getMoviesPerCategory(int categories) throws SQLException, DalException
     {
         try ( Connection con = dbCon.getConnection())
         {
