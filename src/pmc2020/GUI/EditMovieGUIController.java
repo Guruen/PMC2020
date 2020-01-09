@@ -71,12 +71,10 @@ public class EditMovieGUIController implements Initializable
     {
     }
 
-
     void setModel(MovieModel model)
     {
         this.model = model;
     }
-
 
     @FXML
     private void SendValueUser(MouseEvent event)
@@ -89,15 +87,16 @@ public class EditMovieGUIController implements Initializable
 
     @FXML
     private void SendValueIMDB(MouseEvent event)
-    {
+    { 
         double v = editImdbSlider.getValue();
         String formatted = String.format("%.1f", v);
         editIMDBRating.setText(formatted + "");
         iMDBRating = Double.parseDouble(editIMDBRating.getText());
     }
-    @FXML 
+
+    @FXML
     private void handleEditMovie(ActionEvent event) throws IOException, DalException
-    {        
+    {
         final JDialog dialog = new JDialog();
         dialog.setAlwaysOnTop(true);
         String title = editTitleText.getText();
@@ -134,7 +133,7 @@ public class EditMovieGUIController implements Initializable
 
     @FXML
     private void handleEditFilePath(ActionEvent event)
-    {   
+    {
         final JDialog dialog = new JDialog();
         dialog.setAlwaysOnTop(true);
         FileDialog fd = new java.awt.FileDialog((java.awt.Frame) null);
@@ -156,11 +155,9 @@ public class EditMovieGUIController implements Initializable
         }
     }
 
-
     void setMovie(Movie movie)
     {
         this.movie = movie;
-
 
         editTitleText.setText(movie.getTitle());
         editImdbSiteLinkText.setText(movie.getIMDB_Link());

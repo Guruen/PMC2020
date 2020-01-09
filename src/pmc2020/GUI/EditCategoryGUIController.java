@@ -62,7 +62,7 @@ public class EditCategoryGUIController implements Initializable
         
         if(catHasAName = true){
             //closes window
-            //adds category to list  
+            //Edits chosen category on list  
         }
         else
         {
