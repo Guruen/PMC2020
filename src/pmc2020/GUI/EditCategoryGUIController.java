@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import pmc2020.GUI.Model.MovieModel;
@@ -25,7 +26,7 @@ public class EditCategoryGUIController implements Initializable
 {
 
     private MovieModel model;
-    
+
     @FXML
     private Button editButton;
     @FXML
@@ -38,7 +39,7 @@ public class EditCategoryGUIController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
-    }    
+    }
 
     @FXML
     private void handleEditCategoryButton(ActionEvent event)
@@ -47,33 +48,34 @@ public class EditCategoryGUIController implements Initializable
         boolean catHasAName;
         final JDialog dialog = new JDialog();
         dialog.setAlwaysOnTop(true);
-        
-        if (catName != null && !catName.isEmpty()){
+
+        if (catName != null && !catName.isEmpty())
+        {
             editCategoryTextFieldText.setText(catName);
             catHasAName = true;
-        }
-        else
+        } else
         {
             JOptionPane.showMessageDialog(dialog, "Category name can not be blank!", "ERROR", JOptionPane.ERROR_MESSAGE);
             editCategoryTextFieldText.setText("EDIT ME");
             catHasAName = false;
             System.out.println(catHasAName);
         }
-        
-        if(catHasAName = true){
-            //closes window
+
+        if (catHasAName = true)
+        {
+            Stage stage = (Stage) editButton.getScene().getWindow();
+            stage.close();
             //Edits chosen category on list  
-        }
-        else
+        } else
         {
             System.out.println(catHasAName);
         }
-        
+
     }
 
     void setModel(MovieModel model)
     {
         this.model = model;
     }
-    
+
 }

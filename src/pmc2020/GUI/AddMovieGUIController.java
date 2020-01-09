@@ -47,11 +47,12 @@ public class AddMovieGUIController implements Initializable
 
     private String filename;
     private String directory;
+    private Movie movie;
     private double userRating;
     private double iMDBRating;
-    
+
     public MovieModel model;
-    
+
     @FXML
     private TextField titleText;
     @FXML
@@ -68,8 +69,6 @@ public class AddMovieGUIController implements Initializable
     private Slider imdbSlider;
     @FXML
     private ListView<Category> categoryList;
-
-
 
     public AddMovieGUIController() throws IOException, DalException
     {
@@ -126,24 +125,20 @@ public class AddMovieGUIController implements Initializable
         double iMDB_Rating = imdbSlider.getValue();
         String iMDB_SiteLink = imdbSiteLinkText.getText();
         String movie_FilePath = chosenFilePathtext.getText();
-        
+
         List<Category> categories = categoryList.getSelectionModel().getSelectedItems();
-        
-        
-        
+
         model.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
-        
-        
+
         boolean movieNotEmpty;
-        
+
         if (title != null && !title.isEmpty())
         {
             title = titleText.getText();
             titleText.setText(title);
             movieNotEmpty = true;
             System.out.println(movieNotEmpty);
-        }
-        else
+        } else
         {
             JOptionPane.showMessageDialog(dialog, "Movie title can not be blank!", "ERROR", JOptionPane.ERROR_MESSAGE);
             titleText.setText("EDIT ME");
@@ -151,15 +146,14 @@ public class AddMovieGUIController implements Initializable
             System.out.println(movieNotEmpty);
 
         }
-        
+
         if (iMDB_SiteLink != null && !iMDB_SiteLink.isEmpty())
         {
             iMDB_SiteLink = imdbSiteLinkText.getText();
             imdbSiteLinkText.setText(iMDB_SiteLink);
             movieNotEmpty = true;
             System.out.println(movieNotEmpty);
-        }
-        else
+        } else
         {
             JOptionPane.showMessageDialog(dialog, "IMDB link can not be blank!", "ERROR", JOptionPane.ERROR_MESSAGE);
             imdbSiteLinkText.setText("https://www.imdb.com/");
@@ -167,15 +161,14 @@ public class AddMovieGUIController implements Initializable
             System.out.println(movieNotEmpty);
 
         }
-        
+
         if (movie_FilePath != "Chosen File Path" && !movie_FilePath.isEmpty())
         {
             movie_FilePath = chosenFilePathtext.getText();
             chosenFilePathtext.setText(movie_FilePath);
             movieNotEmpty = true;
             System.out.println(movieNotEmpty);
-        }
-        else
+        } else
         {
             JOptionPane.showMessageDialog(dialog, "Movie file path can not be blank!", "ERROR", JOptionPane.ERROR_MESSAGE);
             titleText.setText("Chosen File Path");
@@ -183,22 +176,24 @@ public class AddMovieGUIController implements Initializable
             System.out.println(movieNotEmpty);
 
         }
-        
+
         if (movieNotEmpty == true)
         {
             System.out.println(movieNotEmpty);
+            Stage stage = (Stage) addMovieButton.getScene().getWindow();
             //model.addMovie(title, iMDBRating, iMDB_SiteLink, movie_FilePath, categories);
-            //stage.close
+            stage.close();
         } else
         {
             System.out.println(movieNotEmpty);
         }
-        
+
     }
 
     void setModel(MovieModel model)
     {
         this.model = model;
+
     }
 
     @FXML

@@ -49,14 +49,15 @@ public class MovieManager
     {
         movieDAO.updateMovie(movie);
     }
-    
-        public List<Category> getAllCategories() throws DalException
+
+    public List<Category> getAllCategories() throws DalException
     {
         return categoryDAO.getAllCategories();
     }
 
     /**
      * Searches the list of movies
+     *
      * @param query
      * @return result of what you've searched for
      */
@@ -65,7 +66,7 @@ public class MovieManager
         List<Movie> movieSearchBase = movieDAO.getAllMovies();
         List<Category> categorySearchBase = categoryDAO.getAllCategories(); //Delete
         List<Movie> result = new ArrayList<>();
-        
+
         for (Movie movie : movieSearchBase)
         {
             if (movie.getTitle().toLowerCase().contains(query.toLowerCase()))
@@ -75,10 +76,9 @@ public class MovieManager
         }
         return result;
     }
-    
+
     public Category createCategory(String category) throws DalException
     {
         return categoryDAO.createCategory(category);
     }
-
 }

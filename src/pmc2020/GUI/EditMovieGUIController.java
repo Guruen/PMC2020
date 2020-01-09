@@ -158,7 +158,7 @@ public class EditMovieGUIController implements Initializable
             JOptionPane.showMessageDialog(dialog, "Adding a movie has been cancelled. Try again!", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else
         {
-            editChosenFilePathtext.setText(filename);
+            editChosenFilePathtext.setText(directory + filename);
             System.out.println(filename);
         }
     }

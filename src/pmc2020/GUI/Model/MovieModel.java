@@ -51,7 +51,6 @@ public class MovieModel
         allMovies.remove(movie);
     }
     
-    
     public void addMovie(int ID, String Title, double IMDB_Rating, String File_location, String imdb_Link, String last_view, List<Category> categories) throws DalException
     {
         Movie movie = movieManager.addMovie(Title, IMDB_Rating, File_location, imdb_Link, categories);
@@ -63,9 +62,6 @@ public class MovieModel
         movieManager.updateMovie(movie);
         allMovies.remove(movie);
         allMovies.add(movie);
-       
-
-        
     }
     
     public void search(String query) throws DalException
@@ -113,8 +109,4 @@ public class MovieModel
             allMovies.addAll(movieManager.search(categoryToSearch));
         }
     }
-
-
-
-
 }

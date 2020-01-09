@@ -8,6 +8,7 @@ package pmc2020.GUI;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -34,6 +35,7 @@ import pmc2020.GUI.Model.MovieModel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javafx.collections.ListChangeListener;
+import pmc2020.BE.Category;
 
 /**
  * FXML Controller class
@@ -44,8 +46,10 @@ public class MovieGUIController implements Initializable
 {
 
     private Movie movieToDelete;
-
+    private Movie movieToOpen;
+    private MovieModel model;
     private String TimeAndDate;
+    
     @FXML
     private TextField searchBar;
     @FXML
@@ -58,8 +62,6 @@ public class MovieGUIController implements Initializable
     private Button editCategoryButton;
     @FXML
     private Button playButton;
-
-    private MovieModel model;
     @FXML
     private TableView<Movie> MovieView;
     @FXML
@@ -95,9 +97,8 @@ public class MovieGUIController implements Initializable
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("Title"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("Private_Rating"));
         imdbratingColumn.setCellValueFactory(new PropertyValueFactory<>("IMDB_Rating"));
-        
+
         // Add category column
-        
         movieList();
     }
 
@@ -232,15 +233,14 @@ public class MovieGUIController implements Initializable
     {
         Movie movieToEdit = MovieView.getSelectionModel().getSelectedItem();
         Desktop desktop = Desktop.getDesktop();
-        //get selected element
-        //get file path of element
         File f = new File(movieToEdit.getFile_location());
         desktop.open(f);
-        
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 
-        Date date = new Date();  
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
         System.out.println(formatter.format(date));
         TimeAndDate = formatter.format(date);
+
         //write date to DB
         //find expiry date of last watched (two years after last play)
         //check date on startup, to control expiry
@@ -259,10 +259,17 @@ public class MovieGUIController implements Initializable
     private void handleCategorySearch(ActionEvent event)
     {
         //CategoryCombobox.getSelectionModel().getSelectedItem());
-        
+
         Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
         String categoryToSearch = category.getCategory();
-       // model.searchCategory(categoryToSearch);
+        // model.searchCategory(categoryToSearch);
+    }
+
+    @FXML
+    private void handleOpenLink(ActionEvent event) throws IOException, URISyntaxException
+    {
+        movieToOpen = MovieView.getSelectionModel().getSelectedItem();
+        Desktop.getDesktop().browse(new URL(movieToOpen.getIMDB_Link()).toURI());
     }
 
 }
