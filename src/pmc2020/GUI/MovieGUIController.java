@@ -33,6 +33,8 @@ import pmc2020.DAL.DalException;
 import pmc2020.GUI.Model.MovieModel;
 import java.text.SimpleDateFormat;  
 import java.util.Date;  
+import javafx.collections.ObservableList;
+import pmc2020.BE.Category;
 
 /**
  * FXML Controller class
@@ -69,7 +71,7 @@ public class MovieGUIController implements Initializable
     @FXML
     private TableColumn<Movie, String> categoryColumn;
     @FXML
-    private ComboBox<?> CategoryCombobox;
+    private ComboBox<Category> CategoryCombobox;
 
     public MovieGUIController() throws IOException, DalException
     {
@@ -88,7 +90,7 @@ public class MovieGUIController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        
+        CategoryCombobox.setItems(model.getAllCategories());
         MovieView.setItems(model.getAllMovies());
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("Title"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("Private_Rating"));
@@ -224,6 +226,16 @@ public class MovieGUIController implements Initializable
         movieToDelete = MovieView.getSelectionModel().getSelectedItem();
         System.out.println(movieToDelete);
         model.deleteMovie(movieToDelete);
+    }
+
+    @FXML
+    private void handleCategorySearch(ActionEvent event)
+    {
+        //CategoryCombobox.getSelectionModel().getSelectedItem());
+        
+        Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
+        String categoryToSearch = category.getCategory();
+       // model.searchCategory(categoryToSearch);
     }
 
 }
