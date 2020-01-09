@@ -62,8 +62,6 @@ public class EditMovieGUIController implements Initializable
     private Label editUserRating;
     @FXML
     private Slider editImdbSlider;
-    @FXML
-    private TextField editTitleText;
 
     /**
      * Initializes the controller class.
