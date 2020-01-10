@@ -28,7 +28,7 @@ import pmc2020.GUI.Model.MovieModel;
 /**
  * FXML Controller class
  *
- * @author Zanaxdk
+ * @author Guruerne
  */
 public class EditMovieGUIController implements Initializable
 {
@@ -73,6 +73,11 @@ public class EditMovieGUIController implements Initializable
     {
         this.model = model;
     }
+    
+    /**
+     * gets the value from the slider on the view and sets this value as text on a label, and displays live changes
+     * @param event 
+     */
 
     @FXML
     private void SendValueUser(MouseEvent event)
@@ -82,6 +87,11 @@ public class EditMovieGUIController implements Initializable
         editUserRating.setText(formatted + "");
         userRating = v;
     }
+    
+    /**
+     * gets the value from the slider on the view and sets this value as text on a label, and displays live changes
+     * @param event 
+     */
 
     @FXML
     private void SendValueIMDB(MouseEvent event)
@@ -91,6 +101,15 @@ public class EditMovieGUIController implements Initializable
         editIMDBRating.setText(formatted + "");
         iMDBRating = v;
     }
+    
+    /**
+     * gets all available data on the selected entry from the DB, and lets the user edit it accordingly
+     * handles updating the new data with the DB
+     * window only closes when data is present, to prevent blank entries (true condition)
+     * @param event
+     * @throws IOException
+     * @throws DalException 
+     */
 
     @FXML
     private void handleEditMovie(ActionEvent event) throws IOException, DalException
@@ -138,6 +157,15 @@ public class EditMovieGUIController implements Initializable
         }
     }
 
+    /**
+     * handles opening the filedialog to allow the user to open / choose a mp4 or mpeg4 file
+     * uses filename and directory to see where the file is to add this data to the DB too
+     * also checks the filename to see if it is the correct filetype(s)
+     * @param filename
+     * @param directory
+     * @param event 
+     */
+    
     @FXML
     private void handleEditFilePath(ActionEvent event)
     {
@@ -161,6 +189,11 @@ public class EditMovieGUIController implements Initializable
             System.out.println(filename);
         }
     }
+    
+    /**
+     * sets the movie to the newly edited one
+     * @param movie 
+     */
 
     void setMovie(Movie movie)
     {

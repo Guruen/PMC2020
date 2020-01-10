@@ -16,141 +16,21 @@ import pmc2020.DAL.DalException;
 
 /**
  *
- * @author CSnit
+ * @author Guruerne
  */
 public class Movie
 {
-    private final SimpleIntegerProperty ID = new SimpleIntegerProperty();
-    private final SimpleStringProperty Title = new SimpleStringProperty();
-    private final SimpleDoubleProperty IMDB_Rating = new SimpleDoubleProperty();
-    private final SimpleDoubleProperty Private_Rating = new SimpleDoubleProperty();
-    private final SimpleStringProperty File_location = new SimpleStringProperty();
-    private final SimpleStringProperty Last_Viewed = new SimpleStringProperty();
-    private final SimpleStringProperty IMDB_Link = new SimpleStringProperty();
 
-    public Movie(int id, String title, double imdb_rating, double private_rating, String file_location, String last_viewed, String imdb_link)
-    {
-        setID(id);
-        setTitle(title);
-        setIMDB_Rating(imdb_rating);
-        setPrivate_Rating(private_rating);
-        setFile_location(file_location);
-        setLast_Viewed(last_viewed);
-        setIMDB_Link(imdb_link);
-    }
+    private int ID;
+    private String Title;
+    private double IMDB_Rating;
+    private double Private_Rating;
+    private String File_location;
+    private String Last_Viewed;
+    private String IMDB_Link;
+    private String Categories;
+    
 
-    
-  public final int getID()
-  {
-      return ID.get();
-  }
-  
-  public final void setID(int id)
-  {
-      ID.set(id);
-  }
-  
-  public SimpleIntegerProperty idProperty()
-  {
-      return ID;
-  }
-
-  public final String getTitle()
-  {
-      return Title.get();
-  }
-   
-  public final void setTitle(String title)
-  {
-      Title.set(title);
-  }
-  
-  public SimpleStringProperty titleProperty()
-  {
-      return Title;
-  }
-    
-  public final double getIMDB_Rating()
-  {
-      return IMDB_Rating.get();
-  }
-  
-  public final void setIMDB_Rating(double i)
-  {
-      IMDB_Rating.set(i);
-  }
-  
-  public SimpleDoubleProperty imdb_ratingProperty()
-  {
-      return IMDB_Rating;
-  }
-    
-  public final double getPrivate_Rating()
-  {
-      return Private_Rating.get();
-  }
-    
-  public final void setPrivate_Rating(double p)
-  {
-      Private_Rating.set(p);
-  }
-    
-  public SimpleDoubleProperty private_ratingProperty()
-  {
-      return Private_Rating;
-  }
-  
-  public final String getFile_location()
-  {
-      return File_location.get();
-  }
-    
-  public final void setFile_location(String fl)
-  {
-      File_location.set(fl);
-  }
-    
-  public SimpleStringProperty file_locationProperty()
-  {
-      return File_location;
-  }
-    
-  public final String getLast_Viewed()
-  {
-      return Last_Viewed.get();
-  }
-  
-  public final void setLast_Viewed(String lv)
-  {
-      Last_Viewed.set(lv);
-  }
-  
-  public SimpleStringProperty last_viewedProperty()
-  {
-      return Last_Viewed;
-  }
-  
-  public final String getIMDB_Link()
-  {
-      return IMDB_Link.get();
-  }
-  
-  public final void setIMDB_Link(String il)
-  {
-      IMDB_Link.set(il);
-  }
-  
-  public SimpleStringProperty imdb_linkProperty()
-  {
-      return IMDB_Link;
-  }
-
- 
-      @Override
-    public String toString()
-    {
-        return Title.get();
-    }
     
     /**
      * 
@@ -161,98 +41,210 @@ public class Movie
      * @param File_location
      * @param imdb_Link
      * @param last_view - Format is YYYY-MM-DD
+     * @param categories
      */
     
-//    public Movie(int ID, String Title, double IMDB_Rating, double Private_rating, String File_location, String imdb_Link, String last_view)
-//    {
-//        this.ID = ID;
-//        this.Title = Title;
-//        this.IMDB_Rating = IMDB_Rating;
-//        this.Private_rating = Private_rating;
-//        this.File_location = File_location;
-//        this.imdb_Link = imdb_Link;
-//        this.Last_Viewed = last_view;
-//    }
-//
-//    public Movie(int id, String title, double imdb_rating, String filelocation, String last_view, String imdb_link)
-//    {
-//        this.ID = id;
-//        this.Title = title;
-//        this.IMDB_Rating = imdb_rating;
-//        this.File_location = filelocation;
-//        this.imdb_Link = imdb_link;
-//        this.Last_Viewed = last_view;
-//    }
-//
-//    public int getID()
-//    {
-//        return ID;
-//    }
-//
-//    public void setID(int ID)
-//    {
-//        this.ID = ID;
-//    }
-//
-//    public String getTitle()
-//    {
-//        return Title;
-//    }
-//
-//    public void setTitle(String Title)
-//    {
-//        this.Title = Title;
-//    }
-//
-//    public double getIMDB_Rating()
-//    {
-//        return IMDB_Rating;
-//    }
-//
-//    public void setIMDB_Rating(double IMDB_Rating)
-//    {
-//        this.IMDB_Rating = IMDB_Rating;
-//    }
-//
-//    public double getPrivate_rating()
-//    {
-//        return Private_rating;
-//    }
-//
-//    public void setPrivate_rating(double Private_rating)
-//    {
-//        this.Private_rating = Private_rating;
-//    }
-//
-//    public String getLast_Viewed()
-//    {
-//        return Last_Viewed;
-//    }
-//
-//    public void setLast_Viewed(String Last_Viewed)
-//    {
-//        this.Last_Viewed = Last_Viewed;
-//    }
-//
-//    public String getFile_location()
-//    {
-//        return File_location;
-//    }
-//
-//    public void setFile_location(String File_location)
-//    {
-//        this.File_location = File_location;
-//    }
-//       
-//    public String getIMDB_Link()
-//    {
-//        return imdb_Link;
-//    }
-//
-//    public void setIMDB_Link(String imdb_Link)
-//    {
-//        this.imdb_Link = imdb_Link;
-//    }
-//    
+    public Movie(int id, String title, double imdb_rating, double private_rating, String file_location, String last_viewed, String imdb_link, String categories)
+    {
+        this.ID = id;
+        this.Title = title;
+        this.IMDB_Rating = imdb_rating;
+        this.Private_Rating = private_rating;
+        this.File_location = file_location;
+        this.IMDB_Link = imdb_link;
+        this.Last_Viewed = last_viewed;
+        this.Categories = categories;
+        
+    }
+    
+    /**
+     * This is a polymorphed version of the other movie constructor
+     * @param id
+     * @param title
+     * @param imdb_rating
+     * @param filelocation
+     * @param last_view
+     * @param imdb_link 
+     */
 
+    public Movie(int id, String title, double imdb_rating, String filelocation, String last_view, String imdb_link)
+    {
+        this.ID = id;
+        this.Title = title;
+        this.IMDB_Rating = imdb_rating;
+        this.File_location = filelocation;
+        this.IMDB_Link = imdb_link;
+        this.Last_Viewed = last_view;
+    }
+    
+    /**
+     * Gets the ID of the movie from DB
+     * @return ID
+     */
+
+    public int getID()
+    {
+        return ID;
+    }
+    
+    /**
+     * Sets the id of the selected movie in the DB
+     * @param ID 
+     */
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+    
+    /**
+     * Gets the title of the movie from DB
+     * @return Title
+     */
+
+    public String getTitle()
+    {
+        return Title;
+    }
+    
+    /**
+     * Sets the title of the selected movie to something new, that is specified by the user
+     * @param Title 
+     */
+
+    public void setTitle(String Title)
+    {
+        this.Title = Title;
+    }
+    
+    /**
+     * Gets the IMDB rating of the selected movie from DB
+     * @return IMDB rating
+     */
+
+    public double getIMDB_Rating()
+    {
+        return IMDB_Rating;
+    }
+    
+    /**
+     * Sets the IMDB rating of the movie in the DB to something new
+     * @param IMDB_Rating 
+     */
+
+    public void setIMDB_Rating(double IMDB_Rating)
+    {
+        this.IMDB_Rating = IMDB_Rating;
+    }
+    
+    /**
+     * Gets the users own rating to the selected movie from the DB
+     * @return User rating
+     */
+
+    public double getPrivate_Rating()
+    {
+        return Private_Rating;
+    }
+
+    /**
+     * Sets the users rating to something new in the DB
+     * @param Private_rating 
+     */
+    
+    public void setPrivate_Rating(double Private_rating)
+    {
+        this.Private_Rating = Private_rating;
+    }
+    
+    /**
+     * Gets the date when the user last viewed the selected entry from the DB
+     * @return Last viewed date
+     */
+
+    public String getLast_Viewed()
+    {
+        return Last_Viewed;
+    }
+    
+    /**
+     * Sets the date when the user last viewed the movie to the current date in the DB
+     * @param Last_Viewed 
+     */
+
+    public void setLast_Viewed(String Last_Viewed)
+    {
+        this.Last_Viewed = Last_Viewed;
+    }
+
+    /**
+     * Gets the file path to the selected entry from the DB
+     * @return File location
+     */
+    
+    public String getFile_location()
+    {
+        return File_location;
+    }
+    
+    /**
+     * Sets the file location to the selected entry to something new in the DB
+     * @param File_location 
+     */
+
+    public void setFile_location(String File_location)
+    {
+        this.File_location = File_location;
+    }
+    
+    /**
+     * Gets the IMDB link to the selected movie from the DB
+     * @return IMDB Link
+     */
+       
+    public String getIMDB_Link()
+    {
+        return IMDB_Link;
+    }
+    
+    /**
+     * Sets the IMDB link in the DB to something new in the DB
+     * @param imdb_Link 
+     */
+
+    public void setIMDB_Link(String imdb_Link)
+    {
+        this.IMDB_Link = imdb_Link;
+    }
+    
+    /**
+     * Gets the categories from the DB
+     * @return Categories
+     */
+    
+    public String getCategories()
+    {
+        return Categories;
+    }
+    
+    /**
+     * Sets the category in the DB to sometghing new and saves this in the DB
+     * @param categories 
+     */
+         
+    public void setCategories(String categories)
+    {
+        this.Categories = categories;
+    }
+    
+    /**
+     * Sets title to string and returns this as a string
+     * @return Title as string
+     */
+          
+      @Override
+    public String toString()
+    {
+        return Title;
+    }
 }
