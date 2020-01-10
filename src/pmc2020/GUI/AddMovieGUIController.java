@@ -117,7 +117,7 @@ public class AddMovieGUIController implements Initializable
     }
 
     @FXML
-    private void handleAddMovie(ActionEvent event) throws DalException
+    private void handleAddMovie(ActionEvent event) throws DalException, IOException
     {
         final JDialog dialog = new JDialog();
         dialog.setAlwaysOnTop(true);

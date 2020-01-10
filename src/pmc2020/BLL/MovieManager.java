@@ -31,12 +31,12 @@ public class MovieManager
         categoryDAO = new CategoryDAO();
     }
 
-    public Movie addMovie(String title, double imdb_rating, String filelocation, String imdb_link, List<Category> categories) throws DalException
+    public Movie addMovie(String title, double imdb_rating, String filelocation, String imdb_link, List<Category> categories) throws DalException, IOException
     {
         return movieDAO.createMovie(title, imdb_rating, filelocation, imdb_link, categories);
     }
 
-    public List<Movie> getAllMovies() throws DalException
+    public List<Movie> getAllMovies() throws DalException, IOException
     {
         return movieDAO.getAllMovies();
     }
@@ -61,7 +61,7 @@ public class MovieManager
      * @param query
      * @return result of what you've searched for
      */
-    public List<Movie> search(String query) throws DalException
+    public List<Movie> search(String query) throws DalException, IOException
     {
         List<Movie> movieSearchBase = movieDAO.getAllMovies();
         List<Category> categorySearchBase = categoryDAO.getAllCategories(); //Delete

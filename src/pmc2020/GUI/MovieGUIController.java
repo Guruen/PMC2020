@@ -97,7 +97,9 @@ public class MovieGUIController implements Initializable
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("Title"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("Private_Rating"));
         imdbratingColumn.setCellValueFactory(new PropertyValueFactory<>("IMDB_Rating"));
-        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("Categories"));
+        
+        
         
 
         // Add category column
@@ -130,7 +132,7 @@ public class MovieGUIController implements Initializable
     }
 
     @FXML
-    private void handleSearch(KeyEvent event) throws DalException
+    private void handleSearch(KeyEvent event) throws DalException, IOException
     {
         String query = searchBar.getText().trim();
         model.search(query);

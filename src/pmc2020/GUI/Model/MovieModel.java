@@ -54,7 +54,7 @@ public class MovieModel
     }
     
     
-    public void addMovie(int ID, String Title, double IMDB_Rating, String File_location, String imdb_Link, String last_view, List<Category> categories) throws DalException
+    public void addMovie(int ID, String Title, double IMDB_Rating, String File_location, String imdb_Link, String last_view, List<Category> categories) throws DalException, IOException
     {
         Movie movie = movieManager.addMovie(Title, IMDB_Rating, File_location, imdb_Link, categories);
         allMovies.add(movie);
@@ -70,7 +70,7 @@ public class MovieModel
         
     }
     
-    public void search(String query) throws DalException
+    public void search(String query) throws DalException, IOException
     {
         if (query.isEmpty())
         {
@@ -84,12 +84,12 @@ public class MovieModel
         }
     }
 
-    public void addMovie(String title, double iMDB_Rating, String iMDB_SiteLink, String movie_FilePath, List<Category> categories) throws DalException
+    public void addMovie(String title, double iMDB_Rating, String iMDB_SiteLink, String movie_FilePath, List<Category> categories) throws DalException, IOException
     {
         movieManager.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
     }
     
-    public ObservableList<Movie> refreshMovies() throws DalException
+    public ObservableList<Movie> refreshMovies() throws DalException, IOException
     {
         allMovies.clear();
         allMovies.addAll(movieManager.getAllMovies());
@@ -102,7 +102,7 @@ public class MovieModel
         allCategories.add(cat);
     }
 
-    public void searchCategory(String categoryToSearch) throws DalException
+    public void searchCategory(String categoryToSearch) throws DalException, IOException
     {
                 if (categoryToSearch.isEmpty())
         {
