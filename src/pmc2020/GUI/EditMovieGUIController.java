@@ -134,7 +134,6 @@ public class EditMovieGUIController implements Initializable
             movie.setFile_location(editChosenFilePathtext.getText());
             Stage stage = (Stage) editAddMovieButton.getScene().getWindow();
             model.updateMovie(movie);
-            //model.refreshMovies(); For at refresh efter man har trykket Edit
             stage.close();
         }
     }

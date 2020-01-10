@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,7 +35,13 @@ import pmc2020.BE.Movie;
 import pmc2020.DAL.DalException;
 import pmc2020.GUI.Model.MovieModel;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.collections.ListChangeListener;
 import pmc2020.BE.Category;
@@ -48,10 +55,11 @@ public class MovieGUIController implements Initializable
 {
 
     private Movie movieToDelete;
+    private Movie movie;
     private Movie movieToOpen;
     private MovieModel model;
     private String TimeAndDate;
-    
+
     @FXML
     private TextField searchBar;
     @FXML
@@ -100,10 +108,7 @@ public class MovieGUIController implements Initializable
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("Private_Rating"));
         imdbratingColumn.setCellValueFactory(new PropertyValueFactory<>("IMDB_Rating"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        
 
-        // Add category column
-        movieList();
     }
 
     public void movieList()
@@ -139,7 +144,7 @@ public class MovieGUIController implements Initializable
 
     @FXML
     private void handleCategorySearch(ActionEvent event) throws DalException, SQLException
-    {   
+    {
         Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
         int categoryToSearch = category.getCategory_ID();
         model.searchByCategory(categoryToSearch);
@@ -241,17 +246,18 @@ public class MovieGUIController implements Initializable
     }
 
     @FXML
-    private void handlePlay(ActionEvent event) throws IOException
+    private void handlePlay(ActionEvent event) throws IOException, DalException
     {
         Movie movieToEdit = MovieView.getSelectionModel().getSelectedItem();
         Desktop desktop = Desktop.getDesktop();
         File f = new File(movieToEdit.getFile_location());
         desktop.open(f);
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date = new Date();
-        System.out.println(formatter.format(date));
-        TimeAndDate = formatter.format(date);
+        LocalDate date = LocalDate.now();
+        System.out.println(date);
+        System.out.println(movie.getLast_Viewed());
+        movieToEdit.setLast_Viewed(date + "");
+        model.updateMovie(movieToEdit);
 
         //write date to DB
         //find expiry date of last watched (two years after last play)
@@ -265,16 +271,6 @@ public class MovieGUIController implements Initializable
         movieToDelete = MovieView.getSelectionModel().getSelectedItem();
         System.out.println(movieToDelete);
         model.deleteMovie(movieToDelete);
-    }
-
-    @FXML
-    private void handleCategorySearch(ActionEvent event)
-    {
-        //CategoryCombobox.getSelectionModel().getSelectedItem());
-
-        Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
-        String categoryToSearch = category.getCategory();
-        // model.searchCategory(categoryToSearch);
     }
 
     @FXML

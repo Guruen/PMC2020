@@ -7,8 +7,10 @@ package pmc2020.BLL;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.management.modelmbean.ModelMBean;
 import pmc2020.BE.Category;
 import pmc2020.BE.Movie;
 import pmc2020.DAL.CategoryDAO;
@@ -24,6 +26,7 @@ public class MovieManager
 
     private MovieDAO movieDAO;
     private CategoryDAO categoryDAO;
+    private Movie movie;
 
     public MovieManager() throws IOException
     {
@@ -81,9 +84,9 @@ public class MovieManager
     {
         List<Movie> movieSearchBase = movieDAO.getMoviesPerCategory(categoryToSearch);
         List<Movie> result = new ArrayList<>();
-        
+
         result.addAll(movieDAO.getMoviesPerCategory(categoryToSearch));
-        
+
         return result;
     }
 
@@ -91,11 +94,10 @@ public class MovieManager
     {
         return categoryDAO.createCategory(category);
     }
-    
+
     public List<Category> getCategoryPerMovie(int movieid) throws SQLException, DalException
     {
-        
+
         return categoryDAO.getCategoryPerMovie(movieid);
     }
-
 }

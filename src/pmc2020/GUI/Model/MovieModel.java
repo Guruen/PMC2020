@@ -123,6 +123,4 @@ public class MovieModel
             allMovies.addAll(movieManager.search(categoryToSearch));
         }
     }
-
-
 }
