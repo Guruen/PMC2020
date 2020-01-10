@@ -14,10 +14,16 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author CSnit
+ * @author Guruerne
  */
 public class PMC2020 extends Application
 {
+    
+    /**
+     * starts the primary stage (GUI) of the program
+     * @param primaryStage
+     * @throws IOException 
+     */
     
     @Override
     public void start(Stage primaryStage) throws IOException

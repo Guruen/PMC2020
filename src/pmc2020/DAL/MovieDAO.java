@@ -14,24 +14,34 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import pmc2020.BE.Category;
-
 import pmc2020.BE.Movie;
 
 /**
  *
- * @author CSnit
+ * @author Guruerne
  */
 public class MovieDAO
 {
 
     private DatabaseConnector dbCon;
+    
+    /**
+     * Makes a new instance of a database connector
+     * @throws IOException 
+     */
 
     public MovieDAO() throws IOException
     {
         dbCon = new DatabaseConnector();
     }
+    
+    /**
+     * Gets all movies from the DB
+     * @return all movies as a list
+     * @throws DalException 
+     */
 
-    public List<Movie> getAllMovies() throws DalException
+    public List<Movie> getAllMovies() throws DalException, IOException
     {
         try ( Connection con = dbCon.getConnection())
         {
@@ -48,8 +58,9 @@ public class MovieDAO
                 String filelocation = rs.getString("filelocation");
                 String lastview = rs.getString("lastview");
                 String imdb_link = rs.getString("imdb_link");
+                String cats = getCategoriesforMovie(rs.getInt("id"));
 
-                Movie mov = new Movie(id, title, imdb_rating, p_rating, filelocation, lastview, imdb_link);
+                Movie mov = new Movie(id, title, imdb_rating, p_rating, filelocation, lastview, imdb_link, cats);
                 allMovies.add(mov);
             }
             return allMovies;
@@ -59,8 +70,19 @@ public class MovieDAO
             throw new DalException();
         }
     }
+    
+    /**
+     * The method to create a movie in the DB
+     * @param title
+     * @param imdb_rating
+     * @param filelocation
+     * @param imdb_link
+     * @param categories
+     * @return the newly created movie, and adds categories to it
+     * @throws DalException 
+     */
 
-    public Movie createMovie(String title, double imdb_rating, String filelocation, String imdb_link, List<Category> categories) throws DalException
+    public Movie createMovie(String title, double imdb_rating, String filelocation, String imdb_link, List<Category> categories) throws DalException, IOException
     {
 
         try ( Connection con = dbCon.getConnection())
@@ -82,13 +104,16 @@ public class MovieDAO
                 if (rs.next())
                 {
                     int ID = rs.getInt(1);
+                    
+                    addCategorytoMovie(ID, categories);
+                    
                     String last_view = null;
                     double p_rating = 0;
+                    String cats = getCategoriesforMovie(rs.getInt(1));
+                
+                    Movie mov = new Movie(ID, title, imdb_rating, p_rating, filelocation, last_view, imdb_link, cats);
+
                     
-                    Movie mov = new Movie(ID, title, imdb_rating, p_rating, filelocation, last_view, imdb_link);
-
-
-                    addCategorytoMovie(ID, categories);
                     return mov;
                 }
             }
@@ -100,6 +125,12 @@ public class MovieDAO
             throw new DalException();
         }
     }
+    
+    /**
+     * Deletes a movie from the DB
+     * @param movie
+     * @throws DalException 
+     */
 
     public void deleteMovie(Movie movie) throws DalException
     {
@@ -128,6 +159,12 @@ public class MovieDAO
             throw new DalException();
         }
     }
+    
+    /**
+     * Updates a movie in the DB with the given data
+     * @param movie
+     * @throws DalException 
+     */
 
     public void updateMovie(Movie movie) throws DalException
 
@@ -169,8 +206,16 @@ public class MovieDAO
             throw new DalException();
         }
     }
+    
+    /**
+     * Gets all movies from a certain category
+     * @param categories
+     * @return all movies as a list, from a given category
+     * @throws SQLException
+     * @throws DalException 
+     */
 
-    public List<Movie> getMoviesPerCategory(int categories) throws SQLException, DalException
+    public List<Movie> getMoviesPerCategory(int categories) throws SQLException, DalException, IOException
     {
         try ( Connection con = dbCon.getConnection())
         {
@@ -193,8 +238,9 @@ public class MovieDAO
                 String filelocation = rs.getString("filelocation");
                 String lastview = rs.getString("lastview");
                 String imdb_link = rs.getString("imdb_link");
-
-                Movie mov = new Movie(id, title, imdb_rating, p_rating, filelocation, lastview, imdb_link);
+                String cats = getCategoriesforMovie(id);
+                
+                Movie mov = new Movie(id, title, imdb_rating, p_rating, filelocation, lastview, imdb_link, cats);
                 allMovies.add(mov);
             }
             return allMovies;
@@ -205,6 +251,13 @@ public class MovieDAO
         }
 
     }
+    
+    /**
+     * Adds chosen categories to a movie
+     * @param id
+     * @param category
+     * @throws SQLException 
+     */
 
     public void addCategorytoMovie(int id, List<Category> category) throws SQLException
     {
@@ -224,4 +277,24 @@ public class MovieDAO
             }
         }
     }
+    
+      public String getCategoriesforMovie(int movieid) throws IOException, SQLException, DalException
+  {
+      CategoryDAO catDAO = new CategoryDAO();
+      
+      List<Category> movCat = catDAO.getCategoryPerMovie(movieid);
+      String categories = "";
+      
+      for (int i = 0; i < movCat.size(); i++)
+      {
+          if (categories == "")
+          {
+          categories = movCat.get(i).getCategory();
+          }
+          else{
+          categories = categories + " - " + movCat.get(i).getCategory();
+          }
+      }
+      return categories;
+  }
 }

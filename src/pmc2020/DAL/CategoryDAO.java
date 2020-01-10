@@ -17,18 +17,29 @@ import pmc2020.BE.Category;
 
 /**
  *
- * @author CSnit
+ * @author Guruerne
  */
 public class CategoryDAO
 {
 
     private DatabaseConnector dbCon;
+    
+    /** 
+     * makes new database connector
+     * @throws IOException 
+     */
 
     public CategoryDAO() throws IOException
     {
         dbCon = new DatabaseConnector();
     }
 
+    /** 
+     * method to get all categories as list
+     * @return all categories
+     * @throws DalException 
+     */
+    
     public List<Category> getAllCategories() throws DalException
     {
         try ( Connection con = dbCon.getConnection())
@@ -53,6 +64,13 @@ public class CategoryDAO
         }
 
     }
+    
+    /** 
+     * creates a category, with given data in the DB
+     * @param category
+     * @return category, with ID attached
+     * @throws DalException 
+     */
 
     public Category createCategory(String category) throws DalException
     {
@@ -86,6 +104,12 @@ public class CategoryDAO
             throw new DalException();
         }
     }
+    
+    /** 
+     * deletes a category from the DB
+     * @param category
+     * @throws DalException 
+     */
 
     public void deleteCategory(Category category) throws DalException
     {
@@ -115,6 +139,12 @@ public class CategoryDAO
         }
     }
 
+    /** 
+     * updates a category in the DB, with given data
+     * @param category
+     * @throws DalException 
+     */
+    
     public void updateCategory(Category category) throws DalException
     {
 
@@ -145,6 +175,14 @@ public class CategoryDAO
             throw new DalException();
         }
     }
+    
+    /**
+     * Gets all categoies per movie as a list
+     * @param movieid
+     * @return all categories
+     * @throws SQLException
+     * @throws DalException 
+     */
 
     public List<Category> getCategoryPerMovie(int movieid) throws SQLException, DalException
     {
