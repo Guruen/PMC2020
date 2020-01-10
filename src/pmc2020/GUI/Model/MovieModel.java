@@ -40,7 +40,7 @@ public class MovieModel
         allMovies.addAll(movieManager.getAllMovies());
         allCategories = FXCollections.observableArrayList();
         allCategories.addAll(movieManager.getAllCategories());
-         
+
     }
 
     
@@ -147,8 +147,19 @@ public class MovieModel
         {
             allMovies.clear();
             allMovies.addAll(movieManager.searchByCategory(categoryToSearch));
-            movieManager.searchByCategory(categoryToSearch);
         }
+    }
+
+    public void searchByIMDBRating(double minIMDBRating, double maxIMDBRating) throws DalException, IOException
+    {
+        allMovies.clear();
+        allMovies.addAll(movieManager.searchByIMDBRating(minIMDBRating, maxIMDBRating));
+    }
+
+    public void searchByPersonalRating(double minPersonRating, double maxPersonRating) throws DalException, IOException
+    {
+        allMovies.clear();
+        allMovies.addAll(movieManager.searchByPersonalRating(minPersonRating, maxPersonRating));
     }
     
     /**
@@ -192,26 +203,19 @@ public class MovieModel
         Category cat = movieManager.createCategory(category);
         allCategories.add(cat);
     }
-    
-    /**
-     * Searches in the DB with the given category as a filter
-     * @param categoryToSearch
-     * @throws DalException 
-     */
 
-    public void searchCategory(String categoryToSearch) throws DalException, IOException
+    public void editCategory(Category category) throws DalException
     {
-                if (categoryToSearch.isEmpty())
-        {
-            allMovies.clear();
-            allMovies.addAll(movieManager.getAllMovies());
-        }
-        else
-        {
-            allMovies.clear();
-            allMovies.addAll(movieManager.search(categoryToSearch));
-        }
+        movieManager.editCategory(category);
+        allCategories.clear();
+        allCategories.addAll(movieManager.getAllCategories());
     }
 
+    public void deleteCategory(Category category) throws DalException
+    {
+        movieManager.deleteCategory(category);
+        allCategories.clear();
+        allCategories.addAll(movieManager.getAllCategories());
+    }
 
 }

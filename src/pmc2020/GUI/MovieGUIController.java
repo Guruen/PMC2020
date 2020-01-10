@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,9 +35,18 @@ import pmc2020.BE.Movie;
 import pmc2020.DAL.DalException;
 import pmc2020.GUI.Model.MovieModel;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.collections.ListChangeListener;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
 import pmc2020.BE.Category;
 
 /**
@@ -48,10 +58,11 @@ public class MovieGUIController implements Initializable
 {
 
     private Movie movieToDelete;
+    private Movie movie;
     private Movie movieToOpen;
     private MovieModel model;
     private String TimeAndDate;
-    
+
     @FXML
     private TextField searchBar;
     @FXML
@@ -76,6 +87,22 @@ public class MovieGUIController implements Initializable
     private TableColumn<Movie, String> categoryColumn;
     @FXML
     private ComboBox<Category> CategoryCombobox;
+    @FXML
+    private Slider maxIMDBSlider;
+    @FXML
+    private Slider minIMDBSlider;
+    @FXML
+    private Label searchIMDBRatingMax;
+    @FXML
+    private Label searchIMDBRatingMin;
+    @FXML
+    private Label searchPersonalRatingMin;
+    @FXML
+    private Label searchPersonalRatingMax;
+    @FXML
+    private Slider minPersonalSlider;
+    @FXML
+    private Slider maxPersonalSlider;
 
     public MovieGUIController() throws IOException, DalException
     {
@@ -104,8 +131,6 @@ public class MovieGUIController implements Initializable
         
         
 
-        // Add category column
-        movieList();
     }
 
     public void movieList()
@@ -143,6 +168,14 @@ public class MovieGUIController implements Initializable
     {
         String query = searchBar.getText().trim();
         model.search(query);
+    }
+
+    @FXML
+    private void handleCategorySearch(ActionEvent event) throws DalException, SQLException, IOException
+    {
+        Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
+        int categoryToSearch = category.getCategory_ID();
+        model.searchByCategory(categoryToSearch);
     }
     
     /**
@@ -272,17 +305,18 @@ public class MovieGUIController implements Initializable
      */
 
     @FXML
-    private void handlePlay(ActionEvent event) throws IOException
+    private void handlePlay(ActionEvent event) throws IOException, DalException
     {
         Movie movieToEdit = MovieView.getSelectionModel().getSelectedItem();
         Desktop desktop = Desktop.getDesktop();
         File f = new File(movieToEdit.getFile_location());
         desktop.open(f);
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date = new Date();
-        System.out.println(formatter.format(date));
-        TimeAndDate = formatter.format(date);
+        LocalDate date = LocalDate.now();
+        System.out.println(date);
+        System.out.println(movie.getLast_Viewed());
+        movieToEdit.setLast_Viewed(date + "");
+        model.updateMovie(movieToEdit);
 
         //write date to DB
         //find expiry date of last watched (two years after last play)
@@ -305,21 +339,6 @@ public class MovieGUIController implements Initializable
     }
     
     /**
-     * handles searching within the chosen category / filter(s)
-     * @param event 
-     */
-
-    @FXML
-    private void handleCategorySearch(ActionEvent event)
-    {
-        //CategoryCombobox.getSelectionModel().getSelectedItem());
-
-        Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
-        String categoryToSearch = category.getCategory();
-        // model.searchCategory(categoryToSearch);
-    }
-    
-    /**
      * handles opening the given IMDB link, from chosen entry
      * @param event
      * @throws IOException
@@ -331,6 +350,50 @@ public class MovieGUIController implements Initializable
     {
         movieToOpen = MovieView.getSelectionModel().getSelectedItem();
         Desktop.getDesktop().browse(new URL(movieToOpen.getIMDB_Link()).toURI());
+    }
+
+    @FXML
+    private void handleMaxIMDBSliderRating(MouseEvent event) throws DalException, IOException
+    {
+        searchIMDBRatingMax.setText(maxIMDBSlider.getValue() + "");
+        searchByIMDBRating();
+    }
+
+    @FXML
+    private void handleMinIMDBSliderRating(MouseEvent event) throws DalException, IOException
+    {
+        searchIMDBRatingMin.setText(minIMDBSlider.getValue() + "");
+        searchByIMDBRating();
+    }
+
+    @FXML
+    private void handleMinPersonalSliderRating(MouseEvent event) throws DalException, IOException
+    {
+        searchPersonalRatingMin.setText(minPersonalSlider.getValue() + "");
+        searchByPersonalRating();
+    }
+
+    @FXML
+    private void handleMaxPersonalSliderRating(MouseEvent event) throws DalException, IOException
+    {
+        searchPersonalRatingMax.setText(maxPersonalSlider.getValue() + "");
+        searchByPersonalRating();
+    }
+
+    private void searchByIMDBRating() throws DalException, IOException
+    {
+        double minIMDBRating = minIMDBSlider.getValue();
+        double maxIMDBRating = maxIMDBSlider.getValue();
+
+        model.searchByIMDBRating(minIMDBRating, maxIMDBRating);
+    }
+
+    private void searchByPersonalRating() throws DalException, DalException, IOException
+    {
+        double minPersonRating = minPersonalSlider.getValue();
+        double maxPersonRating = maxPersonalSlider.getValue();
+        
+        model.searchByPersonalRating(minPersonRating, maxPersonRating);
     }
 
 }

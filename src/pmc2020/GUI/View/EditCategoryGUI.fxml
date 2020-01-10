@@ -9,6 +9,7 @@
    <children>
       <Button fx:id="editButton" layoutX="93.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleEditCategoryButton" text="Edit Category" />
       <TextField fx:id="editCategoryTextFieldText" layoutX="19.0" layoutY="57.0" promptText="New category title" />
-      <ComboBox fx:id="CatChooserToEdit" layoutX="18.0" layoutY="14.0" prefWidth="150.0" promptText="Choose Category" />
+      <ComboBox fx:id="CatChooserToEdit" layoutX="18.0" layoutY="14.0" onAction="#handleCategoryComboBox" prefWidth="150.0" promptText="Choose Category" />
+      <Button layoutX="19.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleDelete" text="Delete" />
    </children>
 </AnchorPane>
