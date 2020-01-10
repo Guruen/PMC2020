@@ -139,7 +139,7 @@ public class MovieManager
         return result;
     }
 
-    public List<Movie> searchByIMDBRating(double minRating, double maxRating) throws DalException
+    public List<Movie> searchByIMDBRating(double minRating, double maxRating) throws DalException, IOException
     {
         List<Movie> movieSearchBase = movieDAO.getAllMovies();
         List<Movie> result = new ArrayList<>();
@@ -154,7 +154,7 @@ public class MovieManager
         return result;
     }
 
-    public List<Movie> searchByPersonalRating(double minPersonRating, double maxPersonRating) throws DalException
+    public List<Movie> searchByPersonalRating(double minPersonRating, double maxPersonRating) throws DalException, IOException
     {
         List<Movie> movieSearchBase = movieDAO.getAllMovies();
         List<Movie> result = new ArrayList<>();
@@ -194,6 +194,16 @@ public class MovieManager
     {
 
         return categoryDAO.getCategoryPerMovie(movieid);
+    }
+
+    public void editCategory(Category category) throws DalException
+    {
+        categoryDAO.updateCategory(category);
+    }
+
+    public void deleteCategory(Category category) throws DalException
+    {
+        categoryDAO.deleteCategory(category);
     }
 
 }

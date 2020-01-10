@@ -165,7 +165,7 @@ public class MovieGUIController implements Initializable
     }
 
     @FXML
-    private void handleCategorySearch(ActionEvent event) throws DalException, SQLException
+    private void handleCategorySearch(ActionEvent event) throws DalException, SQLException, IOException
     {
         Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
         int categoryToSearch = category.getCategory_ID();
@@ -332,21 +332,6 @@ public class MovieGUIController implements Initializable
     }
     
     /**
-     * handles searching within the chosen category / filter(s)
-     * @param event 
-     */
-
-    @FXML
-    private void handleCategorySearch(ActionEvent event)
-    {
-        //CategoryCombobox.getSelectionModel().getSelectedItem());
-
-        Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
-        String categoryToSearch = category.getCategory();
-        // model.searchCategory(categoryToSearch);
-    }
-    
-    /**
      * handles opening the given IMDB link, from chosen entry
      * @param event
      * @throws IOException
@@ -361,34 +346,34 @@ public class MovieGUIController implements Initializable
     }
 
     @FXML
-    private void handleMaxIMDBSliderRating(MouseEvent event) throws DalException
+    private void handleMaxIMDBSliderRating(MouseEvent event) throws DalException, IOException
     {
         searchIMDBRatingMax.setText(maxIMDBSlider.getValue() + "");
         searchByIMDBRating();
     }
 
     @FXML
-    private void handleMinIMDBSliderRating(MouseEvent event) throws DalException
+    private void handleMinIMDBSliderRating(MouseEvent event) throws DalException, IOException
     {
         searchIMDBRatingMin.setText(minIMDBSlider.getValue() + "");
         searchByIMDBRating();
     }
 
     @FXML
-    private void handleMinPersonalSliderRating(MouseEvent event)
+    private void handleMinPersonalSliderRating(MouseEvent event) throws DalException, IOException
     {
         searchPersonalRatingMin.setText(minPersonalSlider.getValue() + "");
         searchByPersonalRating();
     }
 
     @FXML
-    private void handleMaxPersonalSliderRating(MouseEvent event)
+    private void handleMaxPersonalSliderRating(MouseEvent event) throws DalException, IOException
     {
         searchPersonalRatingMax.setText(maxPersonalSlider.getValue() + "");
         searchByPersonalRating();
     }
 
-    private void searchByIMDBRating() throws DalException
+    private void searchByIMDBRating() throws DalException, IOException
     {
         double minIMDBRating = minIMDBSlider.getValue();
         double maxIMDBRating = maxIMDBSlider.getValue();
@@ -396,7 +381,7 @@ public class MovieGUIController implements Initializable
         model.searchByIMDBRating(minIMDBRating, maxIMDBRating);
     }
 
-    private void searchByPersonalRating()
+    private void searchByPersonalRating() throws DalException, DalException, IOException
     {
         double minPersonRating = minPersonalSlider.getValue();
         double maxPersonRating = maxPersonalSlider.getValue();

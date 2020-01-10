@@ -5,16 +5,22 @@
  */
 package pmc2020.GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import pmc2020.BE.Category;
+import pmc2020.DAL.DalException;
 import pmc2020.GUI.Model.MovieModel;
 
 /**
@@ -31,6 +37,8 @@ public class EditCategoryGUIController implements Initializable
     private Button editButton;
     @FXML
     private TextField editCategoryTextFieldText;
+    @FXML
+    private ComboBox<Category> CatChooserToEdit;
 
     /**
      * Initializes the controller class.
@@ -38,18 +46,27 @@ public class EditCategoryGUIController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
-    } 
-    
-    /**
-     * Handles editing a category by getting the name to edit, and updating it to the new name in the DB
-     * also checks for blank information, to prevent blank entries
-     * lets the window close if there is data present in all needed places (true conditon)
-     * @param event 
-     */
+        try
+        {
+            model = new MovieModel();
+        } catch (IOException | DalException ex)
+        {
+            Logger.getLogger(MovieGUIController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+        CatChooserToEdit.setItems(model.getAllCategories());
+    }
+
+    /**
+     * Handles editing a category by getting the name to edit, and updating it
+     * to the new name in the DB also checks for blank information, to prevent
+     * blank entries lets the window close if there is data present in all
+     * needed places (true conditon)
+     *
+     * @param event
+     */
     @FXML
-    private void handleEditCategoryButton(ActionEvent event)
+    private void handleEditCategoryButton(ActionEvent event) throws DalException
     {
         String catName = editCategoryTextFieldText.getText();
         boolean catHasAName;
@@ -70,6 +87,12 @@ public class EditCategoryGUIController implements Initializable
 
         if (catHasAName = true)
         {
+            Category category = CatChooserToEdit.getSelectionModel().getSelectedItem();
+
+            category.setCategory(editCategoryTextFieldText.getText());
+
+            model.editCategory(category);
+
             Stage stage = (Stage) editButton.getScene().getWindow();
             stage.close();
             //Edits chosen category on list  
@@ -84,5 +107,20 @@ public class EditCategoryGUIController implements Initializable
     {
         this.model = model;
     }
+
+    @FXML
+    private void handleCategoryComboBox(ActionEvent event)
+    {
+        editCategoryTextFieldText.setText(CatChooserToEdit.getSelectionModel().getSelectedItem().getCategory());
+    }
+
+    @FXML
+    private void handleDelete(ActionEvent event) throws DalException
+    {
+        Category category = CatChooserToEdit.getSelectionModel().getSelectedItem();
+        
+        model.deleteCategory(category);
+    }
+
 
 }

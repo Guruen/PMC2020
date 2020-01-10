@@ -150,19 +150,17 @@ public class MovieModel
         }
     }
 
-    public void searchByIMDBRating(double minIMDBRating, double maxIMDBRating) throws DalException
+    public void searchByIMDBRating(double minIMDBRating, double maxIMDBRating) throws DalException, IOException
     {
         allMovies.clear();
         allMovies.addAll(movieManager.searchByIMDBRating(minIMDBRating, maxIMDBRating));
     }
 
-    public void searchByPersonalRating(double minPersonRating, double maxPersonRating) throws DalException
+    public void searchByPersonalRating(double minPersonRating, double maxPersonRating) throws DalException, IOException
     {
         allMovies.clear();
         allMovies.addAll(movieManager.searchByPersonalRating(minPersonRating, maxPersonRating));
     }
-
-    public void addMovie(String title, double iMDB_Rating, String iMDB_SiteLink, String movie_FilePath, List<Category> categories) throws DalException
     
     /**
      * Adds a movie to the DB
@@ -204,6 +202,20 @@ public class MovieModel
     {
         Category cat = movieManager.createCategory(category);
         allCategories.add(cat);
+    }
+
+    public void editCategory(Category category) throws DalException
+    {
+        movieManager.editCategory(category);
+        allCategories.clear();
+        allCategories.addAll(movieManager.getAllCategories());
+    }
+
+    public void deleteCategory(Category category) throws DalException
+    {
+        movieManager.deleteCategory(category);
+        allCategories.clear();
+        allCategories.addAll(movieManager.getAllCategories());
     }
 
 }
