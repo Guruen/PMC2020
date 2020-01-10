@@ -130,7 +130,7 @@ public class MovieManager
      * @return result of what you've searched for
      */
 
-    public List<Movie> searchByCategory(int categoryToSearch) throws SQLException, DalException
+    public List<Movie> searchByCategory(int categoryToSearch) throws SQLException, DalException, IOException
     {
         List<Movie> movieSearchBase = movieDAO.getMoviesPerCategory(categoryToSearch);
         List<Movie> result = new ArrayList<>();

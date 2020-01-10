@@ -137,7 +137,7 @@ public class MovieModel
      * @throws DalException 
      */
 
-    public void searchByCategory(int categoryToSearch) throws SQLException, DalException
+    public void searchByCategory(int categoryToSearch) throws SQLException, DalException, IOException
     {
         if (categoryToSearch == 0)
         {
