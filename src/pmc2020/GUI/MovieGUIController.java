@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,7 +35,13 @@ import pmc2020.BE.Movie;
 import pmc2020.DAL.DalException;
 import pmc2020.GUI.Model.MovieModel;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.collections.ListChangeListener;
 import javafx.scene.control.Label;
@@ -51,10 +58,11 @@ public class MovieGUIController implements Initializable
 {
 
     private Movie movieToDelete;
+    private Movie movie;
     private Movie movieToOpen;
     private MovieModel model;
     private String TimeAndDate;
-    
+
     @FXML
     private TextField searchBar;
     @FXML
@@ -123,8 +131,6 @@ public class MovieGUIController implements Initializable
         
         
 
-        // Add category column
-        movieList();
     }
     
     /**
@@ -311,17 +317,18 @@ public class MovieGUIController implements Initializable
      */
 
     @FXML
-    private void handlePlay(ActionEvent event) throws IOException
+    private void handlePlay(ActionEvent event) throws IOException, DalException
     {
         Movie movieToEdit = MovieView.getSelectionModel().getSelectedItem();
         Desktop desktop = Desktop.getDesktop();
         File f = new File(movieToEdit.getFile_location());
         desktop.open(f);
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date = new Date();
-        System.out.println(formatter.format(date));
-        TimeAndDate = formatter.format(date);
+        LocalDate date = LocalDate.now();
+        System.out.println(date);
+        System.out.println(movie.getLast_Viewed());
+        movieToEdit.setLast_Viewed(date + "");
+        model.updateMovie(movieToEdit);
 
         //write date to DB
         //find expiry date of last watched (two years after last play)

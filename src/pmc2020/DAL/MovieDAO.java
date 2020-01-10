@@ -108,7 +108,7 @@ public class MovieDAO
                     addCategorytoMovie(ID, categories);
                     
                     String last_view = null;
-                    double p_rating = 0;
+                    double p_rating = 0.0;
                     String cats = getCategoriesforMovie(rs.getInt(1));
                 
                     Movie mov = new Movie(ID, title, imdb_rating, p_rating, filelocation, last_view, imdb_link, cats);
@@ -306,4 +306,51 @@ public class MovieDAO
       }
       return categories;
   }
+      
+      public List<Movie> movieSearch(String titleSearch, int highP_rating, int lowP_rating, int highIMDB_rating, int lowIMDB_rating) throws DalException, IOException
+      {
+         try ( Connection con = dbCon.getConnection())
+        { 
+         String SQL = "SELECT DISTINCT Movie.*\n" +
+                      "FROM CatMovie\n" +
+                      "JOIN Movie as movie ON catmovie.MovieId = movie.id\n" +
+                      "WHERE name LIKE '%?%' AND p_rating <= ? AND p_rating >= ?\n" +
+                      "AND imdb_rating <= ? AND imdb_rating >= ? VALUES (?,?,?,?,?)";
+         
+         PreparedStatement ps = con.prepareStatement(SQL);
+         
+         ps.setString(1, titleSearch);
+         ps.setInt(2, highP_rating);
+         ps.setInt(3, lowP_rating);
+         ps.setInt(4, highIMDB_rating);
+         ps.setInt(5, lowIMDB_rating);
+         
+         ResultSet rs = ps.executeQuery();
+         
+              ArrayList<Movie> allMovies = new ArrayList<>();
+            while (rs.next())
+            {
+                int id = rs.getInt("id");
+                String title = rs.getString("name");
+                double imdb_rating = rs.getDouble("imdb_rating");
+                double p_rating = rs.getDouble("p_rating");
+                String filelocation = rs.getString("filelocation");
+                String lastview = rs.getString("lastview");
+                String imdb_link = rs.getString("imdb_link");
+                String cats = getCategoriesforMovie(id);
+                
+                Movie mov = new Movie(id, title, imdb_rating, p_rating, filelocation, lastview, imdb_link, cats);
+                allMovies.add(mov);
+            }
+            return allMovies;
+         
+         
+         }
+          catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            throw new DalException();
+        }
+          
+      }
 }

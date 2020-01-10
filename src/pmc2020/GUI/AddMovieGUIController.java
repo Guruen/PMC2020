@@ -131,7 +131,7 @@ public class AddMovieGUIController implements Initializable
             JOptionPane.showMessageDialog(dialog, "Adding a movie has been cancelled. Try again!", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else
         {
-            chosenFilePathtext.setText(directory + "\\" + filename);
+            chosenFilePathtext.setText(directory + filename);
             System.out.println(filename);
         }
     }
@@ -157,8 +157,6 @@ public class AddMovieGUIController implements Initializable
         String movie_FilePath = chosenFilePathtext.getText();
 
         List<Category> categories = categoryList.getSelectionModel().getSelectedItems();
-
-        model.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
 
         boolean movieNotEmpty;
 
@@ -201,7 +199,7 @@ public class AddMovieGUIController implements Initializable
         } else
         {
             JOptionPane.showMessageDialog(dialog, "Movie file path can not be blank!", "ERROR", JOptionPane.ERROR_MESSAGE);
-            titleText.setText("Chosen File Path");
+            chosenFilePathtext.setText("Chosen File Path");
             movieNotEmpty = false;
             System.out.println(movieNotEmpty);
 
@@ -211,7 +209,7 @@ public class AddMovieGUIController implements Initializable
         {
             System.out.println(movieNotEmpty);
             Stage stage = (Stage) addMovieButton.getScene().getWindow();
-            //model.addMovie(title, iMDBRating, iMDB_SiteLink, movie_FilePath, categories);
+            model.addMovie(title, iMDB_Rating, movie_FilePath, iMDB_SiteLink, categories);
             stage.close();
         } else
         {
@@ -223,7 +221,6 @@ public class AddMovieGUIController implements Initializable
     void setModel(MovieModel model)
     {
         this.model = model;
-
     }
     
     /**
