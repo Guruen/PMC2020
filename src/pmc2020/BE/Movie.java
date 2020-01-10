@@ -16,7 +16,7 @@ import pmc2020.DAL.DalException;
 
 /**
  *
- * @author CSnit
+ * @author Guruerne
  */
 public class Movie
 {
@@ -27,6 +27,17 @@ public class Movie
     private final SimpleStringProperty File_location = new SimpleStringProperty();
     private final SimpleStringProperty Last_Viewed = new SimpleStringProperty();
     private final SimpleStringProperty IMDB_Link = new SimpleStringProperty();
+    
+    /**
+     * The method that defines what a movie is made up of, in our DB
+     * @param id
+     * @param title
+     * @param imdb_rating
+     * @param private_rating
+     * @param file_location
+     * @param last_viewed
+     * @param imdb_link 
+     */
 
     public Movie(int id, String title, double imdb_rating, double private_rating, String file_location, String last_viewed, String imdb_link)
     {
@@ -40,10 +51,20 @@ public class Movie
     }
 
     
+    /**
+     * Gets a movie ID from the DB
+     * @return  Id of movie from DB
+     */
+    
   public final int getID()
   {
       return ID.get();
   }
+  
+  /**
+   * Sets the movies ID in the DB to the selected value
+   * @param id 
+   */
   
   public final void setID(int id)
   {
@@ -54,11 +75,21 @@ public class Movie
   {
       return ID;
   }
+  
+  /**
+   * Gets the title of the chosen movie from the DB
+   * @return movies title
+   */
 
   public final String getTitle()
   {
       return Title.get();
   }
+  
+  /**
+   * sets the title of the chosen movie to a new title
+   * @param title 
+   */
    
   public final void setTitle(String title)
   {
@@ -69,11 +100,21 @@ public class Movie
   {
       return Title;
   }
+  
+  /**
+   * Gets the IMDB rating of the selected movie from the DB
+   * @return IMDB rating of the selected movie
+   */
     
   public final double getIMDB_Rating()
   {
       return IMDB_Rating.get();
   }
+  
+  /**
+   * Sets the IMDB rating of a movie to a new value
+   * @param i 
+   */
   
   public final void setIMDB_Rating(double i)
   {
@@ -84,11 +125,21 @@ public class Movie
   {
       return IMDB_Rating;
   }
+  
+  /**
+   * Gets the users rating of a movie from the DB
+   * @return Users private rating
+   */
     
   public final double getPrivate_Rating()
   {
       return Private_Rating.get();
   }
+  
+  /**
+   * Sets the movies user rating in the DB to a new value
+   * @param p 
+   */
     
   public final void setPrivate_Rating(double p)
   {
@@ -100,10 +151,20 @@ public class Movie
       return Private_Rating;
   }
   
+  /**
+   * Gets the file location of the selected entry from the DB
+   * @return File path of the selected entry
+   */
+  
   public final String getFile_location()
   {
       return File_location.get();
   }
+  
+  /**
+   * Sets the file location from the DB to a new path, that the user specifies
+   * @param fl 
+   */
     
   public final void setFile_location(String fl)
   {
@@ -114,11 +175,21 @@ public class Movie
   {
       return File_location;
   }
+  
+  /**
+   * Gets the date when the entry was last accessed from the DB
+   * @return last viewed date
+   */
     
   public final String getLast_Viewed()
   {
       return Last_Viewed.get();
   }
+  
+  /**
+   * sets the last viewed date to new date in the DB
+   * @param lv 
+   */
   
   public final void setLast_Viewed(String lv)
   {
@@ -130,10 +201,20 @@ public class Movie
       return Last_Viewed;
   }
   
+  /**
+   * Gets the IMDB link to the selected entry from the DB
+   * @return link to the specific IMDB page
+   */
+  
   public final String getIMDB_Link()
   {
       return IMDB_Link.get();
   }
+  
+  /**
+   * Sets the IMDB link in the DB to a new link
+   * @param il 
+   */
   
   public final void setIMDB_Link(String il)
   {

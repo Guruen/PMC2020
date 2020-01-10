@@ -14,11 +14,17 @@ import java.util.Properties;
 
 /**
  *
- * @author CSnit
+ * @author Guruerne
  */
+
 public class DatabaseConnector
 {
     private SQLServerDataSource dataSource;
+    
+    /**
+     * Reads the settings file to get access to the DB
+     * @throws IOException 
+     */
     
     public DatabaseConnector() throws IOException
     {
@@ -31,6 +37,12 @@ public class DatabaseConnector
         dataSource.setPassword(props.getProperty("password"));
         dataSource.setServerName(props.getProperty("server"));
     }
+    
+    /**
+     * Gets connection the DB, given that the properties are correct
+     * @return The connection the DB
+     * @throws SQLServerException 
+     */
     
     public Connection getConnection() throws SQLServerException
     {

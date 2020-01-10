@@ -42,7 +42,7 @@ import pmc2020.BE.Category;
 /**
  * FXML Controller class
  *
- * @author CSnit
+ * @author Guruerne
  */
 public class MovieGUIController implements Initializable
 {
@@ -130,12 +130,24 @@ public class MovieGUIController implements Initializable
 
     }
 
+    /**
+     * handles searching in realtime using the chosen category/filter(s) and the text in the textfield as query
+     * @param event
+     * @throws DalException 
+     */
+    
     @FXML
     private void handleSearch(KeyEvent event) throws DalException
     {
         String query = searchBar.getText().trim();
         model.search(query);
     }
+    
+    /**
+     * handles opening the add movie window
+     * @param event
+     * @throws IOException 
+     */
 
     @FXML
     private void handleCategorySearch(ActionEvent event) throws DalException, SQLException
@@ -167,6 +179,12 @@ public class MovieGUIController implements Initializable
             throw ex;
         }
     }
+    
+    /**
+     * handles opening the add category window
+     * @param event
+     * @throws IOException 
+     */
 
     @FXML
     private void handleAddCategory(ActionEvent event) throws IOException
@@ -190,6 +208,12 @@ public class MovieGUIController implements Initializable
             throw ex;
         }
     }
+    
+    /**
+     * handles opening the edit movie window
+     * @param event
+     * @throws IOException 
+     */
 
     @FXML
     private void handleEditMovie(ActionEvent event) throws IOException
@@ -216,6 +240,12 @@ public class MovieGUIController implements Initializable
             throw ex;
         }
     }
+    
+    /**
+     * handles opening the edit movie window
+     * @param event
+     * @throws IOException 
+     */
 
     @FXML
     private void handleEditCategory(ActionEvent event) throws IOException
@@ -239,6 +269,13 @@ public class MovieGUIController implements Initializable
             throw ex;
         }
     }
+    
+    /**
+     * handles playing the selected entry on the local media player of the user
+     * gets time and date, to check if the entry has not been watched for two years, and then prompts the user to delete the entry
+     * @param event
+     * @throws IOException 
+     */
 
     @FXML
     private void handlePlay(ActionEvent event) throws IOException
@@ -256,8 +293,14 @@ public class MovieGUIController implements Initializable
         //write date to DB
         //find expiry date of last watched (two years after last play)
         //check date on startup, to control expiry
-        //prompt user to delete entries
+        //prompt user to delete expired entries
     }
+    
+    /**
+     * handles deleting the selected entry from the view and the DB when the button is pushed
+     * @param event
+     * @throws DalException 
+     */
 
     @FXML
     private void deleteMovieButton(ActionEvent event) throws DalException
@@ -266,6 +309,11 @@ public class MovieGUIController implements Initializable
         System.out.println(movieToDelete);
         model.deleteMovie(movieToDelete);
     }
+    
+    /**
+     * handles searching within the chosen category / filter(s)
+     * @param event 
+     */
 
     @FXML
     private void handleCategorySearch(ActionEvent event)

@@ -20,7 +20,7 @@ import pmc2020.GUI.Model.MovieModel;
 /**
  * FXML Controller class
  *
- * @author Zanaxdk
+ * @author Guruerne
  */
 public class EditCategoryGUIController implements Initializable
 {
@@ -39,7 +39,14 @@ public class EditCategoryGUIController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
-    }
+    } 
+    
+    /**
+     * Handles editing a category by getting the name to edit, and updating it to the new name in the DB
+     * also checks for blank information, to prevent blank entries
+     * lets the window close if there is data present in all needed places (true conditon)
+     * @param event 
+     */
 
     @FXML
     private void handleEditCategoryButton(ActionEvent event)
