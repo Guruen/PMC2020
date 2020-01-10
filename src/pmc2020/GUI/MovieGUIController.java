@@ -150,14 +150,6 @@ public class MovieGUIController implements Initializable
      */
 
     @FXML
-    private void handleCategorySearch(ActionEvent event) throws DalException, SQLException
-    {   
-        Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
-        int categoryToSearch = category.getCategory_ID();
-        model.searchByCategory(categoryToSearch);
-    }
-
-    @FXML
     private void handleAddMovie(ActionEvent event) throws IOException
     {
         try

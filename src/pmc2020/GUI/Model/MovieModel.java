@@ -25,7 +25,6 @@ public class MovieModel
 
     private MovieManager movieManager;
     private ObservableList<Movie> allMovies;
-    private ObservableList<Category> allCategories, movieCategories;
     private ObservableList<Category> allCategories;
     
     /**
