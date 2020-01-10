@@ -14,11 +14,6 @@ public class Category
 {
     private int category_ID;
     private String category;
-/** 
- * Defined variables in Category.java
- *  @param category_ID An integer that defines said category's id in the database.
- *  @param category A String that defines the name of a category, that can be used to describe a movies genre.
- */  
     
  /** 
   * Category defines the category that is written to the DB
