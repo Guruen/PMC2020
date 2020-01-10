@@ -79,11 +79,40 @@ public class MovieManager
 
     public List<Movie> searchByCategory(int categoryToSearch) throws SQLException, DalException
     {
-        List<Movie> movieSearchBase = movieDAO.getMoviesPerCategory(categoryToSearch);
         List<Movie> result = new ArrayList<>();
-        
+
         result.addAll(movieDAO.getMoviesPerCategory(categoryToSearch));
-        
+
+        return result;
+    }
+
+    public List<Movie> searchByIMDBRating(double minRating, double maxRating) throws DalException
+    {
+        List<Movie> movieSearchBase = movieDAO.getAllMovies();
+        List<Movie> result = new ArrayList<>();
+
+        for (Movie movie : movieSearchBase)
+        {
+            if (movie.getIMDB_Rating() >= minRating && movie.getIMDB_Rating() <= maxRating)
+            {
+                result.add(movie);
+            }
+        }
+        return result;
+    }
+
+    public List<Movie> searchByPersonalRating(double minPersonRating, double maxPersonRating) throws DalException
+    {
+        List<Movie> movieSearchBase = movieDAO.getAllMovies();
+        List<Movie> result = new ArrayList<>();
+
+        for (Movie movie : movieSearchBase)
+        {
+            if (movie.getPrivate_Rating() >= minPersonRating && movie.getPrivate_Rating() <= maxPersonRating)
+            {
+                result.add(movie);
+            }
+        }
         return result;
     }
 
@@ -91,10 +120,10 @@ public class MovieManager
     {
         return categoryDAO.createCategory(category);
     }
-    
+
     public List<Category> getCategoryPerMovie(int movieid) throws SQLException, DalException
     {
-        
+
         return categoryDAO.getCategoryPerMovie(movieid);
     }
 

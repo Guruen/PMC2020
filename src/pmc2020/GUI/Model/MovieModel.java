@@ -34,7 +34,7 @@ public class MovieModel
         allMovies.addAll(movieManager.getAllMovies());
         allCategories = FXCollections.observableArrayList();
         allCategories.addAll(movieManager.getAllCategories());
-         
+
     }
 
     public ObservableList<Movie> getAllMovies()
@@ -64,9 +64,7 @@ public class MovieModel
         movieManager.updateMovie(movie);
         allMovies.remove(movie);
         allMovies.add(movie);
-       
 
-        
     }
 
     public void search(String query) throws DalException
@@ -92,8 +90,19 @@ public class MovieModel
         {
             allMovies.clear();
             allMovies.addAll(movieManager.searchByCategory(categoryToSearch));
-            movieManager.searchByCategory(categoryToSearch);
         }
+    }
+
+    public void searchByIMDBRating(double minIMDBRating, double maxIMDBRating) throws DalException
+    {
+        allMovies.clear();
+        allMovies.addAll(movieManager.searchByIMDBRating(minIMDBRating, maxIMDBRating));
+    }
+
+    public void searchByPersonalRating(double minPersonRating, double maxPersonRating) throws DalException
+    {
+        allMovies.clear();
+        allMovies.addAll(movieManager.searchByPersonalRating(minPersonRating, maxPersonRating));
     }
 
     public void addMovie(String title, double iMDB_Rating, String iMDB_SiteLink, String movie_FilePath, List<Category> categories) throws DalException
@@ -113,20 +122,5 @@ public class MovieModel
         Category cat = movieManager.createCategory(category);
         allCategories.add(cat);
     }
-
-    public void searchCategory(String categoryToSearch) throws DalException
-    {
-                if (categoryToSearch.isEmpty())
-        {
-            allMovies.clear();
-            allMovies.addAll(movieManager.getAllMovies());
-        }
-        else
-        {
-            allMovies.clear();
-            allMovies.addAll(movieManager.search(categoryToSearch));
-        }
-    }
-
 
 }
