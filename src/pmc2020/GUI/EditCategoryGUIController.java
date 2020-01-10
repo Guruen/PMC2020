@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import pmc2020.GUI.Model.MovieModel;
@@ -19,13 +20,13 @@ import pmc2020.GUI.Model.MovieModel;
 /**
  * FXML Controller class
  *
- * @author Zanaxdk
+ * @author Guruerne
  */
 public class EditCategoryGUIController implements Initializable
 {
 
     private MovieModel model;
-    
+
     @FXML
     private Button editButton;
     @FXML
@@ -38,7 +39,14 @@ public class EditCategoryGUIController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
-    }    
+    } 
+    
+    /**
+     * Handles editing a category by getting the name to edit, and updating it to the new name in the DB
+     * also checks for blank information, to prevent blank entries
+     * lets the window close if there is data present in all needed places (true conditon)
+     * @param event 
+     */
 
     @FXML
     private void handleEditCategoryButton(ActionEvent event)
@@ -47,33 +55,34 @@ public class EditCategoryGUIController implements Initializable
         boolean catHasAName;
         final JDialog dialog = new JDialog();
         dialog.setAlwaysOnTop(true);
-        
-        if (catName != null && !catName.isEmpty()){
+
+        if (catName != null && !catName.isEmpty())
+        {
             editCategoryTextFieldText.setText(catName);
             catHasAName = true;
-        }
-        else
+        } else
         {
             JOptionPane.showMessageDialog(dialog, "Category name can not be blank!", "ERROR", JOptionPane.ERROR_MESSAGE);
             editCategoryTextFieldText.setText("EDIT ME");
             catHasAName = false;
             System.out.println(catHasAName);
         }
-        
-        if(catHasAName = true){
-            //closes window
+
+        if (catHasAName = true)
+        {
+            Stage stage = (Stage) editButton.getScene().getWindow();
+            stage.close();
             //Edits chosen category on list  
-        }
-        else
+        } else
         {
             System.out.println(catHasAName);
         }
-        
+
     }
 
     void setModel(MovieModel model)
     {
         this.model = model;
     }
-    
+
 }

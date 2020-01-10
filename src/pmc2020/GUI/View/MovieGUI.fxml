@@ -17,13 +17,14 @@
             <TableColumn fx:id="categoryColumn" prefWidth="132.79996337890623" text="Category" />
         </columns>
       </TableView>
-      <TextField fx:id="searchBar" layoutX="236.0" layoutY="14.0" onKeyTyped="#handleSearch" prefHeight="26.0" prefWidth="200.0" promptText="Search" />
+      <TextField fx:id="searchBar" layoutX="281.0" layoutY="14.0" onKeyTyped="#handleSearch" prefHeight="26.0" prefWidth="155.0" promptText="Search" />
       <Button fx:id="addMovieButton" layoutX="16.0" layoutY="391.0" mnemonicParsing="false" onAction="#handleAddMovie" text="Add Movie" />
       <Button fx:id="addCategoryButton" layoutX="190.0" layoutY="391.0" mnemonicParsing="false" onAction="#handleAddCategory" text="Add Category" />
       <Button fx:id="editMovieButton" layoutX="104.0" layoutY="391.0" mnemonicParsing="false" onAction="#handleEditMovie" text="Edit Movie" />
       <Button fx:id="editCategoryButton" layoutX="295.0" layoutY="391.0" mnemonicParsing="false" onAction="#handleEditCategory" text="Edit Category" />
       <Button fx:id="playButton" layoutX="16.0" layoutY="15.0" mnemonicParsing="false" onAction="#handlePlay" text="Play" />
-      <ComboBox fx:id="CategoryCombobox" layoutX="80.0" layoutY="15.0" onAction="#handleCategorySearch" prefWidth="150.0" promptText="Search categories" />
+      <ComboBox fx:id="CategoryCombobox" layoutX="130.0" layoutY="15.0" onAction="#handleCategorySearch" prefHeight="25.0" prefWidth="138.0" promptText="Search categories" />
       <Button layoutX="411.0" layoutY="391.0" mnemonicParsing="false" onAction="#deleteMovieButton" text="🗑" />
+      <Button layoutX="64.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleOpenLink" text="Open" />
    </children>
 </AnchorPane>

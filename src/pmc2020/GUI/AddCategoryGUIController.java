@@ -21,7 +21,7 @@ import pmc2020.GUI.Model.MovieModel;
 /**
  * FXML Controller class
  *
- * @author Kim
+ * @author Guruerne
  */
 public class AddCategoryGUIController implements Initializable
 {
@@ -41,6 +41,13 @@ public class AddCategoryGUIController implements Initializable
     {
         // TODO
     }
+    
+    /**
+     * handles adding the given data from the view to the DB
+     * This handler also checks if the data can be added to the DB, by checking the window for any missing data
+     * @param event
+     * @throws DalException 
+     */
 
     @FXML
     private void handleAddButton(ActionEvent event) throws DalException
@@ -74,6 +81,11 @@ public class AddCategoryGUIController implements Initializable
    
         
     }
+    
+    /**
+     * Sets the model
+     * @param model 
+     */
 
     void setModel(MovieModel model)
     {

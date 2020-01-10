@@ -16,7 +16,7 @@ import pmc2020.DAL.DalException;
 
 /**
  *
- * @author CSnit
+ * @author Guruerne
  */
 public class Movie
 {

@@ -8,6 +8,7 @@ package pmc2020.GUI;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -34,20 +35,23 @@ import pmc2020.DAL.DalException;
 import pmc2020.GUI.Model.MovieModel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javafx.collections.ObservableList;
 import javafx.collections.ListChangeListener;
 import pmc2020.BE.Category;
 
 /**
  * FXML Controller class
  *
- * @author CSnit
+ * @author Guruerne
  */
 public class MovieGUIController implements Initializable
 {
 
     private Movie movieToDelete;
-
+    private Movie movieToOpen;
+    private MovieModel model;
     private String TimeAndDate;
+    
     @FXML
     private TextField searchBar;
     @FXML
@@ -60,8 +64,6 @@ public class MovieGUIController implements Initializable
     private Button editCategoryButton;
     @FXML
     private Button playButton;
-
-    private MovieModel model;
     @FXML
     private TableView<Movie> MovieView;
     @FXML
@@ -103,7 +105,6 @@ public class MovieGUIController implements Initializable
         
 
         // Add category column
-        
         movieList();
     }
 
@@ -131,12 +132,24 @@ public class MovieGUIController implements Initializable
 
     }
 
+    /**
+     * handles searching in realtime using the chosen category/filter(s) and the text in the textfield as query
+     * @param event
+     * @throws DalException 
+     */
+    
     @FXML
     private void handleSearch(KeyEvent event) throws DalException, IOException
     {
         String query = searchBar.getText().trim();
         model.search(query);
     }
+    
+    /**
+     * handles opening the add movie window
+     * @param event
+     * @throws IOException 
+     */
 
     @FXML
     private void handleAddMovie(ActionEvent event) throws IOException
@@ -160,6 +173,12 @@ public class MovieGUIController implements Initializable
             throw ex;
         }
     }
+    
+    /**
+     * handles opening the add category window
+     * @param event
+     * @throws IOException 
+     */
 
     @FXML
     private void handleAddCategory(ActionEvent event) throws IOException
@@ -183,6 +202,12 @@ public class MovieGUIController implements Initializable
             throw ex;
         }
     }
+    
+    /**
+     * handles opening the edit movie window
+     * @param event
+     * @throws IOException 
+     */
 
     @FXML
     private void handleEditMovie(ActionEvent event) throws IOException
@@ -209,6 +234,12 @@ public class MovieGUIController implements Initializable
             throw ex;
         }
     }
+    
+    /**
+     * handles opening the edit movie window
+     * @param event
+     * @throws IOException 
+     */
 
     @FXML
     private void handleEditCategory(ActionEvent event) throws IOException
@@ -232,26 +263,38 @@ public class MovieGUIController implements Initializable
             throw ex;
         }
     }
+    
+    /**
+     * handles playing the selected entry on the local media player of the user
+     * gets time and date, to check if the entry has not been watched for two years, and then prompts the user to delete the entry
+     * @param event
+     * @throws IOException 
+     */
 
     @FXML
     private void handlePlay(ActionEvent event) throws IOException
     {
         Movie movieToEdit = MovieView.getSelectionModel().getSelectedItem();
         Desktop desktop = Desktop.getDesktop();
-        //get selected element
-        //get file path of element
         File f = new File(movieToEdit.getFile_location());
         desktop.open(f);
-        
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 
-        Date date = new Date();  
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
         System.out.println(formatter.format(date));
         TimeAndDate = formatter.format(date);
+
         //write date to DB
         //find expiry date of last watched (two years after last play)
         //check date on startup, to control expiry
-        //prompt user to delete entries
+        //prompt user to delete expired entries
     }
+    
+    /**
+     * handles deleting the selected entry from the view and the DB when the button is pushed
+     * @param event
+     * @throws DalException 
+     */
 
     @FXML
     private void deleteMovieButton(ActionEvent event) throws DalException
@@ -260,15 +303,34 @@ public class MovieGUIController implements Initializable
         System.out.println(movieToDelete);
         model.deleteMovie(movieToDelete);
     }
+    
+    /**
+     * handles searching within the chosen category / filter(s)
+     * @param event 
+     */
 
     @FXML
     private void handleCategorySearch(ActionEvent event)
     {
         //CategoryCombobox.getSelectionModel().getSelectedItem());
-        
+
         Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
         String categoryToSearch = category.getCategory();
-       // model.searchCategory(categoryToSearch);
+        // model.searchCategory(categoryToSearch);
+    }
+    
+    /**
+     * handles opening the given IMDB link, from chosen entry
+     * @param event
+     * @throws IOException
+     * @throws URISyntaxException 
+     */
+
+    @FXML
+    private void handleOpenLink(ActionEvent event) throws IOException, URISyntaxException
+    {
+        movieToOpen = MovieView.getSelectionModel().getSelectedItem();
+        Desktop.getDesktop().browse(new URL(movieToOpen.getIMDB_Link()).toURI());
     }
 
 }
