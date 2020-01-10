@@ -153,6 +153,14 @@ public class MovieManager
         return categoryDAO.createCategory(category);
     }
     
+    /**
+     * Gets a list of all categories from a chosen movie from the DB
+     * @param movieid
+     * @return the list of categories that the chosen movie belongs in
+     * @throws SQLException
+     * @throws DalException 
+     */
+    
     public List<Category> getCategoryPerMovie(int movieid) throws SQLException, DalException
     {
         

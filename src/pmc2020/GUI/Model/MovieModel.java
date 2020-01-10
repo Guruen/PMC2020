@@ -131,12 +131,9 @@ public class MovieModel
     }
     
     /**
-     * Adds a movie to the DB
-     * @param title
-     * @param iMDB_Rating
-     * @param iMDB_SiteLink
-     * @param movie_FilePath
-     * @param categories
+     * Searches within a given category/filter
+     * @param categoryToSearch
+     * @throws SQLException
      * @throws DalException 
      */
 
@@ -153,6 +150,16 @@ public class MovieModel
             movieManager.searchByCategory(categoryToSearch);
         }
     }
+    
+    /**
+     * Adds a movie to the DB
+     * @param title
+     * @param iMDB_Rating
+     * @param iMDB_SiteLink
+     * @param movie_FilePath
+     * @param categories
+     * @throws DalException 
+     */
 
     public void addMovie(String title, double iMDB_Rating, String iMDB_SiteLink, String movie_FilePath, List<Category> categories) throws DalException
     {

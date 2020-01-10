@@ -225,6 +225,11 @@ public class Movie
   {
       return IMDB_Link;
   }
+  
+  /**
+   * converts movie title to string
+   * @return the title
+   */
 
  
       @Override

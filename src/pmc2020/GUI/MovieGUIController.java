@@ -316,6 +316,13 @@ public class MovieGUIController implements Initializable
         String categoryToSearch = category.getCategory();
         // model.searchCategory(categoryToSearch);
     }
+    
+    /**
+     * handles opening the given IMDB link, from chosen entry
+     * @param event
+     * @throws IOException
+     * @throws URISyntaxException 
+     */
 
     @FXML
     private void handleOpenLink(ActionEvent event) throws IOException, URISyntaxException

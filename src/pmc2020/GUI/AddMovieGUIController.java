@@ -75,6 +75,12 @@ public class AddMovieGUIController implements Initializable
     private Slider imdbSlider;
     @FXML
     private ListView<Category> categoryList;
+    
+    /**
+     * Adds a new controller to the movie GUI, by making a new instance of the class
+     * @throws IOException
+     * @throws DalException 
+     */
 
     public AddMovieGUIController() throws IOException, DalException
     {
