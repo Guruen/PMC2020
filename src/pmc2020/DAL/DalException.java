@@ -7,8 +7,14 @@ package pmc2020.DAL;
 
 /**
  *
- * @author CSnit
+ * @author Guruerne
  */
+
+/**
+ * 
+ * Data Access Layer Exception
+ */
+
 public class DalException extends Exception
 {
     
