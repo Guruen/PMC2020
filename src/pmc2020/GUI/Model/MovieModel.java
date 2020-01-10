@@ -203,6 +203,12 @@ public class MovieModel
         Category cat = movieManager.createCategory(category);
         allCategories.add(cat);
     }
+    
+    /**
+     * Edits an already existing category within the DB
+     * @param category
+     * @throws DalException 
+     */
 
     public void editCategory(Category category) throws DalException
     {
@@ -210,6 +216,12 @@ public class MovieModel
         allCategories.clear();
         allCategories.addAll(movieManager.getAllCategories());
     }
+    
+    /**
+     * Deletes a category from the DB entirely
+     * @param category
+     * @throws DalException 
+     */
 
     public void deleteCategory(Category category) throws DalException
     {

@@ -108,11 +108,22 @@ public class EditCategoryGUIController implements Initializable
         this.model = model;
     }
 
+    /**
+     * handles categories within a combobox
+     * @param event 
+     */
+    
     @FXML
     private void handleCategoryComboBox(ActionEvent event)
     {
         editCategoryTextFieldText.setText(CatChooserToEdit.getSelectionModel().getSelectedItem().getCategory());
     }
+    
+    /**
+     * handles deleting things
+     * @param event
+     * @throws DalException 
+     */
 
     @FXML
     private void handleDelete(ActionEvent event) throws DalException

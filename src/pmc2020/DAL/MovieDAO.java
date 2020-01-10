@@ -278,6 +278,15 @@ public class MovieDAO
         }
     }
     
+    /**
+     * Gets a list of categories that a movie is in
+     * @param movieid
+     * @return categories
+     * @throws IOException
+     * @throws SQLException
+     * @throws DalException 
+     */
+    
       public String getCategoriesforMovie(int movieid) throws IOException, SQLException, DalException
   {
       CategoryDAO catDAO = new CategoryDAO();

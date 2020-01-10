@@ -126,6 +126,10 @@ public class MovieGUIController implements Initializable
         // Add category column
         movieList();
     }
+    
+    /**
+     * Gets all movies as a list
+     */
 
     public void movieList()
     {
@@ -163,6 +167,14 @@ public class MovieGUIController implements Initializable
         String query = searchBar.getText().trim();
         model.search(query);
     }
+    
+    /**
+     * handles searching within categories or with filters
+     * @param event
+     * @throws DalException
+     * @throws SQLException
+     * @throws IOException 
+     */
 
     @FXML
     private void handleCategorySearch(ActionEvent event) throws DalException, SQLException, IOException
@@ -344,6 +356,13 @@ public class MovieGUIController implements Initializable
         movieToOpen = MovieView.getSelectionModel().getSelectedItem();
         Desktop.getDesktop().browse(new URL(movieToOpen.getIMDB_Link()).toURI());
     }
+    
+    /**
+     * handles the sliders to ensure that the maximum rating is not exceeded
+     * @param event
+     * @throws DalException
+     * @throws IOException 
+     */
 
     @FXML
     private void handleMaxIMDBSliderRating(MouseEvent event) throws DalException, IOException
@@ -351,6 +370,13 @@ public class MovieGUIController implements Initializable
         searchIMDBRatingMax.setText(maxIMDBSlider.getValue() + "");
         searchByIMDBRating();
     }
+    
+    /**
+     * handles the sliders to ensure that the minimum rating is not exceeded
+     * @param event
+     * @throws DalException
+     * @throws IOException 
+     */
 
     @FXML
     private void handleMinIMDBSliderRating(MouseEvent event) throws DalException, IOException
@@ -358,6 +384,13 @@ public class MovieGUIController implements Initializable
         searchIMDBRatingMin.setText(minIMDBSlider.getValue() + "");
         searchByIMDBRating();
     }
+    
+    /**
+     * handles the sliders to ensure that the minimum rating is not exceeded
+     * @param event
+     * @throws DalException
+     * @throws IOException 
+     */
 
     @FXML
     private void handleMinPersonalSliderRating(MouseEvent event) throws DalException, IOException
@@ -365,6 +398,13 @@ public class MovieGUIController implements Initializable
         searchPersonalRatingMin.setText(minPersonalSlider.getValue() + "");
         searchByPersonalRating();
     }
+    
+    /**
+     * handles the sliders to ensure that the maximum rating is not exceeded
+     * @param event
+     * @throws DalException
+     * @throws IOException 
+     */
 
     @FXML
     private void handleMaxPersonalSliderRating(MouseEvent event) throws DalException, IOException
@@ -372,6 +412,12 @@ public class MovieGUIController implements Initializable
         searchPersonalRatingMax.setText(maxPersonalSlider.getValue() + "");
         searchByPersonalRating();
     }
+    
+    /**
+     * Allows the user to search movies by their IMDB rating
+     * @throws DalException
+     * @throws IOException 
+     */
 
     private void searchByIMDBRating() throws DalException, IOException
     {
@@ -380,6 +426,13 @@ public class MovieGUIController implements Initializable
 
         model.searchByIMDBRating(minIMDBRating, maxIMDBRating);
     }
+    
+    /**
+     * Allows the user to search movies by their personal rating
+     * @throws DalException
+     * @throws DalException
+     * @throws IOException 
+     */
 
     private void searchByPersonalRating() throws DalException, DalException, IOException
     {
