@@ -321,7 +321,7 @@ public class MovieDAO
        * @throws IOException 
        */
       
-public List<Movie> movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating) throws DalException, IOException
+      public List<Movie> movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating) throws DalException, IOException
       {
          try ( Connection con = dbCon.getConnection())
         { 
