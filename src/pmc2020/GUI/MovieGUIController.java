@@ -138,6 +138,7 @@ public class MovieGUIController implements Initializable
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("Private_Rating"));
         imdbratingColumn.setCellValueFactory(new PropertyValueFactory<>("IMDB_Rating"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("Categories"));
+        movieList();
 
     }
     
