@@ -19,13 +19,13 @@
             <TableColumn fx:id="categoryColumn" prefWidth="132.79996337890623" text="Category" />
         </columns>
       </TableView>
-      <TextField fx:id="searchBar" layoutX="236.0" layoutY="87.0" onKeyTyped="#handleSearch" prefHeight="26.0" prefWidth="200.0" promptText="Search" />
-      <Button fx:id="addMovieButton" layoutX="14.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleAddMovie" text="Add Movie" />
-      <Button fx:id="addCategoryButton" layoutX="183.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleAddCategory" text="Add Category" />
-      <Button fx:id="editMovieButton" layoutX="100.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleEditMovie" text="Edit Movie" />
-      <Button fx:id="editCategoryButton" layoutX="282.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleEditCategory" text="Edit Category" />
+      <TextField fx:id="searchBar" layoutX="217.0" layoutY="86.0" onKeyTyped="#handleSearch" prefHeight="26.0" prefWidth="185.0" promptText="Search" />
+      <Button fx:id="addMovieButton" layoutX="65.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleAddMovie" text="Add Movie" />
+      <Button fx:id="addCategoryButton" layoutX="221.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleAddCategory" text="Add Category" />
+      <Button fx:id="editMovieButton" layoutX="143.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleEditMovie" text="Edit Movie" />
+      <Button fx:id="editCategoryButton" layoutX="317.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleEditCategory" text="Edit Category" />
       <Button fx:id="playButton" layoutX="14.0" layoutY="87.0" mnemonicParsing="false" onAction="#handlePlay" text="Play" />
-      <ComboBox fx:id="CategoryCombobox" layoutX="75.0" layoutY="87.0" onAction="#handleCategorySearch" prefWidth="150.0" promptText="Search categories" />
+      <ComboBox fx:id="CategoryCombobox" layoutX="57.0" layoutY="87.0" onAction="#handleCategorySearch" prefWidth="150.0" promptText="Search categories" />
       <Button layoutX="412.0" layoutY="462.0" mnemonicParsing="false" onAction="#deleteMovieButton" text="🗑" />
       <Slider fx:id="maxIMDBSlider" layoutX="296.0" layoutY="53.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" onMouseReleased="#handleMaxIMDBSliderRating" showTickLabels="true" snapToTicks="true" value="10.0" />
       <Slider fx:id="minIMDBSlider" layoutX="131.0" layoutY="54.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" onMouseReleased="#handleMinIMDBSliderRating" showTickLabels="true" snapToTicks="true" />
@@ -41,5 +41,7 @@
       <Label fx:id="searchPersonalRatingMax" layoutX="279.0" layoutY="23.0" text="10" />
       <Slider fx:id="minPersonalSlider" layoutX="131.0" layoutY="8.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" onMouseReleased="#handleMinPersonalSliderRating" showTickLabels="true" snapToTicks="true" />
       <Slider fx:id="maxPersonalSlider" layoutX="296.0" layoutY="7.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" onMouseReleased="#handleMaxPersonalSliderRating" showTickLabels="true" snapToTicks="true" value="10.0" />
+      <Button layoutX="10.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleOpenLink" text="Open" />
+      <Button layoutX="409.0" layoutY="86.0" mnemonicParsing="false" onAction="#handleSearchButton" text="🔍" />
    </children>
 </AnchorPane>
