@@ -6,32 +6,25 @@
 package pmc2020.GUI;
 
 import java.awt.FileDialog;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.xml.stream.events.Characters;
 import pmc2020.BE.Category;
 import pmc2020.BE.Movie;
 import pmc2020.DAL.DalException;
@@ -152,7 +145,6 @@ public class AddMovieGUIController implements Initializable
         dialog.setAlwaysOnTop(true);
 
         String title = titleText.getText();
-        double iMDB_Rating = imdbSlider.getValue();
         String iMDB_SiteLink = imdbSiteLinkText.getText();
         String movie_FilePath = chosenFilePathtext.getText();
 
@@ -209,7 +201,7 @@ public class AddMovieGUIController implements Initializable
         {
             System.out.println(movieNotEmpty);
             Stage stage = (Stage) addMovieButton.getScene().getWindow();
-            model.addMovie(title, iMDB_Rating, movie_FilePath, iMDB_SiteLink, categories);
+            model.addMovie(title, iMDBRating, movie_FilePath, iMDB_SiteLink, categories);
             stage.close();
         } else
         {
@@ -232,8 +224,8 @@ public class AddMovieGUIController implements Initializable
     private void SendValueIMDB(MouseEvent event)
     {
         double v = imdbSlider.getValue();
-        String formatted = String.format("%.1f", v);
-        IMDBRating.setText(formatted + "");
+        v = Math.round(v * 10) / 10.0;
+        IMDBRating.setText(v + "");
         iMDBRating = v;
     }
 

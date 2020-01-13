@@ -35,15 +35,7 @@ import javafx.stage.StageStyle;
 import pmc2020.BE.Movie;
 import pmc2020.DAL.DalException;
 import pmc2020.GUI.Model.MovieModel;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import javafx.collections.ObservableList;
 import javafx.collections.ListChangeListener;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -148,6 +140,10 @@ public class MovieGUIController implements Initializable
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("Categories"));
 
     }
+    
+    /**
+     * Gets all movies as a list
+     */
 
     public void movieList()
     {
@@ -192,9 +188,17 @@ public class MovieGUIController implements Initializable
     @FXML
     private void handleSearch(KeyEvent event) throws DalException, IOException
     {
-        String query = searchBar.getText().trim();
-        model.search(query);
+        
+        combinedSearch();
     }
+    
+    /**
+     * handles searching within categories or with filters
+     * @param event
+     * @throws DalException
+     * @throws SQLException
+     * @throws IOException 
+     */
 
     @FXML
     private void handleCategorySearch(ActionEvent event) throws DalException, SQLException, IOException
@@ -295,8 +299,7 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * handles opening the edit movie window
-     *
+     * handles opening the edit category window
      * @param event
      * @throws IOException
      */
@@ -377,42 +380,83 @@ public class MovieGUIController implements Initializable
         movieToOpen = MovieView.getSelectionModel().getSelectedItem();
         Desktop.getDesktop().browse(new URL(movieToOpen.getIMDB_Link()).toURI());
     }
+    
+    /**
+     * handles the sliders to ensure that the maximum rating is not exceeded
+     * @param event
+     * @throws DalException
+     * @throws IOException 
+     */
 
     @FXML
     private void handleMaxIMDBSliderRating(MouseEvent event) throws DalException, IOException
     {
         searchIMDBRatingMax.setText(maxIMDBSlider.getValue() + "");
-        searchByIMDBRating();
+        combinedSearch();
     }
+    
+    /**
+     * handles the sliders to ensure that the minimum rating is not exceeded
+     * @param event
+     * @throws DalException
+     * @throws IOException 
+     */
 
     @FXML
     private void handleMinIMDBSliderRating(MouseEvent event) throws DalException, IOException
     {
         searchIMDBRatingMin.setText(minIMDBSlider.getValue() + "");
-        searchByIMDBRating();
+        combinedSearch();
     }
+    
+    /**
+     * handles the sliders to ensure that the minimum rating is not exceeded
+     * @param event
+     * @throws DalException
+     * @throws IOException 
+     */
 
     @FXML
     private void handleMinPersonalSliderRating(MouseEvent event) throws DalException, IOException
     {
         searchPersonalRatingMin.setText(minPersonalSlider.getValue() + "");
-        searchByPersonalRating();
+        combinedSearch();
     }
+    
+    /**
+     * handles the sliders to ensure that the maximum rating is not exceeded
+     * @param event
+     * @throws DalException
+     * @throws IOException 
+     */
 
     @FXML
     private void handleMaxPersonalSliderRating(MouseEvent event) throws DalException, IOException
     {
         searchPersonalRatingMax.setText(maxPersonalSlider.getValue() + "");
-        searchByPersonalRating();
+        combinedSearch();
     }
+    
+    /**
+     * Allows the user to search movies by their IMDB rating
+     * @throws DalException
+     * @throws IOException 
+     */
 
     private void searchByIMDBRating() throws DalException, IOException
     {
-        double minIMDBRating = minIMDBSlider.getValue();
-        double maxIMDBRating = maxIMDBSlider.getValue();
+            double minIMDBRating = minIMDBSlider.getValue();
+            double maxIMDBRating = maxIMDBSlider.getValue();
 
-        model.searchByIMDBRating(minIMDBRating, maxIMDBRating);
+            model.searchByIMDBRating(minIMDBRating, maxIMDBRating);
     }
+    
+    /**
+     * Allows the user to search movies by their personal rating
+     * @throws DalException
+     * @throws DalException
+     * @throws IOException 
+     */
 
     private void searchByPersonalRating() throws DalException, DalException, IOException
     {
@@ -422,4 +466,17 @@ public class MovieGUIController implements Initializable
         model.searchByPersonalRating(minPersonRating, maxPersonRating);
     }
 
+    private void combinedSearch() throws DalException, IOException 
+    {
+        double minIMDBRating = minIMDBSlider.getValue();
+        double maxIMDBRating = maxIMDBSlider.getValue();
+        double minPersonRating = minPersonalSlider.getValue();
+        double maxPersonRating = maxPersonalSlider.getValue();
+        
+        String query = searchBar.getText().trim();
+
+        model.movieSearch(query, maxPersonRating, minPersonRating, maxIMDBRating, minIMDBRating);
+
+        
+    }
 }

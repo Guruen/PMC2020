@@ -151,12 +151,28 @@ public class MovieModel
             allMovies.addAll(movieManager.searchByCategory(categoryToSearch));
         }
     }
+    
+    /**
+     * Searches the DB by IMDB rating
+     * @param minIMDBRating
+     * @param maxIMDBRating
+     * @throws DalException
+     * @throws IOException 
+     */
 
     public void searchByIMDBRating(double minIMDBRating, double maxIMDBRating) throws DalException, IOException
     {
         allMovies.clear();
         allMovies.addAll(movieManager.searchByIMDBRating(minIMDBRating, maxIMDBRating));
     }
+    
+    /**
+     * Searches the DB by personal rating
+     * @param minPersonRating
+     * @param maxPersonRating
+     * @throws DalException
+     * @throws IOException 
+     */
 
     public void searchByPersonalRating(double minPersonRating, double maxPersonRating) throws DalException, IOException
     {
@@ -176,7 +192,8 @@ public class MovieModel
      */
     public void addMovie(String title, double iMDB_Rating, String iMDB_SiteLink, String movie_FilePath, List<Category> categories) throws DalException, IOException
     {
-        movieManager.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
+        Movie movie = movieManager.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
+        allMovies.add(movie);
     }
 
     /**
@@ -203,6 +220,12 @@ public class MovieModel
         Category cat = movieManager.createCategory(category);
         allCategories.add(cat);
     }
+    
+    /**
+     * Edits an already existing category within the DB
+     * @param category
+     * @throws DalException 
+     */
 
     public void editCategory(Category category) throws DalException
     {
@@ -210,6 +233,12 @@ public class MovieModel
         allCategories.clear();
         allCategories.addAll(movieManager.getAllCategories());
     }
+    
+    /**
+     * Deletes a category from the DB entirely
+     * @param category
+     * @throws DalException 
+     */
 
     public void deleteCategory(Category category) throws DalException
     {
@@ -218,4 +247,11 @@ public class MovieModel
         allCategories.addAll(movieManager.getAllCategories());
     }
 
+    
+    public void movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating) throws DalException, IOException
+    {
+        allMovies.clear();
+        allMovies.addAll(movieManager.movieSearch(titleSearch, highP_rating, lowP_rating, highIMDB_rating, lowIMDB_rating));
+        System.out.println(movieManager.movieSearch(titleSearch, highP_rating, lowP_rating, highIMDB_rating, lowIMDB_rating));
+    }
 }

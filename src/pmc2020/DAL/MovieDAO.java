@@ -88,13 +88,14 @@ public class MovieDAO
         try ( Connection con = dbCon.getConnection())
         {
 
-            String sql = "INSERT INTO Movie (name, imdb_rating, filelocation, imdb_link) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO Movie (name, imdb_rating, filelocation, imdb_link, p_rating) VALUES (?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, title);
             ps.setDouble(2, imdb_rating);
             ps.setString(3, filelocation);
             ps.setString(4, imdb_link);
+            ps.setDouble(5, 0.0);
 
             int affectedRows = ps.executeUpdate();
 
@@ -108,7 +109,7 @@ public class MovieDAO
                     addCategorytoMovie(ID, categories);
                     
                     String last_view = null;
-                    double p_rating = 0;
+                    double p_rating = 0.0;
                     String cats = getCategoriesforMovie(rs.getInt(1));
                 
                     Movie mov = new Movie(ID, title, imdb_rating, p_rating, filelocation, last_view, imdb_link, cats);
@@ -278,6 +279,15 @@ public class MovieDAO
         }
     }
     
+    /**
+     * Gets a list of categories that a movie is in
+     * @param movieid
+     * @return categories
+     * @throws IOException
+     * @throws SQLException
+     * @throws DalException 
+     */
+    
       public String getCategoriesforMovie(int movieid) throws IOException, SQLException, DalException
   {
       CategoryDAO catDAO = new CategoryDAO();
@@ -297,4 +307,64 @@ public class MovieDAO
       }
       return categories;
   }
+      
+      public List<Movie> movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating) throws DalException, IOException
+      /**
+       * Searches the entries for relevant movies within the given filter(s)
+       * @param titleSearch
+       * @param highP_rating
+       * @param lowP_rating
+       * @param highIMDB_rating
+       * @param lowIMDB_rating
+       * @return List of movies
+       * @throws DalException
+       * @throws IOException 
+       */
+      
+      public List<Movie> movieSearch(String titleSearch, int highP_rating, int lowP_rating, int highIMDB_rating, int lowIMDB_rating) throws DalException, IOException
+      {
+         try ( Connection con = dbCon.getConnection())
+        { 
+         String SQL = "SELECT DISTINCT Movie.*\n" +
+                      "FROM CatMovie\n" +
+                      "JOIN Movie as movie ON catmovie.MovieId = movie.id\n" +
+                      "WHERE name LIKE ? AND p_rating <= ? AND p_rating >= ?\n" +
+                      "AND imdb_rating <= ? AND imdb_rating >= ?";
+         
+         PreparedStatement ps = con.prepareStatement(SQL);
+         
+         ps.setString(1, "%" + titleSearch + "%");
+         ps.setDouble(2, highP_rating);
+         ps.setDouble(3, lowP_rating);
+         ps.setDouble(4, highIMDB_rating);
+         ps.setDouble(5, lowIMDB_rating);
+         
+         ResultSet rs = ps.executeQuery();
+         
+              ArrayList<Movie> allMovies = new ArrayList<>();
+            while (rs.next())
+            {
+                int id = rs.getInt("id");
+                String title = rs.getString("name");
+                double imdb_rating = rs.getDouble("imdb_rating");
+                double p_rating = rs.getDouble("p_rating");
+                String filelocation = rs.getString("filelocation");
+                String lastview = rs.getString("lastview");
+                String imdb_link = rs.getString("imdb_link");
+                String cats = getCategoriesforMovie(id);
+                
+                Movie mov = new Movie(id, title, imdb_rating, p_rating, filelocation, lastview, imdb_link, cats);
+                allMovies.add(mov);
+            }
+            return allMovies;
+         
+         
+         }
+          catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            throw new DalException();
+        }
+          
+      }
 }
