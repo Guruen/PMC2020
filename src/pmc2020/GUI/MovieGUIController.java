@@ -186,9 +186,8 @@ public class MovieGUIController implements Initializable
      * @throws DalException
      */
     @FXML
-    private void handleSearch(KeyEvent event) throws DalException, IOException
+    private void handleSearchButton(ActionEvent event) throws DalException, IOException
     {
-        
         combinedSearch();
     }
     
@@ -480,8 +479,5 @@ public class MovieGUIController implements Initializable
         
     }
 
-    @FXML
-    private void handleSearchButton(ActionEvent event)
-    {
-    }
+
 }

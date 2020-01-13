@@ -19,7 +19,7 @@
             <TableColumn fx:id="categoryColumn" prefWidth="132.79996337890623" text="Category" />
         </columns>
       </TableView>
-      <TextField fx:id="searchBar" layoutX="217.0" layoutY="86.0" onKeyTyped="#handleSearch" prefHeight="26.0" prefWidth="185.0" promptText="Search" />
+      <TextField fx:id="searchBar" layoutX="217.0" layoutY="86.0" prefHeight="26.0" prefWidth="185.0" promptText="Search" />
       <Button fx:id="addMovieButton" layoutX="65.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleAddMovie" text="Add Movie" />
       <Button fx:id="addCategoryButton" layoutX="221.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleAddCategory" text="Add Category" />
       <Button fx:id="editMovieButton" layoutX="143.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleEditMovie" text="Edit Movie" />
