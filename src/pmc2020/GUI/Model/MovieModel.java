@@ -8,8 +8,6 @@ package pmc2020.GUI.Model;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import pmc2020.BLL.MovieManager;
 import javafx.collections.FXCollections;
@@ -246,6 +244,17 @@ public class MovieModel
         allCategories.clear();
         allCategories.addAll(movieManager.getAllCategories());
     }
+    
+    /**
+     * Handles searching for movies
+     * @param titleSearch
+     * @param highP_rating
+     * @param lowP_rating
+     * @param highIMDB_rating
+     * @param lowIMDB_rating
+     * @throws DalException
+     * @throws IOException 
+     */
 
     
     public void movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating) throws DalException, IOException

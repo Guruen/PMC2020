@@ -194,6 +194,14 @@ public class MovieManager
         }
         return result;
     }
+    
+    /**
+     * makes a list of movies where it checks the date of the movie
+     * @return result
+     * @throws DalException
+     * @throws IOException
+     * @throws ParseException 
+     */
 
     public List<Movie> checkDate() throws DalException, IOException, ParseException
     {
@@ -269,6 +277,18 @@ public class MovieManager
     {
         categoryDAO.deleteCategory(category);
     }
+    
+    /**
+     * Searches the entries for movies
+     * @param titleSearch
+     * @param highP_rating
+     * @param lowP_rating
+     * @param highIMDB_rating
+     * @param lowIMDB_rating
+     * @return search result
+     * @throws DalException
+     * @throws IOException 
+     */
     
     public List<Movie> movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating) throws DalException, IOException
     {
