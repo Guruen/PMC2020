@@ -308,7 +308,7 @@ public class MovieDAO
       return categories;
   }
       
-      public List<Movie> movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating) throws DalException, IOException
+      
       /**
        * Searches the entries for relevant movies within the given filter(s)
        * @param titleSearch
@@ -321,7 +321,7 @@ public class MovieDAO
        * @throws IOException 
        */
       
-      public List<Movie> movieSearch(String titleSearch, int highP_rating, int lowP_rating, int highIMDB_rating, int lowIMDB_rating) throws DalException, IOException
+public List<Movie> movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating) throws DalException, IOException
       {
          try ( Connection con = dbCon.getConnection())
         { 
