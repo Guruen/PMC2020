@@ -272,7 +272,7 @@ public class MovieGUIController implements Initializable
     }
     
     /**
-     * handles opening the edit movie window
+     * handles opening the edit category window
      * @param event
      * @throws IOException 
      */
