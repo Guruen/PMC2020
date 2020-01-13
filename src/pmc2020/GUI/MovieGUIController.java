@@ -172,8 +172,7 @@ public class MovieGUIController implements Initializable
 
     private void popUp() throws DalException, IOException, ParseException
     {
-        final JFrame frame = new JFrame();
-        JOptionPane.showMessageDialog(frame, "The following movie(s) has a "
+        JOptionPane.showMessageDialog(f, "The following movie(s) has a "
                 + "personal rating lower than 6 and hasn't been watched in the last 2 years\n"
                 + model.checkDate() + "\n" + "Consider deleting them.\n", "Notice",
                 JOptionPane.PLAIN_MESSAGE);
@@ -187,9 +186,8 @@ public class MovieGUIController implements Initializable
      * @throws DalException
      */
     @FXML
-    private void handleSearch(KeyEvent event) throws DalException, IOException
+    private void handleSearchButton(ActionEvent event) throws DalException, IOException
     {
-        
         combinedSearch();
     }
     
@@ -481,4 +479,6 @@ public class MovieGUIController implements Initializable
         CategoryCombobox.getSelectionModel().clearSelection();
         
     }
+
+
 }
