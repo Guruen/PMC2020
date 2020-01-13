@@ -138,6 +138,15 @@ public class MovieManager
 
         return result;
     }
+    
+    /**
+     * Searches by the maximum and minimum IMDB rating value according to the sliders
+     * @param minRating
+     * @param maxRating
+     * @return List of relevant movies
+     * @throws DalException
+     * @throws IOException 
+     */
 
     public List<Movie> searchByIMDBRating(double minRating, double maxRating) throws DalException, IOException
     {
@@ -153,6 +162,15 @@ public class MovieManager
         }
         return result;
     }
+    
+    /**
+     * Searches by the maximum and minimum user rating value according to the sliders
+     * @param minPersonRating
+     * @param maxPersonRating
+     * @return List of relevant movies
+     * @throws DalException
+     * @throws IOException 
+     */
 
     public List<Movie> searchByPersonalRating(double minPersonRating, double maxPersonRating) throws DalException, IOException
     {
@@ -195,11 +213,23 @@ public class MovieManager
 
         return categoryDAO.getCategoryPerMovie(movieid);
     }
+    
+    /**
+     * Updates or edits the chosen category
+     * @param category
+     * @throws DalException 
+     */
 
     public void editCategory(Category category) throws DalException
     {
         categoryDAO.updateCategory(category);
     }
+    
+    /**
+     * deletes the chosen category
+     * @param category
+     * @throws DalException 
+     */
 
     public void deleteCategory(Category category) throws DalException
     {

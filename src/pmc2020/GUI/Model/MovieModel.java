@@ -148,12 +148,28 @@ public class MovieModel
             allMovies.addAll(movieManager.searchByCategory(categoryToSearch));
         }
     }
+    
+    /**
+     * Searches the DB by IMDB rating
+     * @param minIMDBRating
+     * @param maxIMDBRating
+     * @throws DalException
+     * @throws IOException 
+     */
 
     public void searchByIMDBRating(double minIMDBRating, double maxIMDBRating) throws DalException, IOException
     {
         allMovies.clear();
         allMovies.addAll(movieManager.searchByIMDBRating(minIMDBRating, maxIMDBRating));
     }
+    
+    /**
+     * Searches the DB by personal rating
+     * @param minPersonRating
+     * @param maxPersonRating
+     * @throws DalException
+     * @throws IOException 
+     */
 
     public void searchByPersonalRating(double minPersonRating, double maxPersonRating) throws DalException, IOException
     {
