@@ -12,6 +12,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,6 +48,10 @@ import javafx.collections.ListChangeListener;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import pmc2020.BE.Category;
 
 /**
@@ -62,6 +67,7 @@ public class MovieGUIController implements Initializable
     private Movie movieToOpen;
     private MovieModel model;
     private String TimeAndDate;
+    JFrame f;
 
     @FXML
     private TextField searchBar;
@@ -121,15 +127,25 @@ public class MovieGUIController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        try
+        {
+            popUp();
+        } catch (DalException ex)
+        {
+            Logger.getLogger(MovieGUIController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(MovieGUIController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex)
+        {
+            Logger.getLogger(MovieGUIController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         CategoryCombobox.setItems(model.getAllCategories());
         MovieView.setItems(model.getAllMovies());
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("Title"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("Private_Rating"));
         imdbratingColumn.setCellValueFactory(new PropertyValueFactory<>("IMDB_Rating"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("Categories"));
-        
-        
-        
 
     }
 
@@ -157,12 +173,22 @@ public class MovieGUIController implements Initializable
 
     }
 
+    private void popUp() throws DalException, IOException, ParseException
+    {
+        final JFrame frame = new JFrame();
+        JOptionPane.showMessageDialog(frame, "The following movie(s) has a "
+                + "personal rating lower than 6 and hasn't been watched in the last 2 years\n"
+                + model.checkDate() + "\n" + "Consider deleting them.\n", "Notice",
+                JOptionPane.PLAIN_MESSAGE);
+    }
+
     /**
-     * handles searching in realtime using the chosen category/filter(s) and the text in the textfield as query
+     * handles searching in realtime using the chosen category/filter(s) and the
+     * text in the textfield as query
+     *
      * @param event
-     * @throws DalException 
+     * @throws DalException
      */
-    
     @FXML
     private void handleSearch(KeyEvent event) throws DalException, IOException
     {
@@ -177,13 +203,13 @@ public class MovieGUIController implements Initializable
         int categoryToSearch = category.getCategory_ID();
         model.searchByCategory(categoryToSearch);
     }
-    
+
     /**
      * handles opening the add movie window
+     *
      * @param event
-     * @throws IOException 
+     * @throws IOException
      */
-
     @FXML
     private void handleAddMovie(ActionEvent event) throws IOException
     {
@@ -206,13 +232,13 @@ public class MovieGUIController implements Initializable
             throw ex;
         }
     }
-    
+
     /**
      * handles opening the add category window
+     *
      * @param event
-     * @throws IOException 
+     * @throws IOException
      */
-
     @FXML
     private void handleAddCategory(ActionEvent event) throws IOException
     {
@@ -235,13 +261,13 @@ public class MovieGUIController implements Initializable
             throw ex;
         }
     }
-    
+
     /**
      * handles opening the edit movie window
+     *
      * @param event
-     * @throws IOException 
+     * @throws IOException
      */
-
     @FXML
     private void handleEditMovie(ActionEvent event) throws IOException
     {
@@ -267,13 +293,13 @@ public class MovieGUIController implements Initializable
             throw ex;
         }
     }
-    
+
     /**
      * handles opening the edit movie window
+     *
      * @param event
-     * @throws IOException 
+     * @throws IOException
      */
-
     @FXML
     private void handleEditCategory(ActionEvent event) throws IOException
     {
@@ -296,16 +322,17 @@ public class MovieGUIController implements Initializable
             throw ex;
         }
     }
-    
+
     /**
      * handles playing the selected entry on the local media player of the user
-     * gets time and date, to check if the entry has not been watched for two years, and then prompts the user to delete the entry
+     * gets time and date, to check if the entry has not been watched for two
+     * years, and then prompts the user to delete the entry
+     *
      * @param event
-     * @throws IOException 
+     * @throws IOException
      */
-
     @FXML
-    private void handlePlay(ActionEvent event) throws IOException, DalException
+    private void handlePlay(ActionEvent event) throws IOException, DalException, ParseException
     {
         Movie movieToEdit = MovieView.getSelectionModel().getSelectedItem();
         Desktop desktop = Desktop.getDesktop();
@@ -313,8 +340,6 @@ public class MovieGUIController implements Initializable
         desktop.open(f);
 
         LocalDate date = LocalDate.now();
-        System.out.println(date);
-        System.out.println(movie.getLast_Viewed());
         movieToEdit.setLast_Viewed(date + "");
         model.updateMovie(movieToEdit);
 
@@ -323,13 +348,14 @@ public class MovieGUIController implements Initializable
         //check date on startup, to control expiry
         //prompt user to delete expired entries
     }
-    
-    /**
-     * handles deleting the selected entry from the view and the DB when the button is pushed
-     * @param event
-     * @throws DalException 
-     */
 
+    /**
+     * handles deleting the selected entry from the view and the DB when the
+     * button is pushed
+     *
+     * @param event
+     * @throws DalException
+     */
     @FXML
     private void deleteMovieButton(ActionEvent event) throws DalException
     {
@@ -337,14 +363,14 @@ public class MovieGUIController implements Initializable
         System.out.println(movieToDelete);
         model.deleteMovie(movieToDelete);
     }
-    
+
     /**
      * handles opening the given IMDB link, from chosen entry
+     *
      * @param event
      * @throws IOException
-     * @throws URISyntaxException 
+     * @throws URISyntaxException
      */
-
     @FXML
     private void handleOpenLink(ActionEvent event) throws IOException, URISyntaxException
     {
@@ -392,7 +418,7 @@ public class MovieGUIController implements Initializable
     {
         double minPersonRating = minPersonalSlider.getValue();
         double maxPersonRating = maxPersonalSlider.getValue();
-        
+
         model.searchByPersonalRating(minPersonRating, maxPersonRating);
     }
 

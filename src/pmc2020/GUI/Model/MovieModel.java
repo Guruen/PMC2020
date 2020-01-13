@@ -7,7 +7,9 @@ package pmc2020.GUI.Model;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import pmc2020.BLL.MovieManager;
 import javafx.collections.FXCollections;
@@ -26,13 +28,13 @@ public class MovieModel
     private MovieManager movieManager;
     private ObservableList<Movie> allMovies;
     private ObservableList<Category> allCategories;
-    
+
     /**
      * Makes a new MovieModel, and adds all movies and categories
+     *
      * @throws IOException
-     * @throws DalException 
+     * @throws DalException
      */
-
     public MovieModel() throws IOException, DalException
     {
         movieManager = new MovieManager();
@@ -43,43 +45,46 @@ public class MovieModel
 
     }
 
-    
+    public List<Movie> checkDate() throws DalException, IOException, ParseException
+    {
+        return movieManager.checkDate();
+    }
+
     /**
      * gets an ObservableList of all movies
+     *
      * @return all movies
      */
-    
     public ObservableList<Movie> getAllMovies()
     {
         return allMovies;
     }
 
-    
     /**
      * gets an ObservableList of all categories
+     *
      * @return all categories
      */
-    
     public ObservableList<Category> getAllCategories()
     {
         return allCategories;
     }
 
-    
     /**
      * Deletes the chosen movie
+     *
      * @param movie
-     * @throws DalException 
+     * @throws DalException
      */
-    
     public void deleteMovie(Movie movie) throws DalException
     {
         movieManager.deleteMovie(movie);
         allMovies.remove(movie);
     }
-    
+
     /**
      * Adds a newly created movie to the DB
+     *
      * @param ID
      * @param Title
      * @param IMDB_Rating
@@ -87,22 +92,20 @@ public class MovieModel
      * @param imdb_Link
      * @param last_view
      * @param categories
-     * @throws DalException 
+     * @throws DalException
      */
-    
     public void addMovie(int ID, String Title, double IMDB_Rating, String File_location, String imdb_Link, String last_view, List<Category> categories) throws DalException, IOException
     {
         Movie movie = movieManager.addMovie(Title, IMDB_Rating, File_location, imdb_Link, categories);
         allMovies.add(movie);
     }
 
-    
     /**
      * Updates an existing movie in the DB
+     *
      * @param movie
-     * @throws DalException 
+     * @throws DalException
      */
-    
     public void updateMovie(Movie movie) throws DalException
     {
         movieManager.updateMovie(movie);
@@ -110,13 +113,12 @@ public class MovieModel
         allMovies.add(movie);
     }
 
-    
     /**
      * Searches for something with the given term, query or category
+     *
      * @param query
-     * @throws DalException 
+     * @throws DalException
      */
-    
     public void search(String query) throws DalException, IOException
     {
         if (query.isEmpty())
@@ -129,14 +131,14 @@ public class MovieModel
             allMovies.addAll(movieManager.search(query));
         }
     }
-    
+
     /**
      * Searches within a given category/filter
+     *
      * @param categoryToSearch
      * @throws SQLException
-     * @throws DalException 
+     * @throws DalException
      */
-
     public void searchByCategory(int categoryToSearch) throws SQLException, DalException, IOException
     {
         if (categoryToSearch == 0)
@@ -161,29 +163,28 @@ public class MovieModel
         allMovies.clear();
         allMovies.addAll(movieManager.searchByPersonalRating(minPersonRating, maxPersonRating));
     }
-    
+
     /**
      * Adds a movie to the DB
+     *
      * @param title
      * @param iMDB_Rating
      * @param iMDB_SiteLink
      * @param movie_FilePath
      * @param categories
-     * @throws DalException 
+     * @throws DalException
      */
-
     public void addMovie(String title, double iMDB_Rating, String iMDB_SiteLink, String movie_FilePath, List<Category> categories) throws DalException, IOException
     {
         movieManager.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
     }
 
-    
     /**
      * refreshes the list of movies, so it matches with the DB
+     *
      * @return all movies in the DB
-     * @throws DalException 
+     * @throws DalException
      */
-    
     public ObservableList<Movie> refreshMovies() throws DalException, IOException
     {
         allMovies.clear();
@@ -191,13 +192,12 @@ public class MovieModel
         return allMovies;
     }
 
-    
     /**
      * Creates a category and adds it to the DB
+     *
      * @param category
-     * @throws DalException 
+     * @throws DalException
      */
-    
     public void createCategory(String category) throws DalException
     {
         Category cat = movieManager.createCategory(category);
