@@ -5,14 +5,7 @@
  */
 package pmc2020.BE;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import pmc2020.DAL.CategoryDAO;
-import pmc2020.DAL.DalException;
+
 
 /**
  *
@@ -32,17 +25,18 @@ public class Movie
     
 
     
-    /**
-     * 
-     * @param ID
-     * @param Title
-     * @param IMDB_Rating
-     * @param Private_rating
-     * @param File_location
-     * @param imdb_Link
-     * @param last_view - Format is YYYY-MM-DD
-     * @param categories
-     */
+
+/**
+ * This is the movie constructor that defines what a movie must be
+ * @param id
+ * @param title
+ * @param imdb_rating
+ * @param private_rating
+ * @param file_location
+ * @param last_viewed
+ * @param imdb_link
+ * @param categories 
+ */
     
     public Movie(int id, String title, double imdb_rating, double private_rating, String file_location, String last_viewed, String imdb_link, String categories)
     {
