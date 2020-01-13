@@ -270,9 +270,9 @@ public class MovieManager
         categoryDAO.deleteCategory(category);
     }
     
-    public List<Movie> movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating) throws DalException, IOException
+    public List<Movie> movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating, int categoryid) throws DalException, IOException
     {
-        return movieDAO.movieSearch(titleSearch, highP_rating, lowP_rating, highIMDB_rating, lowIMDB_rating);
+        return movieDAO.movieSearch(titleSearch, highP_rating, lowP_rating, highIMDB_rating, lowIMDB_rating, categoryid);
     }
 
 }

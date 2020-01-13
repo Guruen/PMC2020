@@ -321,16 +321,19 @@ public class MovieDAO
        * @throws IOException 
        */
       
-      public List<Movie> movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating) throws DalException, IOException
+      public List<Movie> movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating, int categoryID) throws DalException, IOException
       {
          try ( Connection con = dbCon.getConnection())
         { 
+         if(categoryID == 0)
+         {
          String SQL = "SELECT DISTINCT Movie.*\n" +
                       "FROM CatMovie\n" +
                       "JOIN Movie as movie ON catmovie.MovieId = movie.id\n" +
                       "WHERE name LIKE ? AND p_rating <= ? AND p_rating >= ?\n" +
                       "AND imdb_rating <= ? AND imdb_rating >= ?";
          
+                
          PreparedStatement ps = con.prepareStatement(SQL);
          
          ps.setString(1, "%" + titleSearch + "%");
@@ -357,6 +360,44 @@ public class MovieDAO
                 allMovies.add(mov);
             }
             return allMovies;
+         } else
+         {
+         String SQL = "SELECT DISTINCT Movie.*\n" +
+                      "FROM CatMovie\n" +
+                      "JOIN Movie as movie ON catmovie.MovieId = movie.id\n" +
+                      "WHERE CategoryId = ? AND name LIKE ? AND p_rating <= ? AND p_rating >= ?\n" +
+                      "AND imdb_rating <= ? AND imdb_rating >= ?";   
+         
+                
+         PreparedStatement ps = con.prepareStatement(SQL);
+         
+         ps.setInt(1, categoryID);
+         ps.setString(2, "%" + titleSearch + "%");
+                  ps.setDouble(3, highP_rating);
+         ps.setDouble(4, lowP_rating);
+         ps.setDouble(5, highIMDB_rating);
+         ps.setDouble(6, lowIMDB_rating);
+         
+         ResultSet rs = ps.executeQuery();
+         
+              ArrayList<Movie> allMovies = new ArrayList<>();
+            while (rs.next())
+            {
+                int id = rs.getInt("id");
+                String title = rs.getString("name");
+                double imdb_rating = rs.getDouble("imdb_rating");
+                double p_rating = rs.getDouble("p_rating");
+                String filelocation = rs.getString("filelocation");
+                String lastview = rs.getString("lastview");
+                String imdb_link = rs.getString("imdb_link");
+                String cats = getCategoriesforMovie(id);
+                
+                Movie mov = new Movie(id, title, imdb_rating, p_rating, filelocation, lastview, imdb_link, cats);
+                allMovies.add(mov);
+            }
+            return allMovies;
+         }
+
          
          
          }

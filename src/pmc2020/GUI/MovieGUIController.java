@@ -204,9 +204,7 @@ public class MovieGUIController implements Initializable
     @FXML
     private void handleCategorySearch(ActionEvent event) throws DalException, SQLException, IOException
     {
-        Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
-        int categoryToSearch = category.getCategory_ID();
-        model.searchByCategory(categoryToSearch);
+        //combinedSearch();
     }
 
     /**
@@ -474,10 +472,13 @@ public class MovieGUIController implements Initializable
         double minPersonRating = minPersonalSlider.getValue();
         double maxPersonRating = maxPersonalSlider.getValue();
         
+        Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
+        int categoryToSearch = category.getCategory_ID();
+        
         String query = searchBar.getText().trim();
 
-        model.movieSearch(query, maxPersonRating, minPersonRating, maxIMDBRating, minIMDBRating);
-
+        model.movieSearch(query, maxPersonRating, minPersonRating, maxIMDBRating, minIMDBRating, categoryToSearch);
+        CategoryCombobox.getSelectionModel().clearSelection();
         
     }
 }

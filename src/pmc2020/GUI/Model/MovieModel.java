@@ -248,10 +248,10 @@ public class MovieModel
     }
 
     
-    public void movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating) throws DalException, IOException
+    public void movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating, int categoryid) throws DalException, IOException
     {
         allMovies.clear();
-        allMovies.addAll(movieManager.movieSearch(titleSearch, highP_rating, lowP_rating, highIMDB_rating, lowIMDB_rating));
-        System.out.println(movieManager.movieSearch(titleSearch, highP_rating, lowP_rating, highIMDB_rating, lowIMDB_rating));
+        allMovies.addAll(movieManager.movieSearch(titleSearch, highP_rating, lowP_rating, highIMDB_rating, lowIMDB_rating, categoryid));
+        System.out.println(movieManager.movieSearch(titleSearch, highP_rating, lowP_rating, highIMDB_rating, lowIMDB_rating, categoryid));
     }
 }
