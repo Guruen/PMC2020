@@ -7,7 +7,6 @@ package pmc2020.GUI.Model;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Comparator;
 import java.util.List;
 import pmc2020.BLL.MovieManager;
 import javafx.collections.FXCollections;
