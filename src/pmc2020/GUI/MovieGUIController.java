@@ -183,7 +183,6 @@ public class MovieGUIController implements Initializable
     /**
      * handles searching in realtime using the chosen category/filter(s) and the
      * text in the textfield as query
-     *
      * @param event
      * @throws DalException
      */
@@ -217,7 +216,6 @@ public class MovieGUIController implements Initializable
 
     /**
      * handles opening the add movie window
-     *
      * @param event
      * @throws IOException
      */
@@ -246,7 +244,6 @@ public class MovieGUIController implements Initializable
 
     /**
      * handles opening the add category window
-     *
      * @param event
      * @throws IOException
      */
@@ -275,7 +272,6 @@ public class MovieGUIController implements Initializable
 
     /**
      * handles opening the edit movie window
-     *
      * @param event
      * @throws IOException
      */
@@ -337,7 +333,6 @@ public class MovieGUIController implements Initializable
      * handles playing the selected entry on the local media player of the user
      * gets time and date, to check if the entry has not been watched for two
      * years, and then prompts the user to delete the entry
-     *
      * @param event
      * @throws IOException
      */
@@ -362,7 +357,6 @@ public class MovieGUIController implements Initializable
     /**
      * handles deleting the selected entry from the view and the DB when the
      * button is pushed
-     *
      * @param event
      * @throws DalException
      */
@@ -376,7 +370,6 @@ public class MovieGUIController implements Initializable
 
     /**
      * handles opening the given IMDB link, from chosen entry
-     *
      * @param event
      * @throws IOException
      * @throws URISyntaxException
@@ -472,6 +465,12 @@ public class MovieGUIController implements Initializable
 
         model.searchByPersonalRating(minPersonRating, maxPersonRating);
     }
+    
+    /**
+     * Searches for entries with a combination of filters
+     * @throws DalException
+     * @throws IOException 
+     */
 
     private void combinedSearch() throws DalException, IOException 
     {

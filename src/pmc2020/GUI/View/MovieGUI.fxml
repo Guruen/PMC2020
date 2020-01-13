@@ -25,7 +25,7 @@
       <Button fx:id="editMovieButton" layoutX="143.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleEditMovie" text="Edit Movie" />
       <Button fx:id="editCategoryButton" layoutX="317.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleEditCategory" text="Edit Category" />
       <Button fx:id="playButton" layoutX="14.0" layoutY="87.0" mnemonicParsing="false" onAction="#handlePlay" text="Play" />
-      <ComboBox fx:id="CategoryCombobox" layoutX="57.0" layoutY="87.0" onAction="#handleCategorySearch" prefWidth="150.0" promptText="Search categories" />
+      <ComboBox fx:id="CategoryCombobox" layoutX="57.0" layoutY="87.0" onAction="#handleCategorySearch" prefWidth="150.0" promptText="All Categories" />
       <Button layoutX="412.0" layoutY="462.0" mnemonicParsing="false" onAction="#deleteMovieButton" text="🗑" />
       <Slider fx:id="maxIMDBSlider" layoutX="296.0" layoutY="53.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" onMouseReleased="#handleMaxIMDBSliderRating" showTickLabels="true" snapToTicks="true" value="10.0" />
       <Slider fx:id="minIMDBSlider" layoutX="131.0" layoutY="54.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" onMouseReleased="#handleMinIMDBSliderRating" showTickLabels="true" snapToTicks="true" />

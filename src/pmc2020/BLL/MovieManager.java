@@ -194,6 +194,14 @@ public class MovieManager
         }
         return result;
     }
+    
+    /**
+     * makes a list of movies where it checks the date of the movie
+     * @return result
+     * @throws DalException
+     * @throws IOException
+     * @throws ParseException 
+     */
 
     public List<Movie> checkDate() throws DalException, IOException, ParseException
     {
