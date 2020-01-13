@@ -88,13 +88,14 @@ public class MovieDAO
         try ( Connection con = dbCon.getConnection())
         {
 
-            String sql = "INSERT INTO Movie (name, imdb_rating, filelocation, imdb_link) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO Movie (name, imdb_rating, filelocation, imdb_link, p_rating) VALUES (?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, title);
             ps.setDouble(2, imdb_rating);
             ps.setString(3, filelocation);
             ps.setString(4, imdb_link);
+            ps.setDouble(5, 0.0);
 
             int affectedRows = ps.executeUpdate();
 
@@ -307,23 +308,23 @@ public class MovieDAO
       return categories;
   }
       
-      public List<Movie> movieSearch(String titleSearch, int highP_rating, int lowP_rating, int highIMDB_rating, int lowIMDB_rating) throws DalException, IOException
+      public List<Movie> movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating) throws DalException, IOException
       {
          try ( Connection con = dbCon.getConnection())
         { 
          String SQL = "SELECT DISTINCT Movie.*\n" +
                       "FROM CatMovie\n" +
                       "JOIN Movie as movie ON catmovie.MovieId = movie.id\n" +
-                      "WHERE name LIKE '%?%' AND p_rating <= ? AND p_rating >= ?\n" +
-                      "AND imdb_rating <= ? AND imdb_rating >= ? VALUES (?,?,?,?,?)";
+                      "WHERE name LIKE ? AND p_rating <= ? AND p_rating >= ?\n" +
+                      "AND imdb_rating <= ? AND imdb_rating >= ?";
          
          PreparedStatement ps = con.prepareStatement(SQL);
          
-         ps.setString(1, titleSearch);
-         ps.setInt(2, highP_rating);
-         ps.setInt(3, lowP_rating);
-         ps.setInt(4, highIMDB_rating);
-         ps.setInt(5, lowIMDB_rating);
+         ps.setString(1, "%" + titleSearch + "%");
+         ps.setDouble(2, highP_rating);
+         ps.setDouble(3, lowP_rating);
+         ps.setDouble(4, highIMDB_rating);
+         ps.setDouble(5, lowIMDB_rating);
          
          ResultSet rs = ps.executeQuery();
          

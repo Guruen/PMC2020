@@ -152,7 +152,6 @@ public class AddMovieGUIController implements Initializable
         dialog.setAlwaysOnTop(true);
 
         String title = titleText.getText();
-        double iMDB_Rating = imdbSlider.getValue();
         String iMDB_SiteLink = imdbSiteLinkText.getText();
         String movie_FilePath = chosenFilePathtext.getText();
 
@@ -209,7 +208,7 @@ public class AddMovieGUIController implements Initializable
         {
             System.out.println(movieNotEmpty);
             Stage stage = (Stage) addMovieButton.getScene().getWindow();
-            model.addMovie(title, iMDB_Rating, movie_FilePath, iMDB_SiteLink, categories);
+            model.addMovie(title, iMDBRating, movie_FilePath, iMDB_SiteLink, categories);
             stage.close();
         } else
         {
@@ -232,8 +231,8 @@ public class AddMovieGUIController implements Initializable
     private void SendValueIMDB(MouseEvent event)
     {
         double v = imdbSlider.getValue();
-        String formatted = String.format("%.1f", v);
-        IMDBRating.setText(formatted + "");
+        v = Math.round(v * 10) / 10.0;
+        IMDBRating.setText(v + "");
         iMDBRating = v;
     }
 

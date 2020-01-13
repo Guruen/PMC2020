@@ -83,8 +83,8 @@ public class EditMovieGUIController implements Initializable
     private void SendValueUser(MouseEvent event)
     {
         double v = editUserSlider.getValue();
-        String formatted = String.format("%.1f", v);
-        editUserRating.setText(formatted + "");
+        v = Math.round(v * 10) / 10.0;
+        editUserRating.setText(v + "");
         userRating = v;
     }
     
@@ -97,8 +97,8 @@ public class EditMovieGUIController implements Initializable
     private void SendValueIMDB(MouseEvent event)
     {
         double v = editImdbSlider.getValue();
-        String formatted = String.format("%.1f", v);
-        editIMDBRating.setText(formatted + "");
+        v = Math.round(v * 10) / 10.0;
+        editIMDBRating.setText(v + "");
         iMDBRating = v;
     }
     
@@ -117,12 +117,10 @@ public class EditMovieGUIController implements Initializable
         final JDialog dialog = new JDialog();
         dialog.setAlwaysOnTop(true);
 
-        double imdbRating = editImdbSlider.getValue();
-        double userRating = editUserSlider.getValue();
         String title = editTitleText.getText();
         String imdbLink = editImdbSiteLinkText.getText();
 
-        movie.setIMDB_Rating(imdbRating);
+        movie.setIMDB_Rating(iMDBRating);
         movie.setPrivate_Rating(userRating);
         movie.setTitle(title);
         movie.setIMDB_Link(imdbLink);
@@ -199,6 +197,14 @@ public class EditMovieGUIController implements Initializable
     {
         this.movie = movie;
 
+        userRating = movie.getPrivate_Rating();
+        editUserSlider.setValue(userRating);
+        editUserRating.setText(userRating + "");
+        
+        iMDBRating = movie.getIMDB_Rating();
+        editImdbSlider.setValue(iMDBRating);
+        editIMDBRating.setText(iMDBRating + "");
+        
         editTitleText.setText(movie.getTitle());
         editImdbSiteLinkText.setText(movie.getIMDB_Link());
         editChosenFilePathtext.setText(movie.getFile_location());

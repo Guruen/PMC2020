@@ -174,7 +174,8 @@ public class MovieModel
 
     public void addMovie(String title, double iMDB_Rating, String iMDB_SiteLink, String movie_FilePath, List<Category> categories) throws DalException, IOException
     {
-        movieManager.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
+        Movie movie = movieManager.addMovie(title, iMDB_Rating, iMDB_SiteLink, movie_FilePath, categories);
+        allMovies.add(movie);
     }
 
     
@@ -230,4 +231,11 @@ public class MovieModel
         allCategories.addAll(movieManager.getAllCategories());
     }
 
+    
+    public void movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating) throws DalException, IOException
+    {
+        allMovies.clear();
+        allMovies.addAll(movieManager.movieSearch(titleSearch, highP_rating, lowP_rating, highIMDB_rating, lowIMDB_rating));
+        System.out.println(movieManager.movieSearch(titleSearch, highP_rating, lowP_rating, highIMDB_rating, lowIMDB_rating));
+    }
 }
