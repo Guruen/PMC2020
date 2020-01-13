@@ -132,7 +132,9 @@ public class MovieGUIController implements Initializable
         {
             Logger.getLogger(MovieGUIController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         CategoryCombobox.setItems(model.getAllCategories());
+        CategoryCombobox.getItems().add(0, null);
         MovieView.setItems(model.getAllMovies());
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("Title"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("Private_Rating"));
@@ -202,7 +204,15 @@ public class MovieGUIController implements Initializable
     @FXML
     private void handleCategorySearch(ActionEvent event) throws DalException, SQLException, IOException
     {
-        //combinedSearch();
+//        if (CategoryCombobox.getSelectionModel().getSelectedItem() == null)
+//        {
+//            MovieView.setItems(model.getAllMovies());
+//            MovieView.refresh();
+//            System.out.println("test");
+//        }else
+//        {
+//        combinedSearch();
+//        }
     }
 
     /**
@@ -470,13 +480,22 @@ public class MovieGUIController implements Initializable
         double minPersonRating = minPersonalSlider.getValue();
         double maxPersonRating = maxPersonalSlider.getValue();
         
+        int categoryToSearch;
+        if (CategoryCombobox.getSelectionModel().getSelectedItem() == null)
+        {
+          categoryToSearch = 0;
+        }else
+        {
+        
         Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
-        int categoryToSearch = category.getCategory_ID();
+        categoryToSearch = category.getCategory_ID();
+        }
+  
         
         String query = searchBar.getText().trim();
 
         model.movieSearch(query, maxPersonRating, minPersonRating, maxIMDBRating, minIMDBRating, categoryToSearch);
-        CategoryCombobox.getSelectionModel().clearSelection();
+
         
     }
 
