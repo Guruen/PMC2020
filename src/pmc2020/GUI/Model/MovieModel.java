@@ -167,6 +167,5 @@ public class MovieModel
     {
         allMovies.clear();
         allMovies.addAll(movieManager.movieSearch(titleSearch, highP_rating, lowP_rating, highIMDB_rating, lowIMDB_rating, categoryid));
-        System.out.println(movieManager.movieSearch(titleSearch, highP_rating, lowP_rating, highIMDB_rating, lowIMDB_rating, categoryid));
     }
 }

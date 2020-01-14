@@ -123,10 +123,6 @@ public class CategoryDAO
 
             int affectedRows = ps.executeUpdate();
 
-            if (affectedRows == 1)
-            {
-                System.out.println("It's Dead!");
-            }
             if (affectedRows != 1)
             {
                 throw new DalException();

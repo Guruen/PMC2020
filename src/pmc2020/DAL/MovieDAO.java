@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import pmc2020.BE.Category;
@@ -87,8 +88,9 @@ public class MovieDAO
 
         try ( Connection con = dbCon.getConnection())
         {
-
-            String sql = "INSERT INTO Movie (name, imdb_rating, filelocation, imdb_link, p_rating) VALUES (?,?,?,?,?)";
+            String todaysDate = LocalDate.now() + "";
+            
+            String sql = "INSERT INTO Movie (name, imdb_rating, filelocation, imdb_link, p_rating, lastview) VALUES (?,?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, title);
@@ -96,6 +98,7 @@ public class MovieDAO
             ps.setString(3, filelocation);
             ps.setString(4, imdb_link);
             ps.setDouble(5, 0.0);
+            ps.setString(6, todaysDate);
 
             int affectedRows = ps.executeUpdate();
 
@@ -108,7 +111,7 @@ public class MovieDAO
                     
                     addCategorytoMovie(ID, categories);
                     
-                    String last_view = null;
+                    String last_view = todaysDate;
                     double p_rating = 0.0;
                     String cats = getCategoriesforMovie(rs.getInt(1));
                 
@@ -145,10 +148,6 @@ public class MovieDAO
             
             int affectedRows = ps.executeUpdate();
 
-            if (affectedRows == 1)
-            {
-                System.out.println("It's Dead!");
-            }
             if (affectedRows != 1)
             {
                 throw new DalException();
@@ -192,10 +191,6 @@ public class MovieDAO
 
             int affectedRows = ps.executeUpdate();
 
-            if (affectedRows == 1)
-            {
-                System.out.println("It's Updated!");
-            }
             if (affectedRows != 1)
             {
                 throw new DalException();

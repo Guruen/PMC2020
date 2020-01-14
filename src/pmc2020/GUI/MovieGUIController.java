@@ -141,7 +141,8 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * Listener checking if movie is added or removed from list and refreshes list accordingly
+     * Listener checking if movie is added or removed from list and refreshes
+     * list accordingly
      */
     public void movieList()
     {
@@ -266,33 +267,29 @@ public class MovieGUIController implements Initializable
     {
         Movie movieToEdit = MovieView.getSelectionModel().getSelectedItem();
 
-        if (movieToEdit != null)
+        try
         {
 
-            try
-            {
-
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("View/EditMovieGUI.fxml"));
-                Parent root = (Parent) fxmlLoader.load();
-                EditMovieGUIController c = fxmlLoader.getController();
-                c.setModel(model);
-                c.setMovie(movieToEdit);
-                Stage stage = new Stage();
-                stage.initModality(Modality.WINDOW_MODAL);
-                stage.initStyle(StageStyle.DECORATED);
-                stage.setAlwaysOnTop(true);
-                stage.setTitle("Edit Movie");
-                stage.setResizable(false);
-                stage.setScene(new Scene(root));
-                stage.show();
-            } catch (IOException ex)
-            {
-                throw ex;
-            }
-        } else
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("View/EditMovieGUI.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            EditMovieGUIController c = fxmlLoader.getController();
+            c.setModel(model);
+            c.setMovie(movieToEdit);
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setAlwaysOnTop(true);
+            stage.setTitle("Edit Movie");
+            stage.setResizable(false);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (NullPointerException i)
         {
             JOptionPane.showMessageDialog(f, "Please select a movie to edit!", "Notice",
                     JOptionPane.PLAIN_MESSAGE);
+        } catch (IOException ex)
+        {
+            throw ex;
         }
 
     }
@@ -340,13 +337,13 @@ public class MovieGUIController implements Initializable
         Movie movieToEdit = MovieView.getSelectionModel().getSelectedItem();
         try
         {
-                Desktop desktop = Desktop.getDesktop();
-                File f = new File(movieToEdit.getFile_location());
-                desktop.open(f);
+            Desktop desktop = Desktop.getDesktop();
+            File f = new File(movieToEdit.getFile_location());
+            desktop.open(f);
 
-                LocalDate date = LocalDate.now();
-                movieToEdit.setLast_Viewed(date + "");
-                model.updateMovie(movieToEdit);
+            LocalDate date = LocalDate.now();
+            movieToEdit.setLast_Viewed(date + "");
+            model.updateMovie(movieToEdit);
 
         } catch (IllegalArgumentException i)
         {
@@ -354,11 +351,10 @@ public class MovieGUIController implements Initializable
             error = error.replaceAll("doesn't exist.", "");
             JOptionPane.showMessageDialog(f, "Filelocation: " + error + "\nis not set correct!", "Notice",
                     JOptionPane.PLAIN_MESSAGE);
-        }
-        catch (NullPointerException i)
+        } catch (NullPointerException i)
         {
             JOptionPane.showMessageDialog(f, "No movie selected!\nor\nNo Filelocation set!", "Notice",
-            JOptionPane.PLAIN_MESSAGE);
+                    JOptionPane.PLAIN_MESSAGE);
         }
 
     }
@@ -373,10 +369,15 @@ public class MovieGUIController implements Initializable
     @FXML
     private void deleteMovieButton(ActionEvent event) throws DalException
     {
-        movieToDelete = MovieView.getSelectionModel().getSelectedItem();
-        System.out.println(movieToDelete);
-        model.deleteMovie(movieToDelete);
-        
+        try
+        {
+            movieToDelete = MovieView.getSelectionModel().getSelectedItem();
+            model.deleteMovie(movieToDelete);
+        } catch (NullPointerException i)
+        {
+            JOptionPane.showMessageDialog(f, "No movie selected!", "Notice",
+                    JOptionPane.PLAIN_MESSAGE);
+        }
     }
 
     /**
@@ -397,13 +398,13 @@ public class MovieGUIController implements Initializable
         {
             String error = i.toString().replaceAll("java.net.MalformedURLException: no protocol:", "");
             JOptionPane.showMessageDialog(f, "URL: " + error + "\n is not set correct!", "Notice",
-            JOptionPane.PLAIN_MESSAGE);
+                    JOptionPane.PLAIN_MESSAGE);
         } catch (NullPointerException i)
         {
             JOptionPane.showMessageDialog(f, "No movie selected!", "Notice",
-            JOptionPane.PLAIN_MESSAGE);
+                    JOptionPane.PLAIN_MESSAGE);
         }
-        
+
     }
 
     /**
