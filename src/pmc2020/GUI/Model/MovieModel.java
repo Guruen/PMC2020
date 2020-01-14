@@ -6,7 +6,6 @@
 package pmc2020.GUI.Model;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 import pmc2020.BLL.MovieManager;

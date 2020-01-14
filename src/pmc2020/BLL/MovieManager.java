@@ -8,12 +8,9 @@ package pmc2020.BLL;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import pmc2020.BE.Category;
 import pmc2020.BE.Movie;
@@ -195,6 +192,19 @@ public class MovieManager
     {
         categoryDAO.deleteCategory(category);
     }
+    
+    /**
+     * Handles searching for movies either with or without filters
+     * @param titleSearch
+     * @param highP_rating
+     * @param lowP_rating
+     * @param highIMDB_rating
+     * @param lowIMDB_rating
+     * @param categoryid
+     * @return a list of movies
+     * @throws DalException
+     * @throws IOException 
+     */
     
     public List<Movie> movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating, int categoryid) throws DalException, IOException
     {
