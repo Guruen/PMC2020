@@ -324,9 +324,8 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * handles playing the selected entry on the local media player of the user
-     * gets time and date, to check if the entry has not been watched for two
-     * years, and then prompts the user to delete the entry
+     * handles playing the selected entry on the local media player of the system
+     * gets date when user opens via play button and adds to DB as last viewed.
      *
      * @param event
      * @throws IOException
@@ -360,8 +359,7 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * handles deleting the selected entry from the view and the DB when the
-     * button is pushed
+     * Deletes the selected movie object.
      *
      * @param event
      * @throws DalException
@@ -381,7 +379,7 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * handles opening the given IMDB link, from chosen entry
+     * handles opening the given IMDB link, from chosen object on list
      *
      * @param event
      * @throws IOException
@@ -408,7 +406,7 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * handles the sliders to ensure that the maximum rating is not exceeded
+     * Shows what Max. IMDB Slider is set to and runs search.
      *
      * @param event
      * @throws DalException
@@ -422,7 +420,7 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * handles the sliders to ensure that the minimum rating is not exceeded
+     * Shows what Min. IMDB Slider is set to and runs search.
      *
      * @param event
      * @throws DalException
@@ -436,7 +434,7 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * handles the sliders to ensure that the minimum rating is not exceeded
+     * Shows what Min. Personal Slider is set to and runs search.
      *
      * @param event
      * @throws DalException
@@ -450,7 +448,7 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * handles the sliders to ensure that the maximum rating is not exceeded
+     * Shows what Max. Personal Slider is set to and runs search.
      *
      * @param event
      * @throws DalException
