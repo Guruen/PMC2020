@@ -180,7 +180,7 @@ public class MovieGUIController implements Initializable
                     + model.checkDate() + "\n" + "Consider deleting them.\n", "Notice",
                     JOptionPane.PLAIN_MESSAGE);
         }
-                
+
     }
 
     /**
@@ -204,7 +204,6 @@ public class MovieGUIController implements Initializable
      * @throws SQLException
      * @throws IOException
      */
-
     /**
      * handles opening the add movie window
      *
@@ -273,26 +272,36 @@ public class MovieGUIController implements Initializable
     private void handleEditMovie(ActionEvent event) throws IOException
     {
         Movie movieToEdit = MovieView.getSelectionModel().getSelectedItem();
-        try
+
+        if (movieToEdit != null)
         {
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("View/EditMovieGUI.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            EditMovieGUIController c = fxmlLoader.getController();
-            c.setModel(model);
-            c.setMovie(movieToEdit);
-            Stage stage = new Stage();
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.initStyle(StageStyle.DECORATED);
-            stage.setAlwaysOnTop(true);
-            stage.setTitle("Edit Movie");
-            stage.setResizable(false);
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException ex)
+            try
+            {
+
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("View/EditMovieGUI.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                EditMovieGUIController c = fxmlLoader.getController();
+                c.setModel(model);
+                c.setMovie(movieToEdit);
+                Stage stage = new Stage();
+                stage.initModality(Modality.WINDOW_MODAL);
+                stage.initStyle(StageStyle.DECORATED);
+                stage.setAlwaysOnTop(true);
+                stage.setTitle("Edit Movie");
+                stage.setResizable(false);
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException ex)
+            {
+                throw ex;
+            }
+        } else
         {
-            throw ex;
+            JOptionPane.showMessageDialog(f, "Please select a movie to edit!", "Notice",
+                    JOptionPane.PLAIN_MESSAGE);
         }
+
     }
 
     /**
@@ -435,7 +444,6 @@ public class MovieGUIController implements Initializable
         combinedSearch();
     }
 
-    
     /**
      * Searches for entries with a combination of filters
      *
