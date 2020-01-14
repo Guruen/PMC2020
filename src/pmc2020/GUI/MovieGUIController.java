@@ -186,7 +186,7 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * handles searching in realtime using the chosen category/filter(s) and the
+     * handles searching using the chosen category/filter(s) and the
      * text in the textfield as query
      *
      * @param event
