@@ -61,7 +61,7 @@ public class EditCategoryGUIController implements Initializable
      * Handles editing a category by getting the name to edit, and updating it
      * to the new name in the DB also checks for blank information, to prevent
      * blank entries lets the window close if there is data present in all
-     * needed places (true conditon)
+     * needed places (true condition)
      * @param event
      */
     @FXML
@@ -81,7 +81,6 @@ public class EditCategoryGUIController implements Initializable
             JOptionPane.showMessageDialog(dialog, "Category name can not be blank!", "ERROR", JOptionPane.ERROR_MESSAGE);
             editCategoryTextFieldText.setText("EDIT ME");
             catHasAName = false;
-            System.out.println(catHasAName);
         }
 
         if (catHasAName = true)
@@ -97,7 +96,7 @@ public class EditCategoryGUIController implements Initializable
             //Edits chosen category on list  
         } else
         {
-            System.out.println(catHasAName);
+
         }
 
     }

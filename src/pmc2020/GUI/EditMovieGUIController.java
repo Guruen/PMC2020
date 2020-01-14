@@ -51,8 +51,6 @@ public class EditMovieGUIController implements Initializable
     @FXML
     private Button editAddMovieButton;
     @FXML
-    private ComboBox<?> editCatChooser;
-    @FXML
     private Slider editUserSlider;
     @FXML
     private Label editIMDBRating;
@@ -190,7 +188,6 @@ public class EditMovieGUIController implements Initializable
         } else
         {
             editChosenFilePathtext.setText(directory + filename);
-            System.out.println(filename);
         }
     }
 

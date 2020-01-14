@@ -46,8 +46,6 @@ public class AddMovieGUIController implements Initializable
      */
     private String filename;
     private String directory;
-    private Movie movie;
-    private double userRating;
     private double iMDBRating;
 
     public MovieModel model;
@@ -127,7 +125,6 @@ public class AddMovieGUIController implements Initializable
         } else
         {
             chosenFilePathtext.setText(directory + filename);
-            System.out.println(filename);
         }
     }
 
@@ -178,13 +175,11 @@ public class AddMovieGUIController implements Initializable
 
             titleText.setText(title);
             movieNotEmpty = true;
-            System.out.println(movieNotEmpty);
         } else
         {
             JOptionPane.showMessageDialog(dialog, "Movie title can not be blank!", "ERROR", JOptionPane.ERROR_MESSAGE);
             titleText.setText("EDIT ME");
             movieNotEmpty = false;
-            System.out.println(movieNotEmpty);
 
         }
 
@@ -193,13 +188,11 @@ public class AddMovieGUIController implements Initializable
             iMDB_SiteLink = imdbSiteLinkText.getText();
             imdbSiteLinkText.setText(iMDB_SiteLink);
             iMDB_LinkNotEmpty = true;
-            System.out.println(movieNotEmpty);
         } else
         {
             JOptionPane.showMessageDialog(dialog, "IMDB link can not be blank!", "ERROR", JOptionPane.ERROR_MESSAGE);
             imdbSiteLinkText.setText("https://www.imdb.com/");
             iMDB_LinkNotEmpty = false;
-            System.out.println(movieNotEmpty);
 
         }
 
@@ -208,25 +201,22 @@ public class AddMovieGUIController implements Initializable
             movie_FilePath = chosenFilePathtext.getText();
             chosenFilePathtext.setText(movie_FilePath);
             filepathNotEmpty = true;
-            System.out.println(movieNotEmpty);
         } else
         {
             JOptionPane.showMessageDialog(dialog, "Movie file path can not be blank!", "ERROR", JOptionPane.ERROR_MESSAGE);
             chosenFilePathtext.setText("Chosen File Path");
             filepathNotEmpty = false;
-            System.out.println(movieNotEmpty);
 
         }
 
         if (movieNotEmpty == true && iMDB_LinkNotEmpty == true && filepathNotEmpty == true && movieAlreadyExist == true)
         {
-            System.out.println(movieNotEmpty);
             Stage stage = (Stage) addMovieButton.getScene().getWindow();
             model.addMovie(title, iMDBRating, movie_FilePath, iMDB_SiteLink, categories);
             stage.close();
         } else
         {
-            System.out.println(movieNotEmpty);
+            
         }
 
     }
