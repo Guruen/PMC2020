@@ -10,8 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -28,7 +26,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -40,8 +37,6 @@ import javafx.collections.ListChangeListener;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
-import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import pmc2020.BE.Category;
@@ -170,6 +165,13 @@ public class MovieGUIController implements Initializable
         });
 
     }
+    
+    /**
+     * Handles pop ups for checking wether movies are too old or poorly rated
+     * @throws DalException
+     * @throws IOException
+     * @throws ParseException 
+     */
 
     private void popUp() throws DalException, IOException, ParseException
     {
@@ -180,11 +182,11 @@ public class MovieGUIController implements Initializable
                     + model.checkDate() + "\n" + "Consider deleting them.\n", "Notice",
                     JOptionPane.PLAIN_MESSAGE);
         }
-                
+
     }
 
     /**
-     * handles searching in realtime using the chosen category/filter(s) and the
+     * handles searching using the chosen category/filter(s) and the
      * text in the textfield as query
      *
      * @param event
@@ -195,15 +197,7 @@ public class MovieGUIController implements Initializable
     {
         combinedSearch();
     }
-
-    /**
-     * handles searching within categories or with filters
-     *
-     * @param event
-     * @throws DalException
-     * @throws SQLException
-     * @throws IOException
-     */
+    
 
     /**
      * handles opening the add movie window
@@ -273,26 +267,36 @@ public class MovieGUIController implements Initializable
     private void handleEditMovie(ActionEvent event) throws IOException
     {
         Movie movieToEdit = MovieView.getSelectionModel().getSelectedItem();
-        try
+
+        if (movieToEdit != null)
         {
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("View/EditMovieGUI.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            EditMovieGUIController c = fxmlLoader.getController();
-            c.setModel(model);
-            c.setMovie(movieToEdit);
-            Stage stage = new Stage();
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.initStyle(StageStyle.DECORATED);
-            stage.setAlwaysOnTop(true);
-            stage.setTitle("Edit Movie");
-            stage.setResizable(false);
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException ex)
+            try
+            {
+
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("View/EditMovieGUI.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                EditMovieGUIController c = fxmlLoader.getController();
+                c.setModel(model);
+                c.setMovie(movieToEdit);
+                Stage stage = new Stage();
+                stage.initModality(Modality.WINDOW_MODAL);
+                stage.initStyle(StageStyle.DECORATED);
+                stage.setAlwaysOnTop(true);
+                stage.setTitle("Edit Movie");
+                stage.setResizable(false);
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException ex)
+            {
+                throw ex;
+            }
+        } else
         {
-            throw ex;
+            JOptionPane.showMessageDialog(f, "Please select a movie to edit!", "Notice",
+                    JOptionPane.PLAIN_MESSAGE);
         }
+
     }
 
     /**
@@ -435,7 +439,6 @@ public class MovieGUIController implements Initializable
         combinedSearch();
     }
 
-    
     /**
      * Searches for entries with a combination of filters
      *

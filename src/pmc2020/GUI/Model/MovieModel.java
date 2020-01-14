@@ -6,7 +6,6 @@
 package pmc2020.GUI.Model;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 import pmc2020.BLL.MovieManager;
@@ -29,7 +28,6 @@ public class MovieModel
 
     /**
      * Makes a new MovieModel, and adds all movies and categories
-     *
      * @throws IOException
      * @throws DalException
      */
@@ -50,7 +48,6 @@ public class MovieModel
 
     /**
      * gets an ObservableList of all movies
-     *
      * @return all movies
      */
     public ObservableList<Movie> getAllMovies()
@@ -60,7 +57,6 @@ public class MovieModel
 
     /**
      * gets an ObservableList of all categories
-     *
      * @return all categories
      */
     public ObservableList<Category> getAllCategories()
@@ -70,7 +66,6 @@ public class MovieModel
 
     /**
      * Deletes the chosen movie
-     *
      * @param movie
      * @throws DalException
      */
@@ -82,7 +77,6 @@ public class MovieModel
 
     /**
      * Updates an existing movie in the DB
-     *
      * @param movie
      * @throws DalException
      */
@@ -95,7 +89,6 @@ public class MovieModel
 
     /**
      * Adds a movie to the DB
-     *
      * @param title
      * @param iMDB_Rating
      * @param iMDB_SiteLink
@@ -111,7 +104,6 @@ public class MovieModel
 
     /**
      * refreshes the list of movies, so it matches with the DB
-     *
      * @return all movies in the DB
      * @throws DalException
      */
@@ -124,7 +116,6 @@ public class MovieModel
 
     /**
      * Creates a category and adds it to the DB
-     *
      * @param category
      * @throws DalException
      */
