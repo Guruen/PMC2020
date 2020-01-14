@@ -146,16 +146,17 @@ public class MovieManager
 
         return result;
     }
-    
+
     /**
-     * Searches by the maximum and minimum IMDB rating value according to the sliders
+     * Searches by the maximum and minimum IMDB rating value according to the
+     * sliders
+     *
      * @param minRating
      * @param maxRating
      * @return List of relevant movies
      * @throws DalException
-     * @throws IOException 
+     * @throws IOException
      */
-
     public List<Movie> searchByIMDBRating(double minRating, double maxRating) throws DalException, IOException
     {
         List<Movie> movieSearchBase = movieDAO.getAllMovies();
@@ -170,16 +171,17 @@ public class MovieManager
         }
         return result;
     }
-    
+
     /**
-     * Searches by the maximum and minimum user rating value according to the sliders
+     * Searches by the maximum and minimum user rating value according to the
+     * sliders
+     *
      * @param minPersonRating
      * @param maxPersonRating
      * @return List of relevant movies
      * @throws DalException
-     * @throws IOException 
+     * @throws IOException
      */
-
     public List<Movie> searchByPersonalRating(double minPersonRating, double maxPersonRating) throws DalException, IOException
     {
         List<Movie> movieSearchBase = movieDAO.getAllMovies();
@@ -194,15 +196,19 @@ public class MovieManager
         }
         return result;
     }
-    
+
     /**
-     * makes a list of movies where it checks the date of the movie
-     * @return result
+     * Makes a list of movie objects and checks the last viewed date on movies
+     * in the database and checks the private rating. If a movie has last been
+     * watched before 2 years ago and has a private rating of less than 6, the
+     * movie is added to a list and will display on the screen for the user to
+     * see.
+     *
+     * @return list of movie objects that fulfill the criteria stated
      * @throws DalException
      * @throws IOException
-     * @throws ParseException 
+     * @throws ParseException
      */
-
     public List<Movie> checkDate() throws DalException, IOException, ParseException
     {
         List<Movie> movieSearchBase = movieDAO.getAllMovies();
@@ -213,15 +219,12 @@ public class MovieManager
 
         for (Movie movie : movieSearchBase)
         {
-            if (movie.getLast_Viewed() == null)
-            {
-
-            } else
+            if (movie.getLast_Viewed() != null)
             {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate lastViewed = LocalDate.parse(movie.getLast_Viewed(), formatter);
 
-                if (lastViewed.isBefore(twoYearsAgo) && (movie.getPrivate_Rating() < 6))
+                if (lastViewed.isBefore(twoYearsAgo) == true && (movie.getPrivate_Rating() < 6))
                 {
                     result.add(movie);
                 }
@@ -255,29 +258,29 @@ public class MovieManager
 
         return categoryDAO.getCategoryPerMovie(movieid);
     }
-    
+
     /**
      * Updates or edits the chosen category
+     *
      * @param category
-     * @throws DalException 
+     * @throws DalException
      */
-
     public void editCategory(Category category) throws DalException
     {
         categoryDAO.updateCategory(category);
     }
-    
+
     /**
      * deletes the chosen category
+     *
      * @param category
-     * @throws DalException 
+     * @throws DalException
      */
-
     public void deleteCategory(Category category) throws DalException
     {
         categoryDAO.deleteCategory(category);
     }
-    
+
     public List<Movie> movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating, int categoryid) throws DalException, IOException
     {
         return movieDAO.movieSearch(titleSearch, highP_rating, lowP_rating, highIMDB_rating, lowIMDB_rating, categoryid);
