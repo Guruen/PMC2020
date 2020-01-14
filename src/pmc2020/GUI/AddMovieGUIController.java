@@ -37,13 +37,13 @@ import pmc2020.GUI.Model.MovieModel;
  */
 public class AddMovieGUIController implements Initializable
 {
+
     /**
      * @param filename filename of the file that has been chosen
      * @param directory the directory of the file that has been chosen
      * @param userRating the users personal rating of the movie
      * @param iMDBRating the rating of the movie according to IMDB
      */
-
     private String filename;
     private String directory;
     private Movie movie;
@@ -68,13 +68,14 @@ public class AddMovieGUIController implements Initializable
     private Slider imdbSlider;
     @FXML
     private ListView<Category> categoryList;
-    
-    /**
-     * Adds a new controller to the movie GUI, by making a new instance of the class
-     * @throws IOException
-     * @throws DalException 
-     */
 
+    /**
+     * Adds a new controller to the movie GUI, by making a new instance of the
+     * class
+     *
+     * @throws IOException
+     * @throws DalException
+     */
     public AddMovieGUIController() throws IOException, DalException
     {
         try
@@ -97,14 +98,15 @@ public class AddMovieGUIController implements Initializable
     }
 
     /**
-     * handles opening the filedialog to allow the user to open / choose a mp4 or mpeg4 file
-     * uses filename and directory to see where the file is to add this data to the DB too
-     * also checks the filename to see if it is the correct filetype(s)
+     * handles opening the filedialog to allow the user to open / choose a mp4
+     * or mpeg4 file uses filename and directory to see where the file is to add
+     * this data to the DB too also checks the filename to see if it is the
+     * correct filetype(s)
+     *
      * @param filename
      * @param directory
-     * @param event 
+     * @param event
      */
-    
     @FXML
     private void handleChooseFilePath(ActionEvent event)
     {
@@ -128,16 +130,17 @@ public class AddMovieGUIController implements Initializable
             System.out.println(filename);
         }
     }
-    
-    /**
-     * Handles adding the movie, using the suppied data from the view
-     * the handler also checks if there is any data present, to prevent blank entries to the DB
-     * The user gets an error message if any of the info is blank, and the blank info is then replaced with placeholders
-     * lets the window close if the conditions are true
-     * @param event
-     * @throws DalException 
-     */
 
+    /**
+     * Handles adding the movie, using the suppied data from the view the
+     * handler also checks if there is any data present, to prevent blank
+     * entries to the DB The user gets an error message if any of the info is
+     * blank, and the blank info is then replaced with placeholders lets the
+     * window close if the conditions are true
+     *
+     * @param event
+     * @throws DalException
+     */
     @FXML
     private void handleAddMovie(ActionEvent event) throws DalException, IOException
     {
@@ -149,12 +152,30 @@ public class AddMovieGUIController implements Initializable
         String movie_FilePath = chosenFilePathtext.getText();
 
         List<Category> categories = categoryList.getSelectionModel().getSelectedItems();
+        List<Movie> allMovies = model.getAllMovies();
 
         boolean movieNotEmpty;
+        boolean iMDB_LinkNotEmpty;
+        boolean filepathNotEmpty;
+        boolean movieAlreadyExist = true;
+
+        for (Movie allMovy : allMovies)
+        {
+            if (title.compareTo(allMovy.getTitle()) == 0)
+            {
+                JOptionPane.showMessageDialog(dialog, "Movie title is already added", "ERROR", JOptionPane.ERROR_MESSAGE);
+                movieAlreadyExist = false;
+                break;
+            }else
+            {
+                movieAlreadyExist = true;
+            }
+        }
 
         if (title != null && !title.isEmpty())
         {
             title = titleText.getText();
+
             titleText.setText(title);
             movieNotEmpty = true;
             System.out.println(movieNotEmpty);
@@ -171,13 +192,13 @@ public class AddMovieGUIController implements Initializable
         {
             iMDB_SiteLink = imdbSiteLinkText.getText();
             imdbSiteLinkText.setText(iMDB_SiteLink);
-            movieNotEmpty = true;
+            iMDB_LinkNotEmpty = true;
             System.out.println(movieNotEmpty);
         } else
         {
             JOptionPane.showMessageDialog(dialog, "IMDB link can not be blank!", "ERROR", JOptionPane.ERROR_MESSAGE);
             imdbSiteLinkText.setText("https://www.imdb.com/");
-            movieNotEmpty = false;
+            iMDB_LinkNotEmpty = false;
             System.out.println(movieNotEmpty);
 
         }
@@ -186,18 +207,18 @@ public class AddMovieGUIController implements Initializable
         {
             movie_FilePath = chosenFilePathtext.getText();
             chosenFilePathtext.setText(movie_FilePath);
-            movieNotEmpty = true;
+            filepathNotEmpty = true;
             System.out.println(movieNotEmpty);
         } else
         {
             JOptionPane.showMessageDialog(dialog, "Movie file path can not be blank!", "ERROR", JOptionPane.ERROR_MESSAGE);
             chosenFilePathtext.setText("Chosen File Path");
-            movieNotEmpty = false;
+            filepathNotEmpty = false;
             System.out.println(movieNotEmpty);
 
         }
 
-        if (movieNotEmpty == true)
+        if (movieNotEmpty == true && iMDB_LinkNotEmpty == true && filepathNotEmpty == true && movieAlreadyExist == true)
         {
             System.out.println(movieNotEmpty);
             Stage stage = (Stage) addMovieButton.getScene().getWindow();
@@ -214,12 +235,13 @@ public class AddMovieGUIController implements Initializable
     {
         this.model = model;
     }
-    
-    /**
-     * gets the value from the slider on the view and sets this value as text on a label, and displays live changes
-     * @param event 
-     */
 
+    /**
+     * gets the value from the slider on the view and sets this value as text on
+     * a label, and displays live changes
+     *
+     * @param event
+     */
     @FXML
     private void SendValueIMDB(MouseEvent event)
     {

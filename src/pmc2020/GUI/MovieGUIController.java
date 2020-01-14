@@ -138,11 +138,10 @@ public class MovieGUIController implements Initializable
         movieList();
 
     }
-    
+
     /**
      * Gets all movies as a list
      */
-
     public void movieList()
     {
         model.getAllMovies().addListener((ListChangeListener<Movie>) c ->
@@ -176,15 +175,20 @@ public class MovieGUIController implements Initializable
 
     private void popUp() throws DalException, IOException, ParseException
     {
-        JOptionPane.showMessageDialog(f, "The following movie(s) has a "
-                + "personal rating lower than 6 and hasn't been watched in the last 2 years\n"
-                + model.checkDate() + "\n" + "Consider deleting them.\n", "Notice",
-                JOptionPane.PLAIN_MESSAGE);
+        if (model.checkDate().isEmpty() != true)
+        {
+            JOptionPane.showMessageDialog(f, "The following movie(s) has a "
+                    + "personal rating lower than 6 and hasn't been watched in the last 2 years\n"
+                    + model.checkDate() + "\n" + "Consider deleting them.\n", "Notice",
+                    JOptionPane.PLAIN_MESSAGE);
+        }
+                
     }
 
     /**
      * handles searching in realtime using the chosen category/filter(s) and the
      * text in the textfield as query
+     *
      * @param event
      * @throws DalException
      */
@@ -197,6 +201,7 @@ public class MovieGUIController implements Initializable
 
     /**
      * handles opening the add movie window
+     *
      * @param event
      * @throws IOException
      */
@@ -225,6 +230,7 @@ public class MovieGUIController implements Initializable
 
     /**
      * handles opening the add category window
+     *
      * @param event
      * @throws IOException
      */
@@ -253,6 +259,7 @@ public class MovieGUIController implements Initializable
 
     /**
      * handles opening the edit movie window
+     *
      * @param event
      * @throws IOException
      */
@@ -284,6 +291,7 @@ public class MovieGUIController implements Initializable
 
     /**
      * handles opening the edit category window
+     *
      * @param event
      * @throws IOException
      */
@@ -314,6 +322,7 @@ public class MovieGUIController implements Initializable
      * handles playing the selected entry on the local media player of the user
      * gets time and date, to check if the entry has not been watched for two
      * years, and then prompts the user to delete the entry
+     *
      * @param event
      * @throws IOException
      */
@@ -338,6 +347,7 @@ public class MovieGUIController implements Initializable
     /**
      * handles deleting the selected entry from the view and the DB when the
      * button is pushed
+     *
      * @param event
      * @throws DalException
      */
@@ -351,6 +361,7 @@ public class MovieGUIController implements Initializable
 
     /**
      * handles opening the given IMDB link, from chosen entry
+     *
      * @param event
      * @throws IOException
      * @throws URISyntaxException
@@ -361,56 +372,56 @@ public class MovieGUIController implements Initializable
         movieToOpen = MovieView.getSelectionModel().getSelectedItem();
         Desktop.getDesktop().browse(new URL(movieToOpen.getIMDB_Link()).toURI());
     }
-    
+
     /**
      * handles the sliders to ensure that the maximum rating is not exceeded
+     *
      * @param event
      * @throws DalException
-     * @throws IOException 
+     * @throws IOException
      */
-
     @FXML
     private void handleMaxIMDBSliderRating(MouseEvent event) throws DalException, IOException
     {
         searchIMDBRatingMax.setText(maxIMDBSlider.getValue() + "");
         combinedSearch();
     }
-    
+
     /**
      * handles the sliders to ensure that the minimum rating is not exceeded
+     *
      * @param event
      * @throws DalException
-     * @throws IOException 
+     * @throws IOException
      */
-
     @FXML
     private void handleMinIMDBSliderRating(MouseEvent event) throws DalException, IOException
     {
         searchIMDBRatingMin.setText(minIMDBSlider.getValue() + "");
         combinedSearch();
     }
-    
+
     /**
      * handles the sliders to ensure that the minimum rating is not exceeded
+     *
      * @param event
      * @throws DalException
-     * @throws IOException 
+     * @throws IOException
      */
-
     @FXML
     private void handleMinPersonalSliderRating(MouseEvent event) throws DalException, IOException
     {
         searchPersonalRatingMin.setText(minPersonalSlider.getValue() + "");
         combinedSearch();
     }
-    
+
     /**
      * handles the sliders to ensure that the maximum rating is not exceeded
+     *
      * @param event
      * @throws DalException
-     * @throws IOException 
+     * @throws IOException
      */
-
     @FXML
     private void handleMaxPersonalSliderRating(MouseEvent event) throws DalException, IOException
     {
@@ -421,35 +432,32 @@ public class MovieGUIController implements Initializable
     
     /**
      * Searches for entries with a combination of filters
+     *
      * @throws DalException
-     * @throws IOException 
+     * @throws IOException
      */
-
-    private void combinedSearch() throws DalException, IOException 
+    private void combinedSearch() throws DalException, IOException
     {
         double minIMDBRating = minIMDBSlider.getValue();
         double maxIMDBRating = maxIMDBSlider.getValue();
         double minPersonRating = minPersonalSlider.getValue();
         double maxPersonRating = maxPersonalSlider.getValue();
-        
+
         int categoryToSearch;
         if (CategoryCombobox.getSelectionModel().getSelectedItem() == null)
         {
-          categoryToSearch = 0;
-        }else
+            categoryToSearch = 0;
+        } else
         {
-        
-        Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
-        categoryToSearch = category.getCategory_ID();
+
+            Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
+            categoryToSearch = category.getCategory_ID();
         }
-  
-        
+
         String query = searchBar.getText().trim();
 
         model.movieSearch(query, maxPersonRating, minPersonRating, maxIMDBRating, minIMDBRating, categoryToSearch);
 
-        
     }
-
 
 }
