@@ -158,7 +158,7 @@ public class AddMovieGUIController implements Initializable
 
         for (Movie allMovy : allMovies)
         {
-            if (title.compareTo(allMovy.getTitle()) == 0)
+            if (title.compareToIgnoreCase(allMovy.getTitle()) == 0)
             {
                 JOptionPane.showMessageDialog(dialog, "Movie title is already added", "ERROR", JOptionPane.ERROR_MESSAGE);
                 movieAlreadyExist = false;

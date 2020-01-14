@@ -481,7 +481,6 @@ public class MovieGUIController implements Initializable
             categoryToSearch = 0;
         } else
         {
-
             Category category = CategoryCombobox.getSelectionModel().getSelectedItem();
             categoryToSearch = category.getCategory_ID();
         }

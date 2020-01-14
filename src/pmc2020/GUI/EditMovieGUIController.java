@@ -9,18 +9,23 @@ import java.awt.FileDialog;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import pmc2020.BE.Category;
 import pmc2020.BE.Movie;
 import pmc2020.DAL.DalException;
 import pmc2020.GUI.Model.MovieModel;
@@ -58,6 +63,8 @@ public class EditMovieGUIController implements Initializable
     private Label editUserRating;
     @FXML
     private Slider editImdbSlider;
+    @FXML
+    private ListView<Category> categoriListView;
 
     /**
      * Initializes the controller class.
@@ -65,6 +72,18 @@ public class EditMovieGUIController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        try
+        {
+            model = new MovieModel();
+        } catch (IOException ex)
+        {
+            Logger.getLogger(EditMovieGUIController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DalException ex)
+        {
+            Logger.getLogger(EditMovieGUIController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        categoriListView.setItems(model.getAllCategories());
+        categoriListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     void setModel(MovieModel model)

@@ -373,7 +373,7 @@ public class MovieDAO
          
          ps.setInt(1, categoryID);
          ps.setString(2, "%" + titleSearch + "%");
-                  ps.setDouble(3, highP_rating);
+         ps.setDouble(3, highP_rating);
          ps.setDouble(4, lowP_rating);
          ps.setDouble(5, highIMDB_rating);
          ps.setDouble(6, lowIMDB_rating);
