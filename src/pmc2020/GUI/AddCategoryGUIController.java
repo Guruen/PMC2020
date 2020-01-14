@@ -66,7 +66,6 @@ public class AddCategoryGUIController implements Initializable
             JOptionPane.showMessageDialog(dialog, "Category name can not be blank!", "ERROR", JOptionPane.ERROR_MESSAGE);
             categoryTextFieldText.setText("EDIT ME");
             catHasName = false;
-            System.out.println(catHasName);
         }
         
         if(catHasName == true){
@@ -76,10 +75,9 @@ public class AddCategoryGUIController implements Initializable
         }
         else
         {
-            System.out.println(catHasName);
+
         }
    
-        
     }
     
     /**
