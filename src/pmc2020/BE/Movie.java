@@ -52,26 +52,6 @@ public class Movie
     }
     
     /**
-     * This is a polymorphed version of the other movie constructor
-     * @param id
-     * @param title
-     * @param imdb_rating
-     * @param filelocation
-     * @param last_view
-     * @param imdb_link 
-     */
-
-    public Movie(int id, String title, double imdb_rating, String filelocation, String last_view, String imdb_link)
-    {
-        this.ID = id;
-        this.Title = title;
-        this.IMDB_Rating = imdb_rating;
-        this.File_location = filelocation;
-        this.IMDB_Link = imdb_link;
-        this.Last_Viewed = last_view;
-    }
-    
-    /**
      * Gets the ID of the movie from DB
      * @return ID
      */
