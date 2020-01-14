@@ -8,6 +8,7 @@ package pmc2020.GUI;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.ParseException;
@@ -140,7 +141,7 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * Gets all movies as a list
+     * Listener checking if movie is added or removed from list and refreshes list accordingly
      */
     public void movieList()
     {
@@ -150,13 +151,11 @@ public class MovieGUIController implements Initializable
             {
                 if (c.wasRemoved())
                 {
-                    System.out.println("removed!");
                     MovieView.refresh();
                 }
 
                 if (c.wasAdded())
                 {
-                    System.out.println("added!");
                     MovieView.refresh();
                 }
 
@@ -165,14 +164,14 @@ public class MovieGUIController implements Initializable
         });
 
     }
-    
+
     /**
-     * Handles pop ups for checking wether movies are too old or poorly rated
+     * Handles pop ups for checking wether movies are too old and poorly rated
+     *
      * @throws DalException
      * @throws IOException
-     * @throws ParseException 
+     * @throws ParseException
      */
-
     private void popUp() throws DalException, IOException, ParseException
     {
         if (model.checkDate().isEmpty() != true)
@@ -186,8 +185,8 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * handles searching using the chosen category/filter(s) and the
-     * text in the textfield as query
+     * handles searching using the chosen category/filter(s) and the text in the
+     * textfield as query
      *
      * @param event
      * @throws DalException
@@ -197,7 +196,6 @@ public class MovieGUIController implements Initializable
     {
         combinedSearch();
     }
-    
 
     /**
      * handles opening the add movie window
@@ -340,18 +338,29 @@ public class MovieGUIController implements Initializable
     private void handlePlay(ActionEvent event) throws IOException, DalException, ParseException
     {
         Movie movieToEdit = MovieView.getSelectionModel().getSelectedItem();
-        Desktop desktop = Desktop.getDesktop();
-        File f = new File(movieToEdit.getFile_location());
-        desktop.open(f);
+        try
+        {
+                Desktop desktop = Desktop.getDesktop();
+                File f = new File(movieToEdit.getFile_location());
+                desktop.open(f);
 
-        LocalDate date = LocalDate.now();
-        movieToEdit.setLast_Viewed(date + "");
-        model.updateMovie(movieToEdit);
+                LocalDate date = LocalDate.now();
+                movieToEdit.setLast_Viewed(date + "");
+                model.updateMovie(movieToEdit);
 
-        //write date to DB
-        //find expiry date of last watched (two years after last play)
-        //check date on startup, to control expiry
-        //prompt user to delete expired entries
+        } catch (IllegalArgumentException i)
+        {
+            String error = i.toString().replaceAll("java.lang.IllegalArgumentException: The file: ", "");
+            error = error.replaceAll("doesn't exist.", "");
+            JOptionPane.showMessageDialog(f, "Filelocation: " + error + "\nis not set correct!", "Notice",
+                    JOptionPane.PLAIN_MESSAGE);
+        }
+        catch (NullPointerException i)
+        {
+            JOptionPane.showMessageDialog(f, "No movie selected!\nor\nNo Filelocation set!", "Notice",
+            JOptionPane.PLAIN_MESSAGE);
+        }
+
     }
 
     /**
@@ -367,6 +376,7 @@ public class MovieGUIController implements Initializable
         movieToDelete = MovieView.getSelectionModel().getSelectedItem();
         System.out.println(movieToDelete);
         model.deleteMovie(movieToDelete);
+        
     }
 
     /**
@@ -379,8 +389,21 @@ public class MovieGUIController implements Initializable
     @FXML
     private void handleOpenLink(ActionEvent event) throws IOException, URISyntaxException
     {
-        movieToOpen = MovieView.getSelectionModel().getSelectedItem();
-        Desktop.getDesktop().browse(new URL(movieToOpen.getIMDB_Link()).toURI());
+        try
+        {
+            movieToOpen = MovieView.getSelectionModel().getSelectedItem();
+            Desktop.getDesktop().browse(new URL(movieToOpen.getIMDB_Link()).toURI());
+        } catch (MalformedURLException i)
+        {
+            String error = i.toString().replaceAll("java.net.MalformedURLException: no protocol:", "");
+            JOptionPane.showMessageDialog(f, "URL: " + error + "\n is not set correct!", "Notice",
+            JOptionPane.PLAIN_MESSAGE);
+        } catch (NullPointerException i)
+        {
+            JOptionPane.showMessageDialog(f, "No movie selected!", "Notice",
+            JOptionPane.PLAIN_MESSAGE);
+        }
+        
     }
 
     /**
