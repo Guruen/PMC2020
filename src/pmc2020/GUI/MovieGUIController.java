@@ -200,20 +200,6 @@ public class MovieGUIController implements Initializable
      * @throws IOException 
      */
 
-    @FXML
-    private void handleCategorySearch(ActionEvent event) throws DalException, SQLException, IOException
-    {
-//        if (CategoryCombobox.getSelectionModel().getSelectedItem() == null)
-//        {
-//            MovieView.setItems(model.getAllMovies());
-//            MovieView.refresh();
-//            System.out.println("test");
-//        }else
-//        {
-//        combinedSearch();
-//        }
-    }
-
     /**
      * handles opening the add movie window
      * @param event
@@ -436,35 +422,7 @@ public class MovieGUIController implements Initializable
         searchPersonalRatingMax.setText(maxPersonalSlider.getValue() + "");
         combinedSearch();
     }
-    
-    /**
-     * Allows the user to search movies by their IMDB rating
-     * @throws DalException
-     * @throws IOException 
-     */
 
-    private void searchByIMDBRating() throws DalException, IOException
-    {
-            double minIMDBRating = minIMDBSlider.getValue();
-            double maxIMDBRating = maxIMDBSlider.getValue();
-
-            model.searchByIMDBRating(minIMDBRating, maxIMDBRating);
-    }
-    
-    /**
-     * Allows the user to search movies by their personal rating
-     * @throws DalException
-     * @throws DalException
-     * @throws IOException 
-     */
-
-    private void searchByPersonalRating() throws DalException, DalException, IOException
-    {
-        double minPersonRating = minPersonalSlider.getValue();
-        double maxPersonRating = maxPersonalSlider.getValue();
-
-        model.searchByPersonalRating(minPersonRating, maxPersonRating);
-    }
     
     /**
      * Searches for entries with a combination of filters

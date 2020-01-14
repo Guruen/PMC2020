@@ -81,24 +81,6 @@ public class MovieModel
     }
 
     /**
-     * Adds a newly created movie to the DB
-     *
-     * @param ID
-     * @param Title
-     * @param IMDB_Rating
-     * @param File_location
-     * @param imdb_Link
-     * @param last_view
-     * @param categories
-     * @throws DalException
-     */
-    public void addMovie(int ID, String Title, double IMDB_Rating, String File_location, String imdb_Link, String last_view, List<Category> categories) throws DalException, IOException
-    {
-        Movie movie = movieManager.addMovie(Title, IMDB_Rating, File_location, imdb_Link, categories);
-        allMovies.add(movie);
-    }
-
-    /**
      * Updates an existing movie in the DB
      *
      * @param movie
@@ -109,73 +91,6 @@ public class MovieModel
         movieManager.updateMovie(movie);
         allMovies.remove(movie);
         allMovies.add(movie);
-    }
-
-    /**
-     * Searches for something with the given term, query or category
-     *
-     * @param query
-     * @throws DalException
-     */
-    public void search(String query) throws DalException, IOException
-    {
-        if (query.isEmpty())
-        {
-            allMovies.clear();
-            allMovies.addAll(movieManager.getAllMovies());
-        } else
-        {
-            allMovies.clear();
-            allMovies.addAll(movieManager.search(query));
-        }
-    }
-
-    /**
-     * Searches within a given category/filter
-     *
-     * @param categoryToSearch
-     * @throws SQLException
-     * @throws DalException
-     */
-    public void searchByCategory(int categoryToSearch) throws SQLException, DalException, IOException
-    {
-        if (categoryToSearch == 0)
-        {
-            allMovies.clear();
-            allMovies.addAll(movieManager.getAllMovies());
-        } else
-        {
-            allMovies.clear();
-            allMovies.addAll(movieManager.searchByCategory(categoryToSearch));
-        }
-    }
-    
-    /**
-     * Searches the DB by IMDB rating
-     * @param minIMDBRating
-     * @param maxIMDBRating
-     * @throws DalException
-     * @throws IOException 
-     */
-
-    public void searchByIMDBRating(double minIMDBRating, double maxIMDBRating) throws DalException, IOException
-    {
-        allMovies.clear();
-        allMovies.addAll(movieManager.searchByIMDBRating(minIMDBRating, maxIMDBRating));
-    }
-    
-    /**
-     * Searches the DB by personal rating
-     * @param minPersonRating
-     * @param maxPersonRating
-     * @throws DalException
-     * @throws IOException 
-     */
-
-    public void searchByPersonalRating(double minPersonRating, double maxPersonRating) throws DalException, IOException
-    {
-        allMovies.clear();
-        allMovies.addAll(movieManager.searchByPersonalRating(minPersonRating, maxPersonRating));
     }
 
     /**
