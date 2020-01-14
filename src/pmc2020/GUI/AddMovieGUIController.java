@@ -132,7 +132,7 @@ public class AddMovieGUIController implements Initializable
     }
 
     /**
-     * Handles adding the movie, using the suppied data from the view the
+     * Handles adding the movie, using the supplied data from the view the
      * handler also checks if there is any data present, to prevent blank
      * entries to the DB The user gets an error message if any of the info is
      * blank, and the blank info is then replaced with placeholders lets the
