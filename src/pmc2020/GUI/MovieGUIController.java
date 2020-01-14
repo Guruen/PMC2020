@@ -334,16 +334,16 @@ public class MovieGUIController implements Initializable
     @FXML
     private void handlePlay(ActionEvent event) throws IOException, DalException, ParseException
     {
-        Movie movieToEdit = MovieView.getSelectionModel().getSelectedItem();
+        Movie movieToPlay = MovieView.getSelectionModel().getSelectedItem();
         try
         {
             Desktop desktop = Desktop.getDesktop();
-            File f = new File(movieToEdit.getFile_location());
+            File f = new File(movieToPlay.getFile_location());
             desktop.open(f);
 
             LocalDate date = LocalDate.now();
-            movieToEdit.setLast_Viewed(date + "");
-            model.updateMovie(movieToEdit);
+            movieToPlay.setLast_Viewed(date + "");
+            model.updateMovie(movieToPlay);
 
         } catch (IllegalArgumentException i)
         {
