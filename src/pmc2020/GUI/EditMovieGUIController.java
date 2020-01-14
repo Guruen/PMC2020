@@ -73,12 +73,13 @@ public class EditMovieGUIController implements Initializable
     {
         this.model = model;
     }
-    
-    /**
-     * gets the value from the slider on the view and sets this value as text on a label, and displays live changes
-     * @param event 
-     */
 
+    /**
+     * gets the value from the slider on the view and sets this value as text on
+     * a label, and displays live changes
+     *
+     * @param event
+     */
     @FXML
     private void SendValueUser(MouseEvent event)
     {
@@ -87,12 +88,13 @@ public class EditMovieGUIController implements Initializable
         editUserRating.setText(v + "");
         userRating = v;
     }
-    
-    /**
-     * gets the value from the slider on the view and sets this value as text on a label, and displays live changes
-     * @param event 
-     */
 
+    /**
+     * gets the value from the slider on the view and sets this value as text on
+     * a label, and displays live changes
+     *
+     * @param event
+     */
     @FXML
     private void SendValueIMDB(MouseEvent event)
     {
@@ -101,16 +103,17 @@ public class EditMovieGUIController implements Initializable
         editIMDBRating.setText(v + "");
         iMDBRating = v;
     }
-    
+
     /**
-     * gets all available data on the selected entry from the DB, and lets the user edit it accordingly
-     * handles updating the new data with the DB
-     * window only closes when data is present, to prevent blank entries (true condition)
+     * gets all available data on the selected entry from the DB, and lets the
+     * user edit it accordingly handles updating the new data with the DB window
+     * only closes when data is present, to prevent blank entries (true
+     * condition)
+     *
      * @param event
      * @throws IOException
-     * @throws DalException 
+     * @throws DalException
      */
-
     @FXML
     private void handleEditMovie(ActionEvent event) throws IOException, DalException
     {
@@ -124,29 +127,31 @@ public class EditMovieGUIController implements Initializable
         movie.setPrivate_Rating(userRating);
         movie.setTitle(title);
         movie.setIMDB_Link(imdbLink);
-        boolean notBlank;
+        boolean titlenotBlank;
+        boolean iMDBnotBlank;
+        
 
         if (title != null && !title.isEmpty())
         {
             title = editTitleText.getText();
             movie.setTitle(title);
-            notBlank = true;
+            titlenotBlank = true;
         } else
         {
             JOptionPane.showMessageDialog(dialog, "Movie title can not be blank!", "ERROR", JOptionPane.ERROR_MESSAGE);
-            notBlank = false;
+            titlenotBlank = false;
         }
         if (imdbLink != null && !imdbLink.isEmpty())
         {
             imdbLink = editImdbSiteLinkText.getText();
             movie.setIMDB_Link(imdbLink);
-            notBlank = true;
+            iMDBnotBlank = true;
         } else
         {
             JOptionPane.showMessageDialog(dialog, "IMDB Link can not be blank!", "ERROR", JOptionPane.ERROR_MESSAGE);
-            notBlank = false;
+            iMDBnotBlank = false;
         }
-        if (notBlank = true)
+        if (titlenotBlank == true  && iMDBnotBlank == true)
         {
             movie.setFile_location(editChosenFilePathtext.getText());
             Stage stage = (Stage) editAddMovieButton.getScene().getWindow();
@@ -156,14 +161,15 @@ public class EditMovieGUIController implements Initializable
     }
 
     /**
-     * handles opening the filedialog to allow the user to open / choose a mp4 or mpeg4 file
-     * uses filename and directory to see where the file is to add this data to the DB too
-     * also checks the filename to see if it is the correct filetype(s)
+     * handles opening the filedialog to allow the user to open / choose a mp4
+     * or mpeg4 file uses filename and directory to see where the file is to add
+     * this data to the DB too also checks the filename to see if it is the
+     * correct filetype(s)
+     *
      * @param filename
      * @param directory
-     * @param event 
+     * @param event
      */
-    
     @FXML
     private void handleEditFilePath(ActionEvent event)
     {
@@ -187,12 +193,12 @@ public class EditMovieGUIController implements Initializable
             System.out.println(filename);
         }
     }
-    
+
     /**
      * sets the movie to the newly edited one
-     * @param movie 
+     *
+     * @param movie
      */
-
     void setMovie(Movie movie)
     {
         this.movie = movie;
@@ -200,11 +206,11 @@ public class EditMovieGUIController implements Initializable
         userRating = movie.getPrivate_Rating();
         editUserSlider.setValue(userRating);
         editUserRating.setText(userRating + "");
-        
+
         iMDBRating = movie.getIMDB_Rating();
         editImdbSlider.setValue(iMDBRating);
         editIMDBRating.setText(iMDBRating + "");
-        
+
         editTitleText.setText(movie.getTitle());
         editImdbSiteLinkText.setText(movie.getIMDB_Link());
         editChosenFilePathtext.setText(movie.getFile_location());
