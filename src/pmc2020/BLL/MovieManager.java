@@ -36,7 +36,6 @@ public class MovieManager
     /**
      * MovieManager uses other java classes (creates other instances) to manage
      * movies
-     *
      * @param MovieDAO
      * @param CategoryDAO
      * @throws IOException to make sure that no bugs or errors halt the program
@@ -66,7 +65,6 @@ public class MovieManager
 
     /**
      * list of movies from DB
-     *
      * @return all movies from DB as list
      * @throws DalException
      */
@@ -77,7 +75,6 @@ public class MovieManager
 
     /**
      * Delete Movie from DB
-     *
      * @param movie to be deleted
      * @throws DalException
      */
@@ -88,7 +85,6 @@ public class MovieManager
 
     /**
      * Update movie already in DB
-     *
      * @param movie to be updated
      * @throws DalException
      */
@@ -99,7 +95,6 @@ public class MovieManager
 
     /**
      * List of categories from the DB
-     *
      * @return all categories in the DB as list
      * @throws DalException
      */
@@ -147,7 +142,6 @@ public class MovieManager
 
     /**
      * Constructor for categories
-     *
      * @param category The newly created category
      * @return category
      * @throws DalException
@@ -159,7 +153,6 @@ public class MovieManager
 
     /**
      * Gets a list of all categories from a chosen movie from the DB
-     *
      * @param movieid
      * @return the list of categories that the chosen movie belongs in
      * @throws SQLException

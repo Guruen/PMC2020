@@ -62,7 +62,6 @@ public class EditCategoryGUIController implements Initializable
      * to the new name in the DB also checks for blank information, to prevent
      * blank entries lets the window close if there is data present in all
      * needed places (true conditon)
-     *
      * @param event
      */
     @FXML

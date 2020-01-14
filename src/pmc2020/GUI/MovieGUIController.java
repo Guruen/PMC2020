@@ -166,6 +166,13 @@ public class MovieGUIController implements Initializable
         });
 
     }
+    
+    /**
+     * Handles pop ups for checking wether movies are too old or poorly rated
+     * @throws DalException
+     * @throws IOException
+     * @throws ParseException 
+     */
 
     private void popUp() throws DalException, IOException, ParseException
     {
@@ -187,13 +194,6 @@ public class MovieGUIController implements Initializable
         combinedSearch();
     }
     
-    /**
-     * handles searching within categories or with filters
-     * @param event
-     * @throws DalException
-     * @throws SQLException
-     * @throws IOException 
-     */
 
     /**
      * handles opening the add movie window
