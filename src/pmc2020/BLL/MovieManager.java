@@ -8,12 +8,9 @@ package pmc2020.BLL;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import pmc2020.BE.Category;
 import pmc2020.BE.Movie;
@@ -39,7 +36,6 @@ public class MovieManager
     /**
      * MovieManager uses other java classes (creates other instances) to manage
      * movies
-     *
      * @param MovieDAO
      * @param CategoryDAO
      * @throws IOException to make sure that no bugs or errors halt the program
@@ -69,7 +65,6 @@ public class MovieManager
 
     /**
      * list of movies from DB
-     *
      * @return all movies from DB as list
      * @throws DalException
      */
@@ -80,7 +75,6 @@ public class MovieManager
 
     /**
      * Delete Movie from DB
-     *
      * @param movie to be deleted
      * @throws DalException
      */
@@ -91,7 +85,6 @@ public class MovieManager
 
     /**
      * Update movie already in DB
-     *
      * @param movie to be updated
      * @throws DalException
      */
@@ -102,7 +95,6 @@ public class MovieManager
 
     /**
      * List of categories from the DB
-     *
      * @return all categories in the DB as list
      * @throws DalException
      */
@@ -151,7 +143,6 @@ public class MovieManager
 
     /**
      * Constructor for categories
-     *
      * @param category The newly created category
      * @return category
      * @throws DalException
@@ -163,7 +154,6 @@ public class MovieManager
 
     /**
      * Gets a list of all categories from a chosen movie from the DB
-     *
      * @param movieid
      * @return the list of categories that the chosen movie belongs in
      * @throws SQLException
@@ -196,6 +186,20 @@ public class MovieManager
     {
         categoryDAO.deleteCategory(category);
     }
+    
+    /**
+     * Handles searching for movies either with or without filters
+     * @param titleSearch
+     * @param highP_rating
+     * @param lowP_rating
+     * @param highIMDB_rating
+     * @param lowIMDB_rating
+     * @param categoryid
+     * @return a list of movies
+     * @throws DalException
+     * @throws IOException 
+     */
+    
 
     public List<Movie> movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating, int categoryid) throws DalException, IOException
     {
