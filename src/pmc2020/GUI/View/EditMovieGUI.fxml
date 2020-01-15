@@ -2,34 +2,23 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="326.0" prefWidth="255.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pmc2020.GUI.EditMovieGUIController">
+<AnchorPane id="AnchorPane" prefHeight="223.0" prefWidth="255.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pmc2020.GUI.EditMovieGUIController">
    <children>
       <TextField fx:id="editTitleText" layoutX="35.0" layoutY="24.0" promptText="Title" />
       <TextField fx:id="editImdbSiteLinkText" layoutX="35.0" layoutY="133.0" promptText="IMDB Site Link" />
-      <Button fx:id="editChooseFilePathButton" layoutX="14.0" layoutY="287.0" mnemonicParsing="false" onAction="#handleEditFilePath" text="Choose file path" />
-      <Button fx:id="editAddMovieButton" accessibleRoleDescription="handleSearch" layoutX="165.0" layoutY="287.0" mnemonicParsing="false" onAction="#handleEditMovie" text="Edit Movie" />
-      <Label fx:id="editChosenFilePathtext" contentDisplay="RIGHT" layoutX="15.0" layoutY="268.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="17.0" prefWidth="192.0" text="Chosen File Path" textAlignment="RIGHT" textOverrun="LEADING_ELLIPSIS" wrapText="true" />
+      <Button fx:id="editChooseFilePathButton" layoutX="14.0" layoutY="186.0" mnemonicParsing="false" onAction="#handleEditFilePath" text="Choose file path" />
+      <Button fx:id="editAddMovieButton" accessibleRoleDescription="handleSearch" layoutX="165.0" layoutY="186.0" mnemonicParsing="false" onAction="#handleEditMovie" text="Edit Movie" />
+      <Label fx:id="editChosenFilePathtext" contentDisplay="RIGHT" layoutX="21.0" layoutY="163.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="17.0" prefWidth="192.0" text="Chosen File Path" textAlignment="RIGHT" textOverrun="LEADING_ELLIPSIS" wrapText="true" />
       <Slider fx:id="editUserSlider" blockIncrement="0.1" layoutX="35.0" layoutY="91.0" majorTickUnit="1.0" max="10.0" minorTickCount="9" onDragDetected="#SendValueUser" onMouseClicked="#SendValueUser" onMouseDragged="#SendValueUser" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
       <Label fx:id="editIMDBRating" layoutX="201.0" layoutY="71.0" text="0.0" />
       <Label fx:id="editUserRating" layoutX="201.0" layoutY="110.0" text="0.0" />
       <Slider fx:id="editImdbSlider" blockIncrement="0.1" layoutX="35.0" layoutY="52.0" majorTickUnit="1.0" max="10.0" minorTickCount="9" onDragDetected="#SendValueIMDB" onMouseClicked="#SendValueIMDB" onMouseDragged="#SendValueIMDB" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
       <Label layoutX="177.0" layoutY="52.0" text="IMDB rating" />
       <Label layoutX="180.0" layoutY="91.0" text="User rating" />
-      <ScrollPane layoutX="19.0" layoutY="163.0" prefHeight="71.0" prefWidth="217.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <ListView fx:id="categoriListView" prefHeight="202.0" prefWidth="203.0" />
-               </children>
-            </AnchorPane>
-        </content>
-      </ScrollPane>
 
    </children>
 </AnchorPane>

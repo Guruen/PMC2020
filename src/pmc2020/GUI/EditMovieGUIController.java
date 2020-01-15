@@ -15,7 +15,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
@@ -63,8 +62,6 @@ public class EditMovieGUIController implements Initializable
     private Label editUserRating;
     @FXML
     private Slider editImdbSlider;
-    @FXML
-    private ListView<Category> categoriListView;
 
     /**
      * Initializes the controller class.
@@ -72,18 +69,7 @@ public class EditMovieGUIController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        try
-        {
-            model = new MovieModel();
-        } catch (IOException ex)
-        {
-            Logger.getLogger(EditMovieGUIController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (DalException ex)
-        {
-            Logger.getLogger(EditMovieGUIController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        categoriListView.setItems(model.getAllCategories());
-        categoriListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
     }
 
     void setModel(MovieModel model)
@@ -93,7 +79,7 @@ public class EditMovieGUIController implements Initializable
 
     /**
      * gets the value from the slider on the view and sets this value as text on
-     * a label, and displays live changes
+     * a label, and displays live changes. also rounds to 1 decimal.
      *
      * @param event
      */
@@ -108,7 +94,7 @@ public class EditMovieGUIController implements Initializable
 
     /**
      * gets the value from the slider on the view and sets this value as text on
-     * a label, and displays live changes
+     * a label, and displays live changes. also rounds to 1 decimal.
      *
      * @param event
      */
