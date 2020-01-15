@@ -41,7 +41,7 @@
       <Label fx:id="searchPersonalRatingMax" layoutX="279.0" layoutY="23.0" text="10" />
       <Slider fx:id="minPersonalSlider" layoutX="131.0" layoutY="8.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" onMouseReleased="#handleMinPersonalSliderRating" showTickLabels="true" snapToTicks="true" />
       <Slider fx:id="maxPersonalSlider" layoutX="296.0" layoutY="7.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" onMouseReleased="#handleMaxPersonalSliderRating" showTickLabels="true" snapToTicks="true" value="10.0" />
-      <Button layoutX="10.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleOpenLink" text="Open" />
+      <Button layoutX="13.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleOpenLink" text="IMDB" />
       <Button layoutX="409.0" layoutY="86.0" mnemonicParsing="false" onAction="#handleSearchButton" text="🔍" />
    </children>
 </AnchorPane>
