@@ -215,8 +215,6 @@ public class MovieDAO
     {
         try ( Connection con = dbCon.getConnection())
         {
-            //System.out.println(categories);
-
             String sql = "SELECT DISTINCT Movie.* FROM CatMovie as catmovie \n"
                     + "JOIN Movie as movie ON catmovie.MovieId = movie.id \n"
                     + "JOIN Category as category ON catmovie.CategoryId = category.id \n"
