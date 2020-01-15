@@ -101,13 +101,17 @@ public class EditCategoryGUIController implements Initializable
 
     }
 
+    /**
+     * Sets the model to be the MovieModel class.
+     * @param model 
+     */
     void setModel(MovieModel model)
     {
         this.model = model;
     }
 
     /**
-     * handles categories within a combobox
+     * Handles categories within a combo box
      * @param event 
      */
     
@@ -118,7 +122,7 @@ public class EditCategoryGUIController implements Initializable
     }
     
     /**
-     * handles deleting things
+     * Handles deleting 
      * @param event
      * @throws DalException 
      */

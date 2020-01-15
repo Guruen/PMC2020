@@ -51,10 +51,8 @@ public class MovieGUIController implements Initializable
 {
 
     private Movie movieToDelete;
-    private Movie movie;
     private Movie movieToOpen;
     private MovieModel model;
-    private String TimeAndDate;
     JFrame f;
 
     @FXML
@@ -186,7 +184,7 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * handles searching using the chosen category/filter(s) and the text in the
+     * Handles searching using the chosen category/filter(s) and the text in the
      * textfield as query
      *
      * @param event
@@ -199,7 +197,7 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * handles opening the add movie window
+     * Handles opening the add movie window
      *
      * @param event
      * @throws IOException
@@ -228,7 +226,7 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * handles opening the add category window
+     * Handles opening the add category window
      *
      * @param event
      * @throws IOException
@@ -257,7 +255,7 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * handles opening the edit movie window
+     * Handles opening the edit movie window
      *
      * @param event
      * @throws IOException
@@ -295,7 +293,7 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * handles opening the edit category window
+     * Handles opening the edit category window
      *
      * @param event
      * @throws IOException
@@ -324,7 +322,7 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * handles playing the selected entry on the local media player of the system
+     * Handles playing the selected entry on the local media player of the system
      * gets date when user opens via play button and adds to DB as last viewed.
      *
      * @param event
@@ -379,7 +377,7 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * handles opening the given IMDB link, from chosen object on list
+     * Handles opening the given IMDB link, from chosen object on list
      *
      * @param event
      * @throws IOException
@@ -487,7 +485,5 @@ public class MovieGUIController implements Initializable
         String query = searchBar.getText().trim();
 
         model.movieSearch(query, maxPersonRating, minPersonRating, maxIMDBRating, minIMDBRating, categoryToSearch);
-
     }
-
 }

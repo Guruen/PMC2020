@@ -9,22 +9,17 @@ import java.awt.FileDialog;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import pmc2020.BE.Category;
 import pmc2020.BE.Movie;
 import pmc2020.DAL.DalException;
 import pmc2020.GUI.Model.MovieModel;
@@ -78,7 +73,7 @@ public class EditMovieGUIController implements Initializable
     }
 
     /**
-     * gets the value from the slider on the view and sets this value as text on
+     * Gets the value from the slider on the view and sets this value as text on
      * a label, and displays live changes. also rounds to 1 decimal.
      *
      * @param event
@@ -93,7 +88,7 @@ public class EditMovieGUIController implements Initializable
     }
 
     /**
-     * gets the value from the slider on the view and sets this value as text on
+     * Gets the value from the slider on the view and sets this value as text on
      * a label, and displays live changes. also rounds to 1 decimal.
      *
      * @param event
@@ -108,7 +103,7 @@ public class EditMovieGUIController implements Initializable
     }
 
     /**
-     * gets all available data on the selected entry from the DB, and lets the
+     * Gets all available data on the selected entry from the DB, and lets the
      * user edit it accordingly handles updating the new data with the DB window
      * only closes when data is present, to prevent blank entries (true
      * condition)
@@ -164,7 +159,7 @@ public class EditMovieGUIController implements Initializable
     }
 
     /**
-     * handles opening the filedialog to allow the user to open / choose a mp4
+     * Handles opening the filedialog to allow the user to open / choose a mp4
      * or mpeg4 file uses filename and directory to see where the file is to add
      * this data to the DB too also checks the filename to see if it is the
      * correct filetype(s)
@@ -197,7 +192,7 @@ public class EditMovieGUIController implements Initializable
     }
 
     /**
-     * sets the movie to the newly edited one
+     * Sets the movie to the newly edited one
      *
      * @param movie
      */
