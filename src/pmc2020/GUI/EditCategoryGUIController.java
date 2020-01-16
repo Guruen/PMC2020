@@ -93,7 +93,6 @@ public class EditCategoryGUIController implements Initializable
 
             Stage stage = (Stage) editButton.getScene().getWindow();
             stage.close();
-            //Edits chosen category on list  
         } else
         {
 
@@ -122,7 +121,7 @@ public class EditCategoryGUIController implements Initializable
     }
     
     /**
-     * Handles deleting 
+     * Handles deleting the selected category from the Category chooser dropdown.
      * @param event
      * @throws DalException 
      */

@@ -39,16 +39,14 @@ public class AddCategoryGUIController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
     }
     
     /**
-     * handles adding the given data from the view to the DB
+     * Handles adding the given data from the view to the DB
      * This handler also checks if the data can be added to the DB, by checking the window for any missing data
      * @param event
      * @throws DalException 
      */
-
     @FXML
     private void handleAddButton(ActionEvent event) throws DalException
     {
@@ -81,7 +79,7 @@ public class AddCategoryGUIController implements Initializable
     }
     
     /**
-     * Sets the model
+     * Sets the model to be the MovieModel class.
      * @param model 
      */
 
