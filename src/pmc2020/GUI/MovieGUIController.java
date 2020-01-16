@@ -148,16 +148,11 @@ public class MovieGUIController implements Initializable
         {
             while (c.next())
             {
-                if (c.wasRemoved())
+                if (c.wasRemoved() || c.wasAdded())
                 {
                     MovieView.refresh();
                 }
-
-                if (c.wasAdded())
-                {
-                    MovieView.refresh();
-                }
-
+                
             }
 
         });
@@ -322,8 +317,9 @@ public class MovieGUIController implements Initializable
     }
 
     /**
-     * Handles playing the selected entry on the local media player of the system
-     * gets date when user opens via play button and adds to DB as last viewed.
+     * Handles playing the selected entry on the local media player of the
+     * system gets date when user opens via play button and adds to DB as last
+     * viewed.
      *
      * @param event
      * @throws IOException
