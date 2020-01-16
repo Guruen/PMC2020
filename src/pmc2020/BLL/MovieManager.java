@@ -35,6 +35,7 @@ public class MovieManager
     /**
      * MovieManager uses other java classes (creates other instances) to manage
      * movies
+     *
      * @param MovieDAO
      * @param CategoryDAO
      * @throws IOException to make sure that no bugs or errors halt the program
@@ -46,7 +47,8 @@ public class MovieManager
     }
 
     /**
-     * calls the "createMovie" method in MovieDAO aswell as send the information required.
+     * calls the "createMovie" method in MovieDAO aswell as send the information
+     * required.
      *
      * @param title The title of movie
      * @param imdb_rating rating of movie on IMDB
@@ -63,7 +65,9 @@ public class MovieManager
     }
 
     /**
-     * calls the "getAllMovies" method in MovieDAO and then returns a list of all movies in the Database.
+     * calls the "getAllMovies" method in MovieDAO and then returns a list of
+     * all movies in the Database.
+     *
      * @return all movies from DB as list
      * @throws DalException
      */
@@ -73,7 +77,9 @@ public class MovieManager
     }
 
     /**
-     * calls "deleteMovie" method in MovieDAO and then sends the object marked for deletion.
+     * calls "deleteMovie" method in MovieDAO and then sends the object marked
+     * for deletion.
+     *
      * @param movie to be deleted
      * @throws DalException
      */
@@ -84,6 +90,7 @@ public class MovieManager
 
     /**
      * calls "updateMovie" from MovieDAO and sends the object to be updated.
+     *
      * @param movie to be updated
      * @throws DalException
      */
@@ -93,7 +100,9 @@ public class MovieManager
     }
 
     /**
-     * calls the "getAllCategories" method in MovieDAO and returns a list of all categories in the database.
+     * calls the "getAllCategories" method in MovieDAO and returns a list of all
+     * categories in the database.
+     *
      * @return all categories in the DB as list
      * @throws DalException
      */
@@ -102,8 +111,6 @@ public class MovieManager
         return categoryDAO.getAllCategories();
     }
 
-
-   
     /**
      * Makes a list of movie objects and checks the last viewed date on movies
      * in the database and checks the private rating. If a movie has last been
@@ -141,7 +148,9 @@ public class MovieManager
     }
 
     /**
-     * calls "createCategory" method in MovieDAO and sends a category String aswell as returning the new category.
+     * calls "createCategory" method in MovieDAO and sends a category String
+     * aswell as returning the new category.
+     *
      * @param category The newly created category
      * @return category
      * @throws DalException
@@ -152,8 +161,9 @@ public class MovieManager
     }
 
     /**
-     * calls "getCategoryPerMovie" method in MovieDAO and sends down a single movie Id,
-     * then returns all categories assigned to that movie.
+     * calls "getCategoryPerMovie" method in MovieDAO and sends down a single
+     * movie Id, then returns all categories assigned to that movie.
+     *
      * @param movieid
      * @return the list of categories that the chosen movie belongs in
      * @throws SQLException
@@ -166,7 +176,8 @@ public class MovieManager
     }
 
     /**
-     * calls "updateCategory" method in MovieDAO and send down a category object.
+     * calls "updateCategory" method in MovieDAO and send down a category
+     * object.
      *
      * @param category
      * @throws DalException
@@ -177,7 +188,8 @@ public class MovieManager
     }
 
     /**
-     * calls "deleteCategory" method in MovieDAO and sends down the category object to be deleted.
+     * calls "deleteCategory" method in MovieDAO and sends down the category
+     * object to be deleted.
      *
      * @param category
      * @throws DalException
@@ -186,9 +198,11 @@ public class MovieManager
     {
         categoryDAO.deleteCategory(category);
     }
-    
+
     /**
-     * calls "movieSearch" method in MovieDAO by sending all the movie attributes and returning a list of movies with those attributes.
+     * calls "movieSearch" method in MovieDAO by sending all the movie
+     * attributes and returning a list of movies with those attributes.
+     *
      * @param titleSearch
      * @param highP_rating
      * @param lowP_rating
@@ -197,10 +211,8 @@ public class MovieManager
      * @param categoryid
      * @return a list of movies
      * @throws DalException
-     * @throws IOException 
+     * @throws IOException
      */
-    
-
     public List<Movie> movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating, int categoryid) throws DalException, IOException
     {
         return movieDAO.movieSearch(titleSearch, highP_rating, lowP_rating, highIMDB_rating, lowIMDB_rating, categoryid);

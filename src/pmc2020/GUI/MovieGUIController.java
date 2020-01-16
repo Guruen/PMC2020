@@ -152,7 +152,7 @@ public class MovieGUIController implements Initializable
                 {
                     MovieView.refresh();
                 }
-                
+
             }
 
         });

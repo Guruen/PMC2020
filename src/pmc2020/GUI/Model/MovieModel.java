@@ -28,6 +28,7 @@ public class MovieModel
 
     /**
      * Makes a new MovieModel, and adds all movies and categories
+     *
      * @throws IOException
      * @throws DalException
      */
@@ -48,6 +49,7 @@ public class MovieModel
 
     /**
      * gets an ObservableList of all movies
+     *
      * @return all movies
      */
     public ObservableList<Movie> getAllMovies()
@@ -57,6 +59,7 @@ public class MovieModel
 
     /**
      * gets an ObservableList of all categories
+     *
      * @return all categories
      */
     public ObservableList<Category> getAllCategories()
@@ -66,6 +69,7 @@ public class MovieModel
 
     /**
      * Deletes the chosen movie
+     *
      * @param movie
      * @throws DalException
      */
@@ -77,6 +81,7 @@ public class MovieModel
 
     /**
      * Updates an existing movie in the DB
+     *
      * @param movie
      * @throws DalException
      */
@@ -89,6 +94,7 @@ public class MovieModel
 
     /**
      * Adds a movie to the DB
+     *
      * @param title
      * @param iMDB_Rating
      * @param iMDB_SiteLink
@@ -104,6 +110,7 @@ public class MovieModel
 
     /**
      * refreshes the list of movies, so it matches with the DB
+     *
      * @return all movies in the DB
      * @throws DalException
      */
@@ -116,6 +123,7 @@ public class MovieModel
 
     /**
      * Creates a category and adds it to the DB
+     *
      * @param category
      * @throws DalException
      */
@@ -124,45 +132,44 @@ public class MovieModel
         Category cat = movieManager.createCategory(category);
         allCategories.add(cat);
     }
-    
+
     /**
      * Edits an already existing category within the DB
+     *
      * @param category
-     * @throws DalException 
+     * @throws DalException
      */
-
     public void editCategory(Category category) throws DalException
     {
         movieManager.editCategory(category);
         allCategories.clear();
         allCategories.addAll(movieManager.getAllCategories());
     }
-    
+
     /**
      * Deletes a category from the DB entirely
+     *
      * @param category
-     * @throws DalException 
+     * @throws DalException
      */
-
     public void deleteCategory(Category category) throws DalException
     {
         movieManager.deleteCategory(category);
         allCategories.clear();
         allCategories.addAll(movieManager.getAllCategories());
     }
-    
+
     /**
      * Handles searching for movies
+     *
      * @param titleSearch
      * @param highP_rating
      * @param lowP_rating
      * @param highIMDB_rating
      * @param lowIMDB_rating
      * @throws DalException
-     * @throws IOException 
+     * @throws IOException
      */
-
-    
     public void movieSearch(String titleSearch, double highP_rating, double lowP_rating, double highIMDB_rating, double lowIMDB_rating, int categoryid) throws DalException, IOException
     {
         allMovies.clear();
