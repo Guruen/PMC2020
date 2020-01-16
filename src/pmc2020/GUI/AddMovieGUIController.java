@@ -96,7 +96,7 @@ public class AddMovieGUIController implements Initializable
     }
 
     /**
-     * handles opening the filedialog to allow the user to open / choose a mp4
+     * Handles opening the filedialog to allow the user to open / choose a mp4
      * or mpeg4 file uses filename and directory to see where the file is to add
      * this data to the DB too also checks the filename to see if it is the
      * correct filetype(s)
@@ -131,10 +131,12 @@ public class AddMovieGUIController implements Initializable
     /**
      * Handles adding the movie, using the supplied data from the view the
      * handler also checks if there is any data present, to prevent blank
-     * entries to the DB The user gets an error message if any of the info is
-     * blank, and the blank info is then replaced with placeholders lets the
-     * window close if the conditions are true
-     *
+     * entries to the DB. 
+     * The user gets an error message if any of the info is
+     * blank, and the blank info is then replaced with placeholders. If the 
+     * conditions are true, the window closes as it would do normally and saves
+     * the input from the user.
+     * 
      * @param event
      * @throws DalException
      */
@@ -220,6 +222,11 @@ public class AddMovieGUIController implements Initializable
         }
 
     }
+    
+    /**
+     * Sets the model to be the MovieModel class.
+     * @param model 
+     */
 
     void setModel(MovieModel model)
     {
@@ -227,7 +234,7 @@ public class AddMovieGUIController implements Initializable
     }
 
     /**
-     * gets the value from the slider on the view and sets this value as text on
+     * Gets the value from the slider on the view and sets this value as text on
      * a label, and displays live changes
      *
      * @param event

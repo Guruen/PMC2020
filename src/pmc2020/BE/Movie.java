@@ -5,15 +5,12 @@
  */
 package pmc2020.BE;
 
-
-
 /**
  *
  * @author Guruerne
  */
 public class Movie
 {
-
     private int ID;
     private String Title;
     private double IMDB_Rating;
@@ -22,9 +19,6 @@ public class Movie
     private String Last_Viewed;
     private String IMDB_Link;
     private String Categories;
-    
-
-    
 
 /**
  * This is the movie constructor that defines what a movie must be
